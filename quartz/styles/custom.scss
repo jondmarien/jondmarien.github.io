@@ -1,3 +1,5 @@
+@use "../../node_modules/xterm/css/xterm.css";
+@use "./base.scss";
 @use "./variables.scss" as *;
 
 // Matrix / Hacker TUI Theme
@@ -117,11 +119,12 @@ body::after {
   margin-top: 3.5rem; // Increased from 1rem to clear the label
   
   &::before {
-    content: " [ MAIN_DISPLAY ] ";
+    content: " [ MAIN_PROCESS :: DISPLAY ] ";
     display: inline-block;
     position: absolute;
     top: -12px;
-    right: 20px;
+    left: 20px;
+    right: auto;
     background: var(--matrix-bg);
     color: var(--neon-green);
     border: 1px solid var(--matrix-border);
@@ -134,10 +137,21 @@ body::after {
 
 // Terminal Loading Placeholder
 #terminal-container {
+   width: 100%;
+   background-color: var(--matrix-bg);
+   border: 1px solid var(--neon-green);
+   padding: 1rem;
+   overflow: hidden;
+
    .terminal-placeholder {
        font-size: 0.9rem;
        opacity: 0.8;
        animation: blink 2s infinite;
+   }
+   
+   // Xterm overrides to match theme
+   .xterm-viewport {
+       background-color: transparent !important;
    }
 }
 
@@ -155,6 +169,19 @@ body::after {
     border-bottom: 1px solid var(--dark-green);
     margin-bottom: 0.5rem;
     font-weight: bold;
+  }
+  
+  // Make folder items clickable
+  .folder-container {
+    cursor: pointer;
+    
+    // Improve hover state for folders
+    &:hover {
+      .folder-title {
+        text-decoration: underline;
+        color: var(--neon-green);
+      }
+    }
   }
 }
 

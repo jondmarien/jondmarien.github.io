@@ -51,6 +51,7 @@ function toggleFolder(evt: MouseEvent) {
       ? // svg -> div.folder-container
         target.parentElement
       : // button.folder-button -> div -> div.folder-container
+        // or span.folder-title -> div -> div.folder-container
         target.parentElement?.parentElement
   ) as MaybeHTMLElement
   if (!folderContainer) return
@@ -240,11 +241,16 @@ async function setupExplorer(currentSlug: FullSlug) {
     // Set up folder click handlers
     if (opts.folderClickBehavior === "collapse") {
       const folderButtons = explorer.getElementsByClassName(
-        "folder-button",
+        "folder-outer",
       ) as HTMLCollectionOf<HTMLElement>
       for (const button of folderButtons) {
-        button.addEventListener("click", toggleFolder)
-        window.addCleanup(() => button.removeEventListener("click", toggleFolder))
+        if (button.querySelector(".folder-container")) {
+          const title = button.querySelector(".folder-container div") as HTMLElement
+          if (title) {
+            title.addEventListener("click", toggleFolder)
+            window.addCleanup(() => title.removeEventListener("click", toggleFolder))
+          }
+        }
       }
     }
 

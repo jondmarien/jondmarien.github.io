@@ -17,11 +17,7 @@ description: Where code meets creativity — and every bug has a story.
 
 | Title                                                                                                                             | Author                       | Created            | Published          | Tags                                                                                        |
 | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- | ------------------ | ------------------ | ------------------------------------------------------------------------------------------- |
-| [Module 6 - Networking Pentesting - Internal - Part 3](Module%206%20-%20Networking%20Pentesting%20-%20Internal%20-%20Part%203.md) | <ul><li>Jon Marien</li></ul> | June 20, 2025      | June 20, 2025      | <ul><li>skillsontario</li><li>competitions</li><li>certifications</li><li>classes</li></ul> |
 | [Malicious .lnk Files on Windows](Malicious%20.lnk%20Files%20on%20Windows.md)                                                     | <ul><li>Jon Marien</li></ul> | March 19, 2025     | March 19, 2025     | <ul><li>issessions</li><li>writeups</li></ul>                                               |
-| [Journal - Jonathan Marien](Journal%20-%20Jonathan%20Marien.md)                                                                   | Jon Marien                   | September 27, 2025 | September 27, 2025 | <ul><li>classes</li><li>PHIL28877GD</li></ul>                                               |
-| [Case Study - Logging and old-growth forests in Canada](Case%20Study%20-%20Logging%20and%20old-growth%20forests%20in%20Canada.md) | Jon Marien                   | September 27, 2025 | September 27, 2025 | <ul><li>classes</li><li>PHIL28877GD</li></ul>                                               |
-| [Shifts in Perspectives and Values](Shifts%20in%20Perspectives%20and%20Values.md)                                                 | Jon Marien                   | September 27, 2025 | September 27, 2025 | <ul><li>classes</li><li>PHIL28877GD</li></ul>                                               |
 
 # Unlocking the future, one exploit at a time.
 ---------------

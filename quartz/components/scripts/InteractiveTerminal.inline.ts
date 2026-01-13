@@ -92,15 +92,28 @@ async function mountTerminal() {
   document.documentElement.style.setProperty("--flicker-strength", savedFlicker)
 
   // Listen for theme changes from other components (EffectsSelector/ThemeSelector)
+  // Helper to smooth transition themes
+  function smoothSync() {
+    if (!container) return
+    container.style.transition = "opacity 0.2s ease"
+    container.style.opacity = "0"
+
+    setTimeout(() => {
+      syncTheme(term)
+      container.style.opacity = "1"
+    }, 200)
+  }
+
+  // Listen for theme changes from other components (EffectsSelector/ThemeSelector)
   window.addEventListener("themeChanged", (() => {
-    setTimeout(() => syncTheme(term), 50) // Delay to let CSS repaint
+    smoothSync()
   }) as EventListener)
 
   // Listen for Quartz Light/Dark mode toggle (attribute change on html)
   const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
       if (mutation.type === "attributes" && mutation.attributeName === "saved-theme") {
-        setTimeout(() => syncTheme(term), 50)
+        smoothSync()
       }
     }
   })

@@ -8,18 +8,24 @@
   --matrix-bg: #050505;
   --matrix-border: #00ff41;
   --panel-bg: rgba(0, 20, 0, 0.85);
-  --text-main: #e0e0e0; // High contrast text
+  --text-main: #e0e0e0;
   --text-dim: #a0a0a0;
 }
 
 body {
   font-family: "Fira Code", monospace;
   background-color: var(--matrix-bg) !important;
-  color: var(--text-main) !important; // Better contrast than all-green
+  color: var(--text-main) !important;
   overflow-x: hidden;
+  box-sizing: border-box;
 }
 
-// Global Headers
+// Ensure box-sizing is inherited for layout safety
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+// Global Text Styles
 h1, h2, h3, h4, h5, h6 {
   font-family: "Fira Code", monospace;
   text-transform: uppercase;
@@ -29,178 +35,163 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   border-bottom: 2px solid var(--neon-green);
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
 h2 {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   background: rgba(0, 255, 65, 0.1);
-  border-left: 5px solid var(--neon-green);
+  border-left: 4px solid var(--neon-green);
   padding: 0.5rem 1rem;
-  width: fit-content;
+  margin-top: 2.5rem;
 }
 
-h3 {
-  font-size: 1.4rem;
-  color: var(--dark-green) !important;
-  border-bottom: 1px dashed var(--dark-green);
-  display: inline-block;
-  padding-right: 1rem;
-}
-
-// CRT Scanline Effect
+// CRT Scanline Overlay
 body::after {
   content: " ";
   display: block;
   position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  top: 0; left: 0; bottom: 0; right: 0;
   background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
   z-index: 999;
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
 }
 
-// --- Layout Panels ---
+// --- FORCED DESKTOP LAYOUT OVERRIDE ---
+// Force 3-column layout on screens > 900px (Default is 1200px, which causes stacking on laptops)
+@media (min-width: 900px) {
+  .page > #quartz-body {
+    display: grid !important;
+    grid-template-columns: 300px auto 300px !important;
+    grid-template-rows: auto auto auto !important;
+    grid-template-areas:
+      "grid-sidebar-left grid-header grid-sidebar-right"
+      "grid-sidebar-left grid-center grid-sidebar-right"
+      "grid-sidebar-left grid-footer grid-sidebar-right" !important;
+      
+      // Adjust spacing for the tighter breakpoint
+      column-gap: 2rem !important;
+  }
+  
+  .sidebar.left {
+    grid-area: grid-sidebar-left !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: sticky !important;
+    top: 2rem;
+    height: calc(100vh - 4rem) !important;
+  }
+  
+  .sidebar.right {
+    grid-area: grid-sidebar-right !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: sticky !important;
+    top: 2rem;
+  }
+  
+  .center {
+    grid-area: grid-center !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+  
+  .page-header {
+    grid-area: grid-header !important;
+    margin-top: 2rem !important;
+  }
+}
 
-// 1. Center Content Panel (The Main "Display")
+// --- Visual Panels ---
+
+// 1. Center Content
 .center > article {
   border: 1px solid var(--matrix-border);
   background-color: var(--panel-bg);
   padding: 2rem;
-  box-shadow: 0 0 20px rgba(0, 255, 65, 0.15);
-  position: relative;
-  min-height: 80vh; // Ensure it feels substantial
-
-  // Terminal Window Header
+  margin-top: 1rem;
+  
   &::before {
-    content: " [ MAIN_PROCESS::DISPLAY ] ";
-    display: block;
-    width: fit-content;
-    background-color: var(--matrix-bg);
+    content: " [ MAIN_DISPLAY ] ";
+    display: inline-block;
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: var(--matrix-bg);
     color: var(--neon-green);
     border: 1px solid var(--matrix-border);
-    padding: 2px 10px;
+    padding: 0 10px;
     font-size: 0.8rem;
     font-weight: bold;
-    margin-bottom: 2rem;
-    transform: translateY(-2.8rem);
   }
 }
 
 // 2. Left Sidebar (Explorer)
-.left {
-  padding-right: 1rem;
+.left .explorer {
+  border: 1px solid var(--dark-green);
+  padding: 1rem;
+  height: 100%;
+  overflow-y: auto;
   
-  .explorer {
-    border: 1px solid var(--dark-green);
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.5);
-    
-    &::before {
-      content: "FILE_SYSTEM";
-      color: var(--dark-green);
-      font-weight: bold;
-      border-bottom: 1px solid var(--dark-green);
-      display: block;
-      margin-bottom: 0.5rem;
-    }
+  &::before {
+    content: "FILE_SYS";
+    display: block;
+    color: var(--dark-green);
+    border-bottom: 1px solid var(--dark-green);
+    margin-bottom: 0.5rem;
+    font-weight: bold;
   }
 }
 
-// 3. Right Sidebar (Graph/TOC)
-.center + .right {
+// 3. Right Sidebar
+.right .graph {
+  border: 1px solid var(--dark-green);
+  filter: sepia(100%) hue-rotate(100deg) saturate(300%) contrast(1.2);
+}
+
+.right .toc {
+  border-left: 2px solid var(--dark-green);
   padding-left: 1rem;
-  
-  .graph {
-    border: 1px solid var(--dark-green);
-    border-radius: 0;
-    
-    &::before {
-      // Label for graph
-      content: "NET_TOPOLOGY";
-      background: var(--dark-green);
-      color: black;
-      font-size: 0.7rem;
-      padding: 2px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 10;
-    }
-  }
-  
-  .toc {
-    border-left: 1px solid var(--dark-green);
-    padding-left: 1rem;
-    margin-top: 2rem;
-    
-    &::before {
-      content: "JUMP_TARGETS";
-      color: var(--dark-green);
-      font-weight: bold;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-  }
+  margin-top: 1rem;
 }
 
-
-// Link Styling
-a {
-  color: var(--neon-green) !important;
-  text-decoration: none;
-  transition: all 0.2s;
-  
-  &:hover {
-    background-color: var(--neon-green);
-    color: var(--matrix-bg) !important;
-    text-shadow: none;
-  }
-  
-  &.internal {
-    background-color: transparent !important;
-    border-bottom: 1px dotted var(--dark-green);
-  }
-}
 
 // Code Blocks
 pre {
   border: 1px solid var(--neon-green) !important;
   background-color: #080808 !important;
   border-radius: 0 !important;
-  margin: 1.5rem 0;
-  
-  &::before {
-    content: "EXEC_BUFFER";
-    display: block;
-    background: var(--neon-green);
-    color: black;
-    font-size: 0.75rem;
-    padding: 2px 5px;
-    width: fit-content;
-    margin-bottom: 5px;
-  }
   
   code {
     background: transparent !important;
     font-family: "Fira Code", monospace !important;
-    color: #e0e0e0 !important; // Readable code
+    color: #e0e0e0 !important;
   }
 }
 
-// Scrollbar
+// Links
+a {
+  color: var(--neon-green) !important;
+  text-decoration: none;
+  &:hover {
+    background-color: var(--neon-green);
+    color: black !important;
+  }
+  &.internal {
+    background: transparent !important;
+    border-bottom: 1px dotted var(--dark-green);
+  }
+}
+
+// Scrollbars
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
   background: black;
-  border-left: 1px solid var(--dark-green);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--dark-green);
-  border: 1px solid var(--neon-green);
 }

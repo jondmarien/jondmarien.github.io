@@ -90,4 +90,4 @@ This approach is insecure because a user can modify the value and access functio
 
 - For the lab, this one was solved by retrieving the administrator's password and then using it to delete the user Carlos.
 
-So what we did was we changed the ID parameter in the URL from Weiner or Carlos to administrator and then we clicked on the reset password button with the intercept off so we could see what the data was for the password field. Then we copied the password field, logged out of the other users, and logged into the administrator account. That allowed us to get access to the administrator panel and delete the user Carlos.
+So what we did was we changed the ID parameter in the URL from Weiner or Carlos to administrator and then we clicked on the reset password button with the intercept **on** so we could see what the data was for the password field. Then we copied the password field, logged out of the other users, and logged into the administrator account. That allowed us to get access to the administrator panel and delete the user Carlos.

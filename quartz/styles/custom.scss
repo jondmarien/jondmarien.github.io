@@ -29,8 +29,9 @@
   --text-dim: #a0a0a0;     // Secondary text color
   
   // CRT EFFECT CONTROL
-  // Controlled via EffectsSelector.tsx slider
   --crt-opacity: 1; 
+  --vignette-opacity: 0.4; // 0.4 = ON, 0 = OFF
+  --flicker-strength: 0.04; // Opacity variance (recommended 0.02 - 0.1)
 
   // TERMINAL PALETTE (xterm.js mapping)
   --term-black: #050505;
@@ -50,6 +51,7 @@
 //  overlays that persist across scroll.
 
 // SCANLINES (Horizontal & Vertical Sub-pixels)
+// AND FLICKER (Applied here to affect the whole screen overlay)
 body::before {
   content: " ";
   display: block;
@@ -70,9 +72,13 @@ body::before {
   background-size: 100% 2px, 3px 100%; // Size of scanlines and sub-pixels
   pointer-events: none;    // Allow clicking through the overlay
   transition: opacity 0.2s ease;
+  
+  // Gentle flicker animation to simulate old hardware monitor variations
+  // Moved here from ::after so it works even if vignette is off
+  animation: flicker 0.15s infinite;
 }
 
-// VIGNETTE & FLICKER
+// VIGNETTE
 body::after {
   content: " ";
   display: block;
@@ -82,20 +88,18 @@ body::after {
   opacity: var(--crt-opacity, 1);
   
   // Radial gradient creates the darkened corners (Vignette)
-  background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.2) 100%);
+  // Alpha is controlled strictly by --vignette-opacity
+  background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0, var(--vignette-opacity, 0.4)) 100%);
   
   z-index: 9998;
   pointer-events: none;
-  
-  // Gentle flicker animation to simulate old hardware monitor variations
-  animation: flicker 0.15s infinite;
   transition: opacity 0.2s ease;
 }
 
 @keyframes flicker {
-  0% { opacity: 0.95; }
-  50% { opacity: 0.98; }
-  100% { opacity: 0.95; }
+  0% { opacity: calc(var(--crt-opacity, 1) * (1 - var(--flicker-strength, 0.04))); }
+  50% { opacity: var(--crt-opacity, 1); }
+  100% { opacity: calc(var(--crt-opacity, 1) * (1 - var(--flicker-strength, 0.04))); }
 }
 
 

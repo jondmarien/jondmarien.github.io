@@ -81,9 +81,15 @@ async function mountTerminal() {
   // Initial Theme Sync
   syncTheme(term)
 
-  // Load Saved CRT Opacity
+  // Load Saved CRT Settings
   const savedCrtOpacity = localStorage.getItem("crt-opacity") || "1"
+  // Default to 0.4 if not set (ON)
+  const savedVignette = localStorage.getItem("vignette-opacity") || "0.4"
+  const savedFlicker = localStorage.getItem("flicker-strength") || "0.04"
+
   document.documentElement.style.setProperty("--crt-opacity", savedCrtOpacity)
+  document.documentElement.style.setProperty("--vignette-opacity", savedVignette)
+  document.documentElement.style.setProperty("--flicker-strength", savedFlicker)
 
   // Listen for theme changes from other components (EffectsSelector/ThemeSelector)
   window.addEventListener("themeChanged", (() => {
@@ -179,6 +185,8 @@ async function mountTerminal() {
           term.writeln("  clear             Clear the terminal screen")
           term.writeln("  theme set <name>  Switch theme (matrix, red, cyan, etc.)")
           term.writeln("  crt set <val>     Set CRT effect intensity (0.0 - 1.0)")
+          term.writeln("  vignette <state>  Toggle vignette (on/off)")
+          term.writeln("  flicker set <val> Set flicker strength (0.0 - 0.2)")
           term.writeln("  whoami            Display current user")
           term.writeln("  date              Display system date")
           break
@@ -195,6 +203,39 @@ async function mountTerminal() {
             }
           } else {
             term.writeln("Usage: crt set <0.0-1.0>")
+          }
+          break
+
+        case "vignette":
+          const vState = args[1]?.toLowerCase()
+          if (vState === "on") {
+            // Set directly to 0.4 (dark corners)
+            document.documentElement.style.setProperty("--vignette-opacity", "0.4")
+            localStorage.setItem("vignette-opacity", "0.4")
+            term.writeln(`\x1b[32m[SUCCESS]\x1b[0m Vignette enabled`)
+          } else if (vState === "off") {
+            document.documentElement.style.setProperty("--vignette-opacity", "0")
+            localStorage.setItem("vignette-opacity", "0")
+            term.writeln(`\x1b[32m[SUCCESS]\x1b[0m Vignette disabled`)
+          } else {
+            term.writeln("Usage: vignette <on|off>")
+          }
+          break
+
+        case "flicker":
+          if (args[1] === "set" && args[2]) {
+            const val = parseFloat(args[2])
+            // Recommend small range, but allow up to 0.5 for chaos
+            // Strict range: 0.0 (off) to 0.1 (max usable)
+            if (!isNaN(val) && val >= 0 && val <= 0.1) {
+              document.documentElement.style.setProperty("--flicker-strength", val.toString())
+              localStorage.setItem("flicker-strength", val.toString())
+              term.writeln(`\x1b[32m[SUCCESS]\x1b[0m Flicker strength set to ${val}`)
+            } else {
+              term.writeln(`\x1b[31m[ERROR]\x1b[0m Invalid value. Allowed range: 0.02 - 0.1`)
+            }
+          } else {
+            term.writeln("Usage: flicker set <value>")
           }
           break
 

@@ -3,13 +3,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  background: rgba(0, 20, 0, 0.9);
-  border-bottom: 2px solid var(--neon-green);
+  background: var(--panel-bg);
+  border-bottom: 2px solid var(--theme-border);
   font-family: "Fira Code", monospace;
   margin-bottom: 2rem;
   
   .system-status {
-    color: var(--neon-green);
+    color: var(--theme-main);
     font-weight: bold;
     font-size: 0.8rem;
     display: flex;
@@ -17,7 +17,7 @@
     gap: 0.5rem;
     
     .status-indicator {
-        color: var(--neon-green);
+        color: var(--theme-main);
         animation: blink 2s infinite;
     }
   }
@@ -33,8 +33,8 @@
       text-decoration: none;
       
       &:hover {
-        color: var(--neon-green) !important;
-        text-shadow: 0 0 5px var(--neon-green);
+        color: var(--theme-main) !important;
+        text-shadow: 0 0 5px var(--theme-main);
       }
     }
   }

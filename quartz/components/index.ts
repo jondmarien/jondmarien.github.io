@@ -26,6 +26,7 @@ import ConditionalRender from "./ConditionalRender"
 import TerminalGreeting from "./TerminalGreeting"
 import InteractiveTerminal from "./InteractiveTerminal"
 import HeaderBar from "./HeaderBar"
+import ThemeSelector from "./ThemeSelector"
 
 export {
   ArticleTitle,
@@ -56,4 +57,5 @@ export {
   TerminalGreeting,
   InteractiveTerminal,
   HeaderBar,
+  ThemeSelector,
 }

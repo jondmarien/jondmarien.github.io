@@ -5,18 +5,133 @@
 // Matrix / Hacker TUI Theme
 
 :root {
-  --neon-green: #00ff41;
-  --dark-green: #008f11;
-  --matrix-bg: #050505;
-  --matrix-border: #00ff41;
+  // Default values (Matrix Green) - fallback
+  --theme-main: #00ff41;
+  --theme-dim: #008f11;
+  --theme-bg: #050505;
+  --theme-border: #00ff41;
   --panel-bg: rgba(0, 20, 0, 0.85);
   --text-main: #e0e0e0;
   --text-dim: #a0a0a0;
+  
+  // Terminal Colors
+  --term-black: #050505;
+  --term-red: #ff0000;
+  --term-green: #00ff41;
+  --term-yellow: #ffff00;
+  --term-blue: #0000ff;
+  --term-magenta: #ff00ff;
+  --term-cyan: #00ffff;
+  --term-white: #e0e0e0;
 }
+
+// THEME DEFINITIONS
+[data-theme-id="matrix"] {
+  --theme-main: #00ff41;
+  --theme-dim: #008f11;
+  --theme-border: #00ff41;
+  --term-green: #00ff41;
+}
+
+[data-theme-id="amber"] {
+  --theme-main: #ffb000;
+  --theme-dim: #8f6200;
+  --theme-border: #ffb000;
+  --term-green: #ffb000; // Map green to main color for consistency in TUI
+  --panel-bg: rgba(40, 20, 0, 0.85);
+}
+
+[data-theme-id="cyan"] {
+  --theme-main: #00ffff;
+  --theme-dim: #008f8f;
+  --theme-border: #00ffff;
+  --term-green: #00ffff;
+  --panel-bg: rgba(0, 20, 40, 0.85);
+}
+
+[data-theme-id="red"] {
+  --theme-main: #ff4d4d; // Brighter red for better contrast against black
+  --theme-dim: #b30000;
+  --theme-border: #ff4d4d;
+  --term-green: #ff4d4d;
+  --panel-bg: rgba(40, 0, 0, 0.85);
+}
+
+[data-theme-id="purple"] {
+  --theme-main: #d580ff; // Bright Neon Purple
+  --theme-dim: #8a00e0;
+  --theme-border: #d580ff;
+  --term-green: #d580ff;
+  --panel-bg: rgba(20, 0, 40, 0.85);
+}
+
+[data-theme-id="white"] {
+    --theme-main: #ffffff;
+    --theme-dim: #808080;
+    --theme-border: #ffffff;
+    --term-green: #ffffff;
+    --panel-bg: rgba(20, 20, 20, 0.85);
+}
+
+
+// LIGHT MODE OVERRIDES
+// LIGHT MODE OVERRIDES
+// Quartz typically uses [saved-theme="light"]
+:root[saved-theme="light"] {
+    --theme-bg: #fdf6e3 !important; // Solarized Light "Beige" / Paper
+    --panel-bg: rgba(253, 246, 227, 0.95) !important;
+    --text-main: #333333 !important;
+    --text-dim: #666666 !important;
+    
+    // In light mode, the "neon" colors need to be darker to be readable or inverted
+}
+
+:root[saved-theme="light"][data-theme-id="matrix"] {
+    --theme-main: #004d00 !important; // Dark Forest Green
+    --theme-dim: #006600 !important;
+    --theme-border: #004d00 !important;
+    --term-green: #004d00 !important;
+}
+
+:root[saved-theme="light"][data-theme-id="amber"] {
+    --theme-main: #b35900 !important; // Dark Burnt Orange
+    --theme-dim: #804000 !important;
+    --theme-border: #b35900 !important;
+     --term-green: #b35900 !important;
+}
+
+:root[saved-theme="light"][data-theme-id="cyan"] {
+    --theme-main: #004d4d !important; // Dark Teal
+    --theme-dim: #003333 !important;
+    --theme-border: #004d4d !important;
+    --term-green: #004d4d !important;
+}
+
+:root[saved-theme="light"][data-theme-id="red"] {
+    --theme-main: #b30000 !important; // Dark Crimson
+    --theme-dim: #800000 !important;
+    --theme-border: #b30000 !important;
+    --term-green: #b30000 !important;
+}
+
+:root[saved-theme="light"][data-theme-id="purple"] {
+    --theme-main: #4d0099 !important; // Dark Purple
+    --theme-dim: #330066 !important;
+    --theme-border: #4d0099 !important;
+    --term-green: #4d0099 !important;
+}
+
+:root[saved-theme="light"][data-theme-id="white"] {
+    --theme-main: #000000 !important; // Pure Black
+    --theme-dim: #444444 !important;
+    --theme-border: #000000 !important;
+    --term-green: #000000 !important;
+}
+
 
 body {
   font-family: "Fira Code", monospace;
-  background-color: var(--matrix-bg) !important;
+  background-color: var(--theme-bg) !important;
   color: var(--text-main) !important;
   overflow-x: hidden;
   box-sizing: border-box;
@@ -31,22 +146,24 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Fira Code", monospace;
   text-transform: uppercase;
-  color: var(--neon-green) !important;
-  text-shadow: 0 0 5px rgba(0, 255, 65, 0.4);
+  color: var(--theme-main) !important;
+  text-shadow: 0 0 5px rgba(var(--theme-main), 0.4); // This might assume generic rgb, which hex doesn't support directly in rgba without conversion. 
+  // Simplified shadow for hex vars:
+  text-shadow: 0 0 5px var(--theme-dim);
   margin-top: 2rem;
 }
 
 h1 {
   font-size: 2rem;
-  border-bottom: 2px solid var(--neon-green);
+  border-bottom: 2px solid var(--theme-main);
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
 h2 {
   font-size: 1.5rem;
-  background: rgba(0, 255, 65, 0.1);
-  border-left: 4px solid var(--neon-green);
+  background: rgba(128, 128, 128, 0.1); // Generic subtle bg
+  border-left: 4px solid var(--theme-main);
   padding: 0.5rem 1rem;
   margin-top: 2.5rem;
 }
@@ -113,7 +230,7 @@ body::after {
 // 1. Center Content
 .center > article {
   position: relative;
-  border: 1px solid var(--matrix-border);
+  border: 1px solid var(--theme-border);
   background-color: var(--panel-bg);
   padding: 2rem;
   margin-top: 3.5rem; // Increased from 1rem to clear the label
@@ -125,9 +242,9 @@ body::after {
     top: -12px;
     left: 20px;
     right: auto;
-    background: var(--matrix-bg);
-    color: var(--neon-green);
-    border: 1px solid var(--matrix-border);
+    background: var(--theme-bg);
+    color: var(--theme-main);
+    border: 1px solid var(--theme-border);
     padding: 0 10px;
     font-size: 0.8rem;
     font-weight: bold;
@@ -138,8 +255,8 @@ body::after {
 // Terminal Loading Placeholder
 #terminal-container {
    width: 100%;
-   background-color: var(--matrix-bg);
-   border: 1px solid var(--neon-green);
+   background-color: var(--theme-bg);
+   border: 1px solid var(--theme-border);
    padding: 1rem;
    overflow: hidden;
 
@@ -147,6 +264,7 @@ body::after {
        font-size: 0.9rem;
        opacity: 0.8;
        animation: blink 2s infinite;
+       color: var(--theme-main);
    }
    
    // Xterm overrides to match theme
@@ -157,7 +275,7 @@ body::after {
 
 // 2. Left Sidebar (Explorer)
 .left .explorer {
-  border: 1px solid var(--dark-green);
+  border: 1px solid var(--theme-dim);
   padding: 1rem;
   height: 100%;
   overflow-y: auto;
@@ -165,8 +283,8 @@ body::after {
   &::before {
     content: "FILE_SYS";
     display: block;
-    color: var(--dark-green);
-    border-bottom: 1px solid var(--dark-green);
+    color: var(--theme-dim);
+    border-bottom: 1px solid var(--theme-dim);
     margin-bottom: 0.5rem;
     font-weight: bold;
   }
@@ -179,7 +297,7 @@ body::after {
     &:hover {
       .folder-title {
         text-decoration: underline;
-        color: var(--neon-green);
+        color: var(--theme-main);
       }
     }
   }
@@ -188,7 +306,7 @@ body::after {
 // --- Footer Styling ---
 footer {
   margin-top: 4rem;
-  border-top: 1px dashed var(--dark-green);
+  border-top: 1px dashed var(--theme-dim);
   padding: 1.5rem 0;
   text-align: center;
   font-family: "Fira Code", monospace;
@@ -208,7 +326,7 @@ footer {
     font-size: 0.9rem;
     
     &:hover {
-      color: var(--neon-green) !important;
+      color: var(--theme-main) !important;
       background: transparent;
       text-decoration: underline;
     }
@@ -222,7 +340,7 @@ footer {
   gap: 2rem;
   
   .toc {
-    border-left: 2px solid var(--dark-green);
+    border-left: 2px solid var(--theme-dim);
     padding-left: 1rem;
     margin-top: 0; // Reset margin since it's now first (or second)
     position: relative;
@@ -231,7 +349,7 @@ footer {
     
     &::before {
       content: "JUMP_TARGETS";
-      color: var(--dark-green);
+      color: var(--theme-dim);
       font-weight: bold;
       display: block;
       margin-bottom: 0.5rem;
@@ -240,14 +358,20 @@ footer {
   }
 
   .graph {
-    border: 1px solid var(--dark-green);
+    border: 1px solid var(--theme-dim);
     filter: sepia(100%) hue-rotate(100deg) saturate(300%) contrast(1.2);
+    // Note: The hue-rotate filter might mess up non-green themes. We should reset it or enable it only for matrix.
+    // For simplicity, we'll keep the filter for that "CRT" look, but maybe adjust it per theme later if needed.
+    // Actually, generic contrast/sepia is okay, but hue-rotate shifts the color. 
+    // We should probably rely on the theme colors instead of filters.
+    filter: none; // Resetting filter to rely on theme colors
+    
     position: relative;
     padding-top: 1.5rem; // Space for the label
     
     &::before {
       content: "NET_TOPOLOGY";
-      background: var(--dark-green);
+      background: var(--theme-dim);
       color: black;
       font-size: 0.7rem;
       padding: 2px 5px;
@@ -262,14 +386,14 @@ footer {
 
 // Code Blocks
 pre {
-  border: 1px solid var(--neon-green) !important;
-  background-color: #080808 !important;
+  border: 1px solid var(--theme-main) !important;
+  background-color: rgba(5,5,5,0.9) !important;
   border-radius: 0 !important;
   
   code {
     background: transparent !important;
     font-family: "Fira Code", monospace !important;
-    color: #e0e0e0 !important;
+    color: var(--text-main) !important;
   }
 }
 
@@ -285,14 +409,12 @@ pre {
   // Open Folder
   li[data-collapsed="false"] > button span.folder-container::before {
     content: "📂 ";
-    filter: sepia(100%) hue-rotate(100deg) saturate(500%); // Neon-ish
+    // filter: sepia(100%) hue-rotate(100deg) saturate(500%); // Neon-ish
+    // Replace hard filter with just normal display, maybe colorized via text shadow
+    color: var(--theme-main);
+    filter: none;
   }
 
-  // Data for "File" (li without button usually, or check structure)
-  // Quartz explorer structure is complex, usually:
-  // li > a.internal (File)
-  // li > button (Folder)
-  
   li > a.internal::before {
     content: "📄 ";
     filter: grayscale(1);
@@ -306,17 +428,17 @@ table {
   border-collapse: collapse;
   width: 100%;
   margin: 2rem 0;
-  border: 1px solid var(--dark-green);
+  border: 1px solid var(--theme-dim);
   font-family: "Fira Code", monospace;
   
   thead {
-    background-color: rgba(0, 255, 65, 0.1);
-    border-bottom: 2px solid var(--neon-green);
+    background-color: rgba(128, 128, 128, 0.1);
+    border-bottom: 2px solid var(--theme-main);
     
     th {
       text-align: left;
       padding: 1rem;
-      color: var(--neon-green);
+      color: var(--theme-main);
       text-transform: uppercase;
       font-weight: bold;
       letter-spacing: 0.1em;
@@ -325,11 +447,11 @@ table {
   
   tbody {
     tr {
-      border-bottom: 1px solid var(--dark-green);
+      border-bottom: 1px solid var(--theme-dim);
       transition: background 0.2s;
       
       &:hover {
-        background-color: rgba(0, 255, 65, 0.05);
+        background-color: rgba(128, 128, 128, 0.1);
       }
       
       td {
@@ -342,23 +464,26 @@ table {
 
 // Links
 a {
-  color: var(--neon-green) !important;
+  color: var(--theme-main) !important;
   text-decoration: none;
+  transition: all 0.2s;
+
   &:hover {
-    background-color: var(--neon-green);
-    color: black !important;
+    background-color: var(--theme-main);
+    color: var(--theme-bg) !important; // Contrast text color on hover
+    box-shadow: 0 0 5px var(--theme-main);
   }
   &.internal {
     background: transparent !important;
-    border-bottom: 1px dotted var(--dark-green);
+    border-bottom: 1px dotted var(--theme-dim);
   }
 }
 
 // Scrollbars
 ::-webkit-scrollbar {
   width: 8px;
-  background: black;
+  background: var(--theme-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--dark-green);
+  background: var(--theme-dim);
 }

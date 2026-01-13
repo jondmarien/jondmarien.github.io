@@ -41,6 +41,8 @@
     "@myriaddreamin/rehype-typst": "^0.6.0",
     "@napi-rs/simple-git": "0.1.22",
     "@tweenjs/tween.js": "^25.0.0",
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/xterm": "^6.0.0",
     "ansi-truncate": "^1.4.0",
     "async-mutex": "^0.5.0",
     "chokidar": "^5.0.0",
@@ -98,8 +100,6 @@
     "vfile": "^6.0.3",
     "workerpool": "^10.0.1",
     "ws": "^8.19.0",
-    "xterm": "^5.3.0",
-    "xterm-addon-fit": "^0.8.0",
     "yargs": "^18.0.0"
   },
   "devDependencies": {

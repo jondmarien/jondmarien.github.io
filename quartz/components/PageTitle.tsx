@@ -19,6 +19,13 @@ PageTitle.css = `
   margin: 0;
   font-family: var(--titleFont);
 }
+
+@media (max-width: 600px) {
+  .ascii-art {
+    font-size: 0.25rem;
+    line-height: 0.25rem;
+  }
+}
 `
 
 export default (() => PageTitle) satisfies QuartzComponentConstructor

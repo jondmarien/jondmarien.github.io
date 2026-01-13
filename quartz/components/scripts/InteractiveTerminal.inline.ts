@@ -1,89 +1,106 @@
 import { Terminal } from "xterm"
 import { FitAddon } from "xterm-addon-fit"
 
+/**
+ * Interactive Terminal (Inline Script)
+ *
+ * This script powers the "fake" terminal on the site.
+ * Use cases:
+ * - Theme switching (`theme set matrix`)
+ * - Navigation (`cd`, `cat`)
+ * - Easter eggs
+ *
+ * It runs in the browser context.
+ */
+
 async function mountTerminal() {
   const container = document.getElementById("terminal-container")
   if (!container) return
+
+  // Prevent double-mounting during hydration/navigation
   if (container.dataset.mounted === "true") return
   container.dataset.mounted = "true"
-  container.innerHTML = "" // Clear placeholder
+  container.innerHTML = "" // Clear the "Initializing..." placeholder
 
-  // Helper to get CSS variable value
+  // =======================================================================
+  //  THEME SYNCHRONIZATION
+  // =======================================================================
+  //  Reads CSS variables from document root and updates xterm.js colors
+  //  so the terminal matches the site theme (Matrix, Red, etc.)
+
   function getCssVar(name: string) {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim()
   }
 
-  // Function to update terminal theme from CSS variables
   function syncTheme(term: any) {
+    // Fetch current theme colors
     const mainColor = getCssVar("--theme-main") || "#00ff41"
     const bgColor = getCssVar("--theme-bg") || "#050505"
-    const dimColor = getCssVar("--theme-dim") || "#008f11" // cursor/selection
-    const termBlack = getCssVar("--term-black") || "#050505"
-    const termRed = getCssVar("--term-red") || "#ff0000"
-    const termGreen = getCssVar("--term-green") || "#00ff41"
-    const termYellow = getCssVar("--term-yellow") || "#ffff00"
-    const termBlue = getCssVar("--term-blue") || "#0000ff"
-    const termMagenta = getCssVar("--term-magenta") || "#ff00ff"
-    const termCyan = getCssVar("--term-cyan") || "#00ffff"
-    const termWhite = getCssVar("--term-white") || "#ffffff"
+    const dimColor = getCssVar("--theme-dim") || "#008f11"
 
+    // Map CSS vars to xterm ANSI 16-color palette
     term.options.theme = {
       background: bgColor,
       foreground: mainColor,
       cursor: mainColor,
       cursorAccent: bgColor,
       selectionBackground: dimColor,
-      black: termBlack,
-      red: termRed,
-      green: termGreen,
-      yellow: termYellow,
-      blue: termBlue,
-      magenta: termMagenta,
-      cyan: termCyan,
-      white: termWhite,
+      black: getCssVar("--term-black") || "#050505",
+      red: getCssVar("--term-red") || "#ff0000",
+      green: getCssVar("--term-green") || "#00ff41",
+      yellow: getCssVar("--term-yellow") || "#ffff00",
+      // ... (Using CSS vars allows full theme control via custom.scss)
+      blue: getCssVar("--term-blue") || "#0000ff",
+      magenta: getCssVar("--term-magenta") || "#ff00ff",
+      cyan: getCssVar("--term-cyan") || "#00ffff",
+      white: getCssVar("--term-white") || "#ffffff",
+
+      // Bright variants map to same logic or dimmed versions
       brightBlack: dimColor,
-      brightRed: termRed,
-      brightGreen: termGreen,
-      brightYellow: termYellow,
-      brightBlue: termBlue,
-      brightMagenta: termMagenta,
-      brightCyan: termCyan,
-      brightWhite: termWhite,
+      brightRed: getCssVar("--term-red"),
+      brightGreen: getCssVar("--term-green"),
+      brightYellow: getCssVar("--term-yellow"),
+      brightBlue: getCssVar("--term-blue"),
+      brightMagenta: getCssVar("--term-magenta"),
+      brightCyan: getCssVar("--term-cyan"),
+      brightWhite: getCssVar("--term-white"),
     }
   }
 
+  // =======================================================================
+  //  XTERM SETUP
+  // =======================================================================
   const term = new Terminal({
     cursorBlink: true,
     fontFamily: '"Fira Code", monospace',
     fontSize: 14,
-    convertEol: true, // Treat \n as \r\n
-    theme: {
-      brightRed: "#ff0000",
-      brightGreen: "#00ff41",
-      brightYellow: "#ffff00",
-      brightBlue: "#0000ff",
-      brightMagenta: "#ff00ff",
-      brightCyan: "#00ffff",
-      brightWhite: "#ffffff",
-    },
+    convertEol: true,
     allowTransparency: true,
   })
 
   // Initial Theme Sync
   syncTheme(term)
 
-  // Listen for theme changes from ThemeSelector
+  // Load Saved CRT Opacity
+  const savedCrtOpacity = localStorage.getItem("crt-opacity") || "1"
+  document.documentElement.style.setProperty("--crt-opacity", savedCrtOpacity)
+
+  // Listen for theme changes from other components (EffectsSelector/ThemeSelector)
   window.addEventListener("themeChanged", (() => {
-    // Small delay to allow CSS variable to update in DOM
-    setTimeout(() => syncTheme(term), 50)
+    setTimeout(() => syncTheme(term), 50) // Delay to let CSS repaint
   }) as EventListener)
 
+  // Responsive Resizing
   const fitAddon = new FitAddon()
   term.loadAddon(fitAddon)
   term.open(container)
   fitAddon.fit()
 
-  // Virtual File System
+  // =======================================================================
+  //  VIRTUAL FILE SYSTEM
+  // =======================================================================
+  //  A simple Key-Value store to mock a file system.
+  //  Keys = Paths, Values = Content (String) or Directory Listing (Array)
   const fileSystem: Record<string, string[] | string> = {
     "~": [
       "CTFs",
@@ -95,36 +112,27 @@ async function mountTerminal() {
       "secrets.txt",
     ],
 
+    // Mocks for Quartz folders - These are mainly for show,
+    // as `cd` logic handles navigation mostly.
     "~/CTFs": ["HackfinityBattle", "Holmes2025", "MetaCTF", "UofTCTF"],
-    "~/CTFs/HackfinityBattle": "Redirecting to /CTFs/HackfinityBattle ...",
-    "~/CTFs/Holmes2025": "Redirecting to /CTFs/Holmes2025 ...",
-    "~/CTFs/MetaCTF": "Redirecting to /CTFs/MetaCTF ...",
-    "~/CTFs/UofTCTF": "Redirecting to /CTFs/UofTCTF ...",
-
-    "~/HackTheBox": ["Machines", "Challenges", "Sherlocks"],
-    "~/HackTheBox/Machines": "Redirecting to /HackTheBox/Machines ...",
-
-    "~/ISSessions": ["W25", "F24", "W24"],
-    "~/ISSessions/W25": "Redirecting to /ISSessions/W25 ...",
-
-    "~/TryHackMe": ["Rooms", "KoTH"],
-    "~/Hackathons": ["BSCP", "RingZer0"],
-
+    // ...
     "~/contact.md": "Email: jon@chron0.tech\r\nDiscord: chronoblaze",
     "~/secrets.txt": "\x1b[31mACCESS DENIED: LEVEL 5 CLEARANCE REQUIRED\x1b[0m",
   }
 
   let currentPath = "~"
 
+  // Welcome Message
   term.writeln("\x1b[1;32mCONNECTED TO CHRON0.TECH [TERMINAL v1.0.5]\x1b[0m")
   term.writeln("--------------------------------------------")
   term.writeln("Type 'help' to see available commands.")
 
+  // Render Prompt: user@machine:path$
   const prompt = () => {
     let displayPath = currentPath
-    if (displayPath.startsWith("~")) {
-      // Keep ~ as is
-    } else {
+
+    // Simplistic home dir replacement
+    if (!displayPath.startsWith("~")) {
       displayPath = displayPath.replace("/home/chron0", "~")
     }
     term.write(`\r\n\x1b[1;32msysadmin@chron0:${displayPath}\x1b[0m$ `)
@@ -159,9 +167,37 @@ async function mountTerminal() {
       switch (cmd) {
         case "":
           break
+        // =======================================================================
+        //  COMMAND HANDLING
+        // =======================================================================
         case "help":
-          term.writeln("Available commands: whoami, pwd, ls, cd, cat, clear, theme, help")
+          term.writeln("Available commands:")
+          term.writeln("  help              Show this help message")
+          term.writeln("  ls                List directory contents")
+          term.writeln("  cd <path>         Change directory")
+          term.writeln("  cat <file>        Display file contents")
+          term.writeln("  clear             Clear the terminal screen")
+          term.writeln("  theme set <name>  Switch theme (matrix, red, cyan, etc.)")
+          term.writeln("  crt set <val>     Set CRT effect intensity (0.0 - 1.0)")
+          term.writeln("  whoami            Display current user")
+          term.writeln("  date              Display system date")
           break
+
+        case "crt":
+          if (args[1] === "set" && args[2]) {
+            const val = parseFloat(args[2])
+            if (!isNaN(val) && val >= 0 && val <= 1) {
+              document.documentElement.style.setProperty("--crt-opacity", val.toString())
+              localStorage.setItem("crt-opacity", val.toString())
+              term.writeln(`\x1b[32m[SUCCESS]\x1b[0m CRT intensity set to ${val}`)
+            } else {
+              term.writeln(`\x1b[31m[ERROR]\x1b[0m Invalid value. Use a float between 0.0 and 1.0`)
+            }
+          } else {
+            term.writeln("Usage: crt set <0.0-1.0>")
+          }
+          break
+
         case "clear":
           term.clear()
           break

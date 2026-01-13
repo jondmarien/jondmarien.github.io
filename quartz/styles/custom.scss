@@ -524,7 +524,7 @@ pre {
 }
 
 // --- Graph View Theming ---
-.graph-container, .global-graph-container {
+.graph-container, .global-graph-container, .global-graph-icon {
   // Target D3 nodes and links
   // Note: These might be SVG 'circle' and 'line' elements
   svg {
@@ -539,6 +539,12 @@ pre {
       transition: stroke 0.3s ease;
     }
     
+    // Global Graph Icon (Top Right)
+    path {
+        fill: var(--theme-main) !important; // Force fill for the icon
+        transition: fill 0.3s ease;
+    }
+    
     // Active/Highlight states
     .node-active {
         fill: var(--theme-main) !important;
@@ -550,6 +556,42 @@ pre {
         stroke: var(--theme-main) !important;
     }
   }
+}
+
+// --- Table of Contents Theming ---
+.toc {
+    button.toc-header {
+        color: var(--theme-main) !important;
+        
+        svg.fold {
+            stroke: var(--theme-main) !important;
+            polyline {
+                 stroke: var(--theme-main) !important;
+            }
+        }
+    }
+}
+
+// --- Page Animation ---
+@keyframes contentFadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+#quartz-body {
+    animation: contentFadeIn 0.8s ease-out forwards;
+}
+
+// --- ASCII Header ---
+.header-bar .ascii-header {
+    font-family: "Fira Code", monospace;
+    font-size: 0.5rem; // ASCII art needs to be small to fit
+    line-height: 0.5rem;
+    white-space: pre;
+    color: var(--theme-main);
+    text-shadow: 0 0 5px var(--theme-dim);
+    margin: 1rem 0;
+    overflow-x: hidden; // Prevent accidental scrollbar from art
 }
 
 // --- Table Formatting ---

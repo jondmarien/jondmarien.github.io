@@ -12,7 +12,9 @@ tags:
 | Title          | Author     | Created          | Published        | Tags                                                                     |
 | -------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------------------------ |
 | Authentication | Jon Marien | January 13, 2026 | January 13, 2026 | [[#certifications\|#certifications]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
-
 # Definition
+
+![[image-1046.png]]
+
 ## Authentication Vulnerabilities
 

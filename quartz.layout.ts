@@ -7,22 +7,25 @@ export const sharedPageComponents: SharedLayout = {
   header: [],
   afterBody: [],
   footer: Component.Footer({
-    links: {
-      LinkedIn: "https://linkedin.com/in/jondmarien",
-      Instagram: "https://instagram.com/jon.marien",
-      Portfolio: "https://chron0.tech",
-    },
+    links: {},
   }),
 }
 
 // components for pages that display a single page (e.g. a single note)
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
+    Component.HeaderBar({
+      links: {
+        LinkedIn: "https://linkedin.com/in/jondmarien",
+        Instagram: "https://instagram.com/jon.marien",
+        Portfolio: "https://chron0.tech",
+      },
+    }),
     Component.ConditionalRender({
       component: Component.Breadcrumbs(),
       condition: (page) => page.fileData.slug !== "index",
     }),
-    Component.TerminalGreeting(),
+    Component.InteractiveTerminal(),
     Component.ArticleTitle(),
     Component.ContentMeta(),
     Component.TagList(),
@@ -43,8 +46,8 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Explorer(),
   ],
   right: [
-    Component.DesktopOnly(Component.TableOfContents()),
     Component.Graph(),
+    Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
   ],
 }
@@ -52,8 +55,15 @@ export const defaultContentPageLayout: PageLayout = {
 // components for pages that display lists of pages  (e.g. tags or folders)
 export const defaultListPageLayout: PageLayout = {
   beforeBody: [
+    Component.HeaderBar({
+      links: {
+        LinkedIn: "https://linkedin.com/in/jondmarien",
+        Instagram: "https://instagram.com/jon.marien",
+        Portfolio: "https://chron0.tech",
+      },
+    }),
     Component.Breadcrumbs(),
-    Component.TerminalGreeting(),
+    Component.InteractiveTerminal(),
     Component.ArticleTitle(),
     Component.ContentMeta(),
   ],

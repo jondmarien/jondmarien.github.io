@@ -1,0 +1,47 @@
+.header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 20, 0, 0.9);
+  border-bottom: 2px solid var(--neon-green);
+  font-family: "Fira Code", monospace;
+  margin-bottom: 2rem;
+  
+  .system-status {
+    color: var(--neon-green);
+    font-weight: bold;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    .status-indicator {
+        color: var(--neon-green);
+        animation: blink 2s infinite;
+    }
+  }
+  
+  .header-links {
+    display: flex;
+    gap: 1.5rem;
+    
+    .header-link {
+      color: var(--text-dim) !important;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      
+      &:hover {
+        color: var(--neon-green) !important;
+        text-shadow: 0 0 5px var(--neon-green);
+      }
+    }
+  }
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}

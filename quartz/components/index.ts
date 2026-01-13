@@ -24,6 +24,8 @@ import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import TerminalGreeting from "./TerminalGreeting"
+import InteractiveTerminal from "./InteractiveTerminal"
+import HeaderBar from "./HeaderBar"
 
 export {
   ArticleTitle,
@@ -52,4 +54,6 @@ export {
   Flex,
   ConditionalRender,
   TerminalGreeting,
+  InteractiveTerminal,
+  HeaderBar,
 }

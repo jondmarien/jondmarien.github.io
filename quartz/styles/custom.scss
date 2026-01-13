@@ -110,16 +110,17 @@ body::after {
 
 // 1. Center Content
 .center > article {
+  position: relative;
   border: 1px solid var(--matrix-border);
   background-color: var(--panel-bg);
   padding: 2rem;
-  margin-top: 1rem;
+  margin-top: 3.5rem; // Increased from 1rem to clear the label
   
   &::before {
     content: " [ MAIN_DISPLAY ] ";
     display: inline-block;
     position: absolute;
-    top: -10px;
+    top: -12px;
     right: 20px;
     background: var(--matrix-bg);
     color: var(--neon-green);
@@ -127,7 +128,17 @@ body::after {
     padding: 0 10px;
     font-size: 0.8rem;
     font-weight: bold;
+    z-index: 5;
   }
+}
+
+// Terminal Loading Placeholder
+#terminal-container {
+   .terminal-placeholder {
+       font-size: 0.9rem;
+       opacity: 0.8;
+       animation: blink 2s infinite;
+   }
 }
 
 // 2. Left Sidebar (Explorer)

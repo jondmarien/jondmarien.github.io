@@ -9,6 +9,7 @@ export default ((opts?: Options) => {
   const Footer: QuartzComponent = ({ displayClass }: QuartzComponentProps) => {
     const year = new Date().getFullYear()
     const links = opts?.links ?? []
+    if (Object.keys(links).length === 0) return null
     return (
       <footer class={`${displayClass ?? ""}`}>
         <p>© {year}</p>

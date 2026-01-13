@@ -186,7 +186,7 @@ async function mountTerminal() {
           term.writeln("  theme set <name>  Switch theme (matrix, red, cyan, etc.)")
           term.writeln("  crt set <val>     Set CRT effect intensity (0.0 - 1.0)")
           term.writeln("  vignette <state>  Toggle vignette (on/off)")
-          term.writeln("  flicker set <val> Set flicker strength (0.0 - 0.2)")
+          term.writeln("  flicker set <val> Set flicker strength (0.02 - 0.1)")
           term.writeln("  whoami            Display current user")
           term.writeln("  date              Display system date")
           break
@@ -225,14 +225,21 @@ async function mountTerminal() {
         case "flicker":
           if (args[1] === "set" && args[2]) {
             const val = parseFloat(args[2])
-            // Recommend small range, but allow up to 0.5 for chaos
-            // Strict range: 0.0 (off) to 0.1 (max usable)
-            if (!isNaN(val) && val >= 0 && val <= 0.1) {
+            // Recommend small range, allowing 0.0 (off) or strict 0.02-0.1 range
+            // User requested strict 0.02 - 0.1
+            if (!isNaN(val) && val >= 0.02 && val <= 0.1) {
               document.documentElement.style.setProperty("--flicker-strength", val.toString())
               localStorage.setItem("flicker-strength", val.toString())
               term.writeln(`\x1b[32m[SUCCESS]\x1b[0m Flicker strength set to ${val}`)
+            } else if (val === 0) {
+              // Explicitly allow turning it off
+              document.documentElement.style.setProperty("--flicker-strength", "0")
+              localStorage.setItem("flicker-strength", "0")
+              term.writeln(`\x1b[32m[SUCCESS]\x1b[0m Flicker disabled`)
             } else {
-              term.writeln(`\x1b[31m[ERROR]\x1b[0m Invalid value. Allowed range: 0.02 - 0.1`)
+              term.writeln(
+                `\x1b[31m[ERROR]\x1b[0m Invalid value. Allowed range: 0.02 - 0.1 (or 0 to disable)`,
+              )
             }
           } else {
             term.writeln("Usage: flicker set <value>")
@@ -246,7 +253,12 @@ async function mountTerminal() {
           term.writeln("sysadmin@chron0.tech")
           break
         case "pwd":
-          term.writeln(currentPath.replace("~", "/home/chron0"))
+          // Output the full resolved path
+          let output = currentPath
+          if (currentPath.startsWith("~")) {
+            output = "/home/chron0" + currentPath.substring(1)
+          }
+          term.writeln(output)
           break
         case "cd":
           const navArg = args[1]

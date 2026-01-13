@@ -236,10 +236,22 @@ async function mountTerminal() {
 
           if (subCmd !== "set" || !themeNameArg) {
             term.writeln("Usage: theme set <name>")
-            term.writeln("Available themes: matrix, amber, cyan, red, white, purple")
+            term.writeln(
+              "Available themes: matrix, amber, cyan, red, white, purple, ocean, cherry, rainy",
+            )
           } else {
             const tName = themeNameArg.toLowerCase()
-            const validThemes = ["matrix", "amber", "cyan", "red", "white", "purple"]
+            const validThemes = [
+              "matrix",
+              "amber",
+              "cyan",
+              "red",
+              "white",
+              "purple",
+              "ocean",
+              "cherry",
+              "rainy",
+            ]
 
             if (validThemes.includes(tName)) {
               document.documentElement.setAttribute("data-theme-id", tName)
@@ -248,7 +260,9 @@ async function mountTerminal() {
               term.writeln(`Theme set to: ${tName}`)
             } else {
               term.writeln(`Invalid theme: ${tName}`)
-              term.writeln("Available themes: matrix, amber, cyan, red, white, purple")
+              term.writeln(
+                "Available themes: matrix, amber, cyan, red, white, purple, ocean, cherry, rainy",
+              )
             }
           }
           break

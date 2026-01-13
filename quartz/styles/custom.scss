@@ -25,6 +25,42 @@
   --term-white: #e0e0e0;
 }
 
+// CRT / Retro Effects
+body::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 9999;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+
+body::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4) 100%);
+  z-index: 9998;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.95; }
+  50% { opacity: 0.98; }
+  100% { opacity: 0.95; }
+}
+
+
 // THEME DEFINITIONS
 [data-theme-id="matrix"] {
   --theme-main: #00ff41;
@@ -37,7 +73,7 @@
   --theme-main: #ffb000;
   --theme-dim: #8f6200;
   --theme-border: #ffb000;
-  --term-green: #ffb000; // Map green to main color for consistency in TUI
+  --term-green: #ffb000;
   --panel-bg: rgba(40, 20, 0, 0.85);
 }
 
@@ -50,7 +86,7 @@
 }
 
 [data-theme-id="red"] {
-  --theme-main: #ff4d4d; // Brighter red for better contrast against black
+  --theme-main: #ff4d4d;
   --theme-dim: #b30000;
   --theme-border: #ff4d4d;
   --term-green: #ff4d4d;
@@ -58,11 +94,35 @@
 }
 
 [data-theme-id="purple"] {
-  --theme-main: #d580ff; // Bright Neon Purple
+  --theme-main: #d580ff;
   --theme-dim: #8a00e0;
   --theme-border: #d580ff;
   --term-green: #d580ff;
   --panel-bg: rgba(20, 0, 40, 0.85);
+}
+
+[data-theme-id="ocean"] {
+  --theme-main: #00bfff; // Deep Sky Blue
+  --theme-dim: #006080;
+  --theme-border: #00bfff;
+  --term-green: #00bfff;
+  --panel-bg: rgba(0, 10, 30, 0.85);
+}
+
+[data-theme-id="cherry"] {
+  --theme-main: #ff0055; // Retro Pink/Red
+  --theme-dim: #990033;
+  --theme-border: #ff0055;
+  --term-green: #ff0055;
+  --panel-bg: rgba(30, 0, 10, 0.85);
+}
+
+[data-theme-id="rainy"] {
+  --theme-main: #a3c2c2; // Blue Grey
+  --theme-dim: #5c7a7a;
+  --theme-border: #a3c2c2;
+  --term-green: #a3c2c2;
+  --panel-bg: rgba(10, 15, 20, 0.85);
 }
 
 [data-theme-id="white"] {
@@ -75,54 +135,72 @@
 
 
 // LIGHT MODE OVERRIDES
-// LIGHT MODE OVERRIDES
 // Quartz typically uses [saved-theme="light"]
 :root[saved-theme="light"] {
     --theme-bg: #fdf6e3 !important; // Solarized Light "Beige" / Paper
     --panel-bg: rgba(253, 246, 227, 0.95) !important;
     --text-main: #333333 !important;
     --text-dim: #666666 !important;
-    
-    // In light mode, the "neon" colors need to be darker to be readable or inverted
 }
 
 :root[saved-theme="light"][data-theme-id="matrix"] {
-    --theme-main: #004d00 !important; // Dark Forest Green
+    --theme-main: #004d00 !important;
     --theme-dim: #006600 !important;
     --theme-border: #004d00 !important;
     --term-green: #004d00 !important;
 }
 
 :root[saved-theme="light"][data-theme-id="amber"] {
-    --theme-main: #b35900 !important; // Dark Burnt Orange
+    --theme-main: #b35900 !important;
     --theme-dim: #804000 !important;
     --theme-border: #b35900 !important;
      --term-green: #b35900 !important;
 }
 
 :root[saved-theme="light"][data-theme-id="cyan"] {
-    --theme-main: #004d4d !important; // Dark Teal
+    --theme-main: #004d4d !important;
     --theme-dim: #003333 !important;
     --theme-border: #004d4d !important;
     --term-green: #004d4d !important;
 }
 
 :root[saved-theme="light"][data-theme-id="red"] {
-    --theme-main: #b30000 !important; // Dark Crimson
+    --theme-main: #b30000 !important;
     --theme-dim: #800000 !important;
     --theme-border: #b30000 !important;
     --term-green: #b30000 !important;
 }
 
 :root[saved-theme="light"][data-theme-id="purple"] {
-    --theme-main: #4d0099 !important; // Dark Purple
+    --theme-main: #4d0099 !important;
     --theme-dim: #330066 !important;
     --theme-border: #4d0099 !important;
     --term-green: #4d0099 !important;
 }
 
+:root[saved-theme="light"][data-theme-id="ocean"] {
+    --theme-main: #004080 !important;
+    --theme-dim: #002040 !important;
+    --theme-border: #004080 !important;
+    --term-green: #004080 !important;
+}
+
+:root[saved-theme="light"][data-theme-id="cherry"] {
+    --theme-main: #990033 !important;
+    --theme-dim: #660022 !important;
+    --theme-border: #990033 !important;
+    --term-green: #990033 !important;
+}
+
+:root[saved-theme="light"][data-theme-id="rainy"] {
+    --theme-main: #2f4f4f !important; // Dark Slate Gray
+    --theme-dim: #1a2e2e !important;
+    --theme-border: #2f4f4f !important;
+    --term-green: #2f4f4f !important;
+}
+
 :root[saved-theme="light"][data-theme-id="white"] {
-    --theme-main: #000000 !important; // Pure Black
+    --theme-main: #000000 !important;
     --theme-dim: #444444 !important;
     --theme-border: #000000 !important;
     --term-green: #000000 !important;
@@ -398,12 +476,34 @@ pre {
 }
 
 // --- Sidebar Icons (Explorer) ---
+// --- Sidebar Icons (Explorer) ---
 .explorer {
+  // Hide the main "Explorer" collapse arrow and disable clicking
+  .title-button {
+    pointer-events: none;
+    h2 {
+      cursor: default;
+    }
+    svg.fold {
+      display: none !important;
+    }
+  }
+
   // Data for "Folder"
   li > button span.folder-container::before {
     content: "📁 ";
     filter: grayscale(1) brightness(0.7); // Make it look "hollow"/dim
     margin-right: 5px;
+  }
+  
+  // Colorize the chevron arrow for folders
+  .folder-icon {
+    color: var(--theme-main) !important;
+    stroke: var(--theme-main) !important;
+    
+    polyline {
+      stroke: var(--theme-main) !important;
+    }
   }
   
   // Open Folder
@@ -420,6 +520,35 @@ pre {
     filter: grayscale(1);
     opacity: 0.7;
     margin-right: 5px;
+  }
+}
+
+// --- Graph View Theming ---
+.graph-container, .global-graph-container {
+  // Target D3 nodes and links
+  // Note: These might be SVG 'circle' and 'line' elements
+  svg {
+    circle {
+      fill: var(--theme-main) !important;
+      opacity: 0.8;
+      transition: fill 0.3s ease;
+    }
+    
+    line {
+      stroke: var(--theme-dim) !important;
+      transition: stroke 0.3s ease;
+    }
+    
+    // Active/Highlight states
+    .node-active {
+        fill: var(--theme-main) !important;
+        stroke: var(--theme-border) !important;
+        stroke-width: 2px;
+    }
+    
+    .link-active {
+        stroke: var(--theme-main) !important;
+    }
   }
 }
 

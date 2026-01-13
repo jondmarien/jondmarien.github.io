@@ -1,3 +1,206 @@
-@use "./base.scss";
+@use "./variables.scss" as *;
 
-// put your custom CSS here!
+// Matrix / Hacker TUI Theme
+
+:root {
+  --neon-green: #00ff41;
+  --dark-green: #008f11;
+  --matrix-bg: #050505;
+  --matrix-border: #00ff41;
+  --panel-bg: rgba(0, 20, 0, 0.85);
+  --text-main: #e0e0e0; // High contrast text
+  --text-dim: #a0a0a0;
+}
+
+body {
+  font-family: "Fira Code", monospace;
+  background-color: var(--matrix-bg) !important;
+  color: var(--text-main) !important; // Better contrast than all-green
+  overflow-x: hidden;
+}
+
+// Global Headers
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Fira Code", monospace;
+  text-transform: uppercase;
+  color: var(--neon-green) !important;
+  text-shadow: 0 0 5px rgba(0, 255, 65, 0.4);
+  margin-top: 2rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  border-bottom: 2px solid var(--neon-green);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  background: rgba(0, 255, 65, 0.1);
+  border-left: 5px solid var(--neon-green);
+  padding: 0.5rem 1rem;
+  width: fit-content;
+}
+
+h3 {
+  font-size: 1.4rem;
+  color: var(--dark-green) !important;
+  border-bottom: 1px dashed var(--dark-green);
+  display: inline-block;
+  padding-right: 1rem;
+}
+
+// CRT Scanline Effect
+body::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 999;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+
+// --- Layout Panels ---
+
+// 1. Center Content Panel (The Main "Display")
+.center > article {
+  border: 1px solid var(--matrix-border);
+  background-color: var(--panel-bg);
+  padding: 2rem;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.15);
+  position: relative;
+  min-height: 80vh; // Ensure it feels substantial
+
+  // Terminal Window Header
+  &::before {
+    content: " [ MAIN_PROCESS::DISPLAY ] ";
+    display: block;
+    width: fit-content;
+    background-color: var(--matrix-bg);
+    color: var(--neon-green);
+    border: 1px solid var(--matrix-border);
+    padding: 2px 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    transform: translateY(-2.8rem);
+  }
+}
+
+// 2. Left Sidebar (Explorer)
+.left {
+  padding-right: 1rem;
+  
+  .explorer {
+    border: 1px solid var(--dark-green);
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    
+    &::before {
+      content: "FILE_SYSTEM";
+      color: var(--dark-green);
+      font-weight: bold;
+      border-bottom: 1px solid var(--dark-green);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+// 3. Right Sidebar (Graph/TOC)
+.center + .right {
+  padding-left: 1rem;
+  
+  .graph {
+    border: 1px solid var(--dark-green);
+    border-radius: 0;
+    
+    &::before {
+      // Label for graph
+      content: "NET_TOPOLOGY";
+      background: var(--dark-green);
+      color: black;
+      font-size: 0.7rem;
+      padding: 2px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+  }
+  
+  .toc {
+    border-left: 1px solid var(--dark-green);
+    padding-left: 1rem;
+    margin-top: 2rem;
+    
+    &::before {
+      content: "JUMP_TARGETS";
+      color: var(--dark-green);
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+
+// Link Styling
+a {
+  color: var(--neon-green) !important;
+  text-decoration: none;
+  transition: all 0.2s;
+  
+  &:hover {
+    background-color: var(--neon-green);
+    color: var(--matrix-bg) !important;
+    text-shadow: none;
+  }
+  
+  &.internal {
+    background-color: transparent !important;
+    border-bottom: 1px dotted var(--dark-green);
+  }
+}
+
+// Code Blocks
+pre {
+  border: 1px solid var(--neon-green) !important;
+  background-color: #080808 !important;
+  border-radius: 0 !important;
+  margin: 1.5rem 0;
+  
+  &::before {
+    content: "EXEC_BUFFER";
+    display: block;
+    background: var(--neon-green);
+    color: black;
+    font-size: 0.75rem;
+    padding: 2px 5px;
+    width: fit-content;
+    margin-bottom: 5px;
+  }
+  
+  code {
+    background: transparent !important;
+    font-family: "Fira Code", monospace !important;
+    color: #e0e0e0 !important; // Readable code
+  }
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 12px;
+  background: black;
+  border-left: 1px solid var(--dark-green);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--dark-green);
+  border: 1px solid var(--neon-green);
+}

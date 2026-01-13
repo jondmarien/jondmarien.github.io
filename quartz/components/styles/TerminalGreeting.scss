@@ -1,0 +1,28 @@
+.terminal-greeting {
+  font-family: "Fira Code", monospace;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(0, 20, 0, 0.5);
+  border: 1px solid var(--secondary);
+  border-radius: 4px;
+}
+
+.terminal-greeting .prefix {
+  color: var(--secondary);
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.terminal-greeting .message {
+  color: var(--darkgray);
+}
+
+.terminal-greeting .cursor {
+  color: var(--secondary);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}

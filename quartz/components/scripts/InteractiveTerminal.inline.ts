@@ -96,6 +96,19 @@ async function mountTerminal() {
     setTimeout(() => syncTheme(term), 50) // Delay to let CSS repaint
   }) as EventListener)
 
+  // Listen for Quartz Light/Dark mode toggle (attribute change on html)
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === "attributes" && mutation.attributeName === "saved-theme") {
+        setTimeout(() => syncTheme(term), 50)
+      }
+    }
+  })
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["saved-theme"],
+  })
+
   // Responsive Resizing
   const fitAddon = new FitAddon()
   term.loadAddon(fitAddon)

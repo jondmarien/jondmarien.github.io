@@ -187,6 +187,44 @@ body::after {
     --panel-bg: rgba(253, 246, 227, 0.95) !important;
     --text-main: #333333 !important;
     --text-dim: #666666 !important;
+    
+    // Theme Overrides for Light Mode (High Contrast / Darker for Readability)
+  &[data-theme-id="matrix"] {
+    --theme-main: #003300 !important; // Deep Forest Green
+    --theme-dim: #002200 !important;
+    --theme-border: #003300 !important;
+    --term-green: #003300 !important;
+  }
+  &[data-theme-id="amber"] {
+    --theme-main: #663300 !important; // Deep Brown
+    --theme-dim: #4d2600 !important;
+    --theme-border: #663300 !important;
+    --term-green: #663300 !important;
+  }
+  &[data-theme-id="cyan"] {
+    --theme-main: #003333 !important; // Deep Teal
+    --theme-dim: #002222 !important;
+    --theme-border: #003333 !important;
+    --term-green: #003333 !important;
+  }
+  &[data-theme-id="purple"] {
+    --theme-main: #2a004d !important; // Deep Indigo
+    --theme-dim: #1a0033 !important;
+    --theme-border: #2a004d !important;
+    --term-green: #2a004d !important;
+  }
+  &[data-theme-id="ocean"] {
+    --theme-main: #002244 !important; // Deep Navy
+    --theme-dim: #001122 !important;
+    --theme-border: #002244 !important;
+    --term-green: #002244 !important;
+  }
+  &[data-theme-id="red"] {
+    --theme-main: #800000 !important; // Dark Maroon
+    --theme-dim: #4d0000 !important;
+    --theme-border: #800000 !important;
+    --term-green: #800000 !important;
+  }
 }
 
 :root[saved-theme="light"][data-theme-id="matrix"] {

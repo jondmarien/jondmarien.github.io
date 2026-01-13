@@ -74,6 +74,7 @@ async function mountTerminal() {
     cursorBlink: true,
     fontFamily: '"Fira Code", monospace',
     fontSize: 14,
+    drawBoldTextInBrightColors: false,
     convertEol: true,
     allowTransparency: true,
   })
@@ -373,6 +374,12 @@ async function mountTerminal() {
               localStorage.setItem("theme-id", tName)
               window.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: tName } }))
               term.writeln(`Theme set to: ${tName}`)
+              // Debug color resolution
+              setTimeout(() => {
+                term.writeln(
+                  `Debug: Main=${getCssVar("--theme-main")} Bg=${getCssVar("--theme-bg")}`,
+                )
+              }, 100)
             } else {
               term.writeln(`Invalid theme: ${tName}`)
               term.writeln(

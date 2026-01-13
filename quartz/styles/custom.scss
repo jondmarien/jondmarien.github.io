@@ -147,16 +147,78 @@ body::after {
   }
 }
 
-// 3. Right Sidebar
-.right .graph {
-  border: 1px solid var(--dark-green);
-  filter: sepia(100%) hue-rotate(100deg) saturate(300%) contrast(1.2);
+// --- Footer Styling ---
+footer {
+  margin-top: 4rem;
+  border-top: 1px dashed var(--dark-green);
+  padding: 1.5rem 0;
+  text-align: center;
+  font-family: "Fira Code", monospace;
+  opacity: 0.8;
+  
+  ul {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 0.5rem;
+  }
+  
+  a {
+    color: var(--text-dim) !important;
+    font-size: 0.9rem;
+    
+    &:hover {
+      color: var(--neon-green) !important;
+      background: transparent;
+      text-decoration: underline;
+    }
+  }
 }
 
-.right .toc {
-  border-left: 2px solid var(--dark-green);
-  padding-left: 1rem;
-  margin-top: 1rem;
+// --- Right Sidebar Refinements ---
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  
+  .toc {
+    border-left: 2px solid var(--dark-green);
+    padding-left: 1rem;
+    margin-top: 0; // Reset margin since it's now first (or second)
+    position: relative;
+    
+    margin-bottom: 2rem; // Space between TOC and Graph
+    
+    &::before {
+      content: "JUMP_TARGETS";
+      color: var(--dark-green);
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  .graph {
+    border: 1px solid var(--dark-green);
+    filter: sepia(100%) hue-rotate(100deg) saturate(300%) contrast(1.2);
+    position: relative;
+    padding-top: 1.5rem; // Space for the label
+    
+    &::before {
+      content: "NET_TOPOLOGY";
+      background: var(--dark-green);
+      color: black;
+      font-size: 0.7rem;
+      padding: 2px 5px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+  }
 }
 
 
@@ -170,6 +232,73 @@ pre {
     background: transparent !important;
     font-family: "Fira Code", monospace !important;
     color: #e0e0e0 !important;
+  }
+}
+
+// --- Sidebar Icons (Explorer) ---
+.explorer {
+  // Data for "Folder"
+  li > button span.folder-container::before {
+    content: "📁 ";
+    filter: grayscale(1) brightness(0.7); // Make it look "hollow"/dim
+    margin-right: 5px;
+  }
+  
+  // Open Folder
+  li[data-collapsed="false"] > button span.folder-container::before {
+    content: "📂 ";
+    filter: sepia(100%) hue-rotate(100deg) saturate(500%); // Neon-ish
+  }
+
+  // Data for "File" (li without button usually, or check structure)
+  // Quartz explorer structure is complex, usually:
+  // li > a.internal (File)
+  // li > button (Folder)
+  
+  li > a.internal::before {
+    content: "📄 ";
+    filter: grayscale(1);
+    opacity: 0.7;
+    margin-right: 5px;
+  }
+}
+
+// --- Table Formatting ---
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 2rem 0;
+  border: 1px solid var(--dark-green);
+  font-family: "Fira Code", monospace;
+  
+  thead {
+    background-color: rgba(0, 255, 65, 0.1);
+    border-bottom: 2px solid var(--neon-green);
+    
+    th {
+      text-align: left;
+      padding: 1rem;
+      color: var(--neon-green);
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+    }
+  }
+  
+  tbody {
+    tr {
+      border-bottom: 1px solid var(--dark-green);
+      transition: background 0.2s;
+      
+      &:hover {
+        background-color: rgba(0, 255, 65, 0.05);
+      }
+      
+      td {
+        padding: 0.8rem 1rem;
+        color: var(--text-main);
+      }
+    }
   }
 }
 

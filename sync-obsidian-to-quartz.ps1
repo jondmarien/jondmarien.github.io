@@ -59,6 +59,7 @@ $foldersToSync = @(
         Name        = "ISSessions"
         Source      = Join-Path $ObsidianVaultPath "ISSessions"
         Destination = Join-Path $QuartzContentPath "ISSessions"
+        SubfoldersOnly = @("Articles")
     },
     @{
         Name        = "Resources"
@@ -73,7 +74,8 @@ function Sync-Folder {
         [string]$FolderName,
         [string]$Source,
         [string]$Destination,
-        [bool]$IsDryRun
+        [bool]$IsDryRun,
+        [string[]]$SubfoldersOnly = @()
     )
 
     if (-not (Test-Path -Path $Source -PathType Container)) {
@@ -81,13 +83,45 @@ function Sync-Folder {
         return
     }
 
-    # Create destination if it doesn't exist
+    # Create destination if it doesn't exist (including parent directories)
     if (-not (Test-Path -Path $Destination)) {
         Write-Info "Creating destination folder: $Destination"
         New-Item -ItemType Directory -Path $Destination -Force | Out-Null
     }
 
     Write-Info "Syncing $FolderName..."
+
+    # If SubfoldersOnly is specified, only sync those subfolders
+    if ($SubfoldersOnly.Count -gt 0) {
+        foreach ($subfolder in $SubfoldersOnly) {
+            $sourceSubfolder = Join-Path $Source $subfolder
+            $destSubfolder = Join-Path $Destination $subfolder
+            
+            if (-not (Test-Path -Path $sourceSubfolder -PathType Container)) {
+                Write-Warning "Subfolder not found: $sourceSubfolder (skipping)"
+                continue
+            }
+            
+            if (-not (Test-Path -Path $destSubfolder)) {
+                New-Item -ItemType Directory -Path $destSubfolder -Force | Out-Null
+            }
+            
+            Sync-SingleFolder -SubfolderName $subfolder -Source $sourceSubfolder -Destination $destSubfolder -IsDryRun $IsDryRun
+        }
+        return
+    }
+
+    # Normal sync for all subfolders
+    Sync-SingleFolder -SubfolderName "" -Source $Source -Destination $Destination -IsDryRun $IsDryRun
+}
+
+function Sync-SingleFolder {
+    param(
+        [string]$SubfolderName,
+        [string]$Source,
+        [string]$Destination,
+        [bool]$IsDryRun
+    )
 
     # Robocopy flags explanation:
     # /E      = Copy subdirectories including empty ones
@@ -168,7 +202,8 @@ Write-Info "Starting sync process..."
 Write-Host ""
 
 foreach ($folder in $foldersToSync) {
-    Sync-Folder -FolderName $folder.Name -Source $folder.Source -Destination $folder.Destination -IsDryRun $DryRun
+    $subfolders = if ($folder.SubfoldersOnly) { $folder.SubfoldersOnly } else { @() }
+    Sync-Folder -FolderName $folder.Name -Source $folder.Source -Destination $folder.Destination -IsDryRun $DryRun -SubfoldersOnly $subfolders
 }
 
 Write-Host ""

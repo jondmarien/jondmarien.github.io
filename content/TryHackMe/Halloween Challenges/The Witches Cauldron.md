@@ -15,42 +15,42 @@ In this example, Alice is Person A and Bob is Person B. Eve is an outsider -- th
 I forgot to take photos throughout the game as I was too involved! I found the secret though :)
 
 > [!check]- Key 1
-> ![](/Resources/Learning/TryHackMe/Witches-Cauldron/The-Witches-Cauldron-20241031191216720.webp)
+> ![](The%20Witches%20Cauldron-20241031191216720.webp)
 ## Technical Portion
 Once we install `openssl`, we can start with the challenge. We need to find the flag that is returned after decrypting `encrypted_spell.enc`. I installed `openssl` via `scoop`, with the command `scoop install openssl`.
 
 Now, we can start~!
 
 The following command generates Diffie Helman parameters, in a `dhparams.pen` file. It creates a `2048`-bit long safe prime.
-![](/Resources/Learning/TryHackMe/Witches-Cauldron/The-Witches-Cauldron-20241031182252570.webp)
+![](The%20Witches%20Cauldron-20241031182252570.webp)
 
 Now, we need to generate Alice and Bob's respective **private** keys, using what we are given.
-![](/Resources/Learning/TryHackMe/Witches-Cauldron/The-Witches-Cauldron-20241031182403504.webp)
+![](The%20Witches%20Cauldron-20241031182403504.webp)
 
 These commands generate the respective **private** keys with the parameter files:
-![](/Resources/Learning/TryHackMe/Witches-Cauldron/The-Witches-Cauldron-20241031182511463.webp)
+![](The%20Witches%20Cauldron-20241031182511463.webp)
 
 Now, we need to generate Alice and Bob's respective **public** keys.
 
 These commands generate the respective **public** keys with the parameter files:
-![](/Resources/Learning/TryHackMe/Witches-Cauldron/The-Witches-Cauldron-20241031182701012.webp)
+![](The%20Witches%20Cauldron-20241031182701012.webp)
 
 Next, we can use Alice's **private** key and Bob's **public** key (or vice versa) to find out the **shared secret key**:
-![](/Resources/Learning/TryHackMe/Witches-Cauldron/The-Witches-Cauldron-20241031185526942.webp)
+![](The%20Witches%20Cauldron-20241031185526942.webp)
 
 After executing that, we should be left with some more files, including the **shared secret key**:
-![](/Resources/Learning/TryHackMe/Witches-Cauldron/The-Witches-Cauldron-20241031183043758.webp)
+![](The%20Witches%20Cauldron-20241031183043758.webp)
 
 Now, we just need to replicate the decryption done by Bob (which we have a hint for, at the bottom of the page, near the submit box. *"I encrypted the spell using AES-256-CBC." -Bob*). Easy enough!
 
 To decrypt in `openssl`, with a specific encryption type, use the following command:
-![](/Resources/Learning/TryHackMe/Witches-Cauldron/The-Witches-Cauldron-20241031183610483.webp)
+![](The%20Witches%20Cauldron-20241031183610483.webp)
 
 After execution, though, it says that I am using a deprecated key derivation, and to swap, because it couldn't decrypt it. Instead of using `-d`, I went with `-pbkdf2`, which I know well, and is the most recognizable one for me. It is called Password Based Key Derivation Function (2). Now the command looks like this:
-![](/Resources/Learning/TryHackMe/Witches-Cauldron/The-Witches-Cauldron-20241031183800291.webp)
+![](The%20Witches%20Cauldron-20241031183800291.webp)
 
 And we have our recipe.txt!
-![](/Resources/Learning/TryHackMe/Witches-Cauldron/The-Witches-Cauldron-20241031183825457.webp)
+![](The%20Witches%20Cauldron-20241031183825457.webp)
 
 If we see what is inside, it should be our flag!
 > [!check]- Key 2

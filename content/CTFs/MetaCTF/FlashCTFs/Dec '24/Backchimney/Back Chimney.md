@@ -20,6 +20,6 @@ The pattern suggests someone with:
 The Culprit: Given the vertical movement pattern, footprints, and crumb trails, combined with no signs of forced entry, this appears to be an inside job. The "backchimney" theory is likely a red herring - the perpetrator is probably using normal house access points like stairs or hidden passages between floors.
 
 
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241221130413.png)
+![](Pasted%20image%2020241221130413.png)
 
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241221130526.png)
+![](Pasted%20image%2020241221130526.png)

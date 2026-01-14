@@ -25,15 +25,15 @@ Decompiling, however, converts the binary into its high-level code, such as C++,
 
 This challenge was really cool but I didn't take a lot of screenshots. I was really enjoying it. Here is what I have:
 
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231202801.png)
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231202804.png)
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231202806.png)
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231202831.png)
+![](Pasted%20image%2020241231202801.png)
+![](Pasted%20image%2020241231202804.png)
+![](Pasted%20image%2020241231202806.png)
+![](Pasted%20image%2020241231202831.png)
 
 
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231202755.png)
+![](Pasted%20image%2020241231202755.png)
 
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231202743.png)
+![](Pasted%20image%2020241231202743.png)
 
 
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231202838.png)
+![](Pasted%20image%2020241231202838.png)

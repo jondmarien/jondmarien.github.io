@@ -50,7 +50,7 @@ Typing `d` + `e` will delete from the cursor to the end of the word. (`de`)
 *Note: You can still use the motions without the operator, it will just move the cursor as specified, instead of deleting.*'
 
 ### Full List of Motions
-![](/Resources/Learning/TryHackMe/Neovim/Pasted-image-20241008185439.png)
+![](Pasted%20image%2020241008185439.png)
 
 ### Using Count for Motion
 Typing a number with an operator repeats it that many times.
@@ -98,7 +98,7 @@ We learned some more undo + redo commands: [Undo](#Undo)
 
 ----------
 ## Keybinds to Know
-![](/Resources/Learning/TryHackMe/Neovim/Pasted-image-20241008175642.png)
+![](Pasted%20image%2020241008175642.png)
 <u>Help Menu:</u>
 - `SPACE` + `s` + `h`
 	- `Space` opens up a menu of options.

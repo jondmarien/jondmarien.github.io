@@ -38,15 +38,15 @@ view-source:https://www.google.com
 While on a website, you can right-click on the page, and you should see an menu option called "Inspect Element". `CTRL + SHIFT + J` also usually opens the dev-tools.
 
 In this picture, for example, we can edit the css of a paywall from `block` to `none` and view what is behind it.
-![](/Resources/Learning/TryHackMe/premium-blocker.png)
-![](/Resources/Learning/TryHackMe/css-code-for-blocker.png)
-![](/Resources/Learning/TryHackMe/paywall-lifted.png)
+![](premium%20blocker.png)
+![](css%20code%20for%20blocker.png)
+![](paywall%20lifted.png)
 *Note: Most websites have advanced ways to disallow a user from doing this.* 
 ### Acme IT Support - Debugger
 In the debugger, you can peruse to the Sources tab to try and find any vulnerable lines of code within the website. For example, in in the `flash.min.js` file in assets while browsing the `customer` subdomain, you can attach a breakpoint to a line and refresh the page, revealing a hidden flag:
-![](/Resources/Learning/TryHackMe/Sources-page.png)
-![](/Resources/Learning/TryHackMe/breakpoint-location.png)
-![](/Resources/Learning/TryHackMe/debugger-pausing-website-with-flag.png)
+![](Sources%20page.png)
+![](breakpoint%20location.png)
+![](debugger%20pausing%20website%20with%20flag.png)
 
 ### Acme IT Support - Network
 The network tab of the developer tools can be used to track every external request a certain webpage makes. If you refresh the page while on this tab, you will start to see entries populate.
@@ -56,14 +56,14 @@ In this example, if you attempt to fill in the contact form and click the `Send 
 *"`AJAX` is a method for sending and receiving network data in a web application background without interfering by changing the current web page."*
 
 As you can see, the network tab is empty:
-![](/Resources/Learning/TryHackMe/empty-network-page.png)
+![](empty%20network%20page.png)
 We now fill out the form and submit the data:
-![](/Resources/Learning/TryHackMe/contact-form-fill-out.png)
-![](/Resources/Learning/TryHackMe/contact-form-sent.png)
+![](contact%20form%20fill%20out.png)
+![](contact%20form%20sent.png)
 After submitting the data, we get an event in the Network tab which we can click on and inspect further:
-![](/Resources/Learning/TryHackMe/contact-msg-network-event.png)
+![](contact-msg%20network%20event.png)
  Here, there is a red herring, we can see a flag, `THM{HEADER_FLAG}`, but it is not the one we want! If we go a few tabs down within the `contact-msg` event, down to `Preivew` or `Response`, you will find the correct flag:
-![](/Resources/Learning/TryHackMe/correct-ajax-flag.png)
+![](correct%20ajax%20flag.png)
 
 Nice! Finished.
 ## Content Discovery

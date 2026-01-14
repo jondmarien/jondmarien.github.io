@@ -12,7 +12,7 @@ tags:
 | Bash Jail 3 | <ul><li>Jon Marien</li></ul> | January 16, 2025 | \-        | [[#issessions\|#issessions]] |
 
 This one took me **EVEN LONGER*** than the 2nd challenge did. And for good reason, `stdout` and `stderr` are being redirected to `/dev/null`, so nothing is printed to the screen. If we redirect to `stdin`, though (which is at `0`), we can solve the solution and get the flag:
-![](/Resources/Learning/RingZer0/Jail-Escaping/bash_jail_3.png)
+![](bash_jail_3.png)
 This works because we are still allowed to use `eval`, and `stdin` was not being redirected to `/dev/null`. 
 
 >[!check]- Flag!

@@ -1,5 +1,5 @@
 #tryhackme 
-![](/Resources/Learning/TryHackMe/how-websites-work.png)
+![](how%20websites%20work.png)
 ## HTML Structure
 The basic HTML structure has the following components:
 - The `<!DOCTYPE html>` defines that the page is a HTML5 document. This helps with standardization across different browsers and tells the browser to use HTML5 to interpret the page.
@@ -16,7 +16,7 @@ Tags can include attributes like the _class_ attribute, which is useful for st
 To view the HTML of any website, you can right-click and choose "View Page Source" in Chrome or "Show Page Source" in Safari.
 
 ### HTML Injection
-![](/Resources/Learning/TryHackMe/html-injection.png)
+![](html%20injection.png)
 
 HTML Injection is a vulnerability that occurs when unfiltered user input is displayed on the page. If a website fails to sanitise user input (filter any "malicious" text that a user inputs into a website), and that input is used on the page, an attacker can inject HTML code into a vulnerable website.
 
@@ -44,6 +44,6 @@ HTML elements can also have events, such as "onclick" or "onhover" that execute 
 \
 
 ## Putting it all Together
-![](/Resources/Learning/TryHackMe/how-it-works-together.png)
+![](how%20it%20works%20together.png)
 
 

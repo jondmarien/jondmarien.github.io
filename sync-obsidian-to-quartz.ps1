@@ -53,7 +53,8 @@ $foldersToSync = @(
     @{
         Name        = "Learning"
         Source      = Join-Path $ObsidianVaultPath "Learning"
-        Destination = Join-Path $QuartzContentPath "Learning"
+        Destination = $QuartzContentPath
+        FlattenContents = $true
     },
     @{
         Name        = "ISSessions"
@@ -75,7 +76,8 @@ function Sync-Folder {
         [string]$Source,
         [string]$Destination,
         [bool]$IsDryRun,
-        [string[]]$SubfoldersOnly = @()
+        [string[]]$SubfoldersOnly = @(),
+        [bool]$FlattenContents = $false
     )
 
     if (-not (Test-Path -Path $Source -PathType Container)) {
@@ -90,6 +92,28 @@ function Sync-Folder {
     }
 
     Write-Info "Syncing $FolderName..."
+
+    # If FlattenContents is true, sync each subfolder of Source directly to Destination
+    if ($FlattenContents) {
+        $subfolders = Get-ChildItem -Path $Source -Directory -ErrorAction SilentlyContinue
+        if ($subfolders.Count -eq 0) {
+            Write-Warning "No subfolders found in $Source"
+            return
+        }
+        
+        foreach ($subfolder in $subfolders) {
+            $sourceSubfolder = $subfolder.FullName
+            $destSubfolder = Join-Path $Destination $subfolder.Name
+            
+            if (-not (Test-Path -Path $destSubfolder)) {
+                Write-Info "Creating $destSubfolder"
+                New-Item -ItemType Directory -Path $destSubfolder -Force | Out-Null
+            }
+            
+            Sync-SingleFolder -SubfolderName $subfolder.Name -Source $sourceSubfolder -Destination $destSubfolder -IsDryRun $IsDryRun
+        }
+        return
+    }
 
     # If SubfoldersOnly is specified, only sync those subfolders
     if ($SubfoldersOnly.Count -gt 0) {
@@ -204,7 +228,8 @@ Write-Host ""
 
 foreach ($folder in $foldersToSync) {
     $subfolders = if ($folder.SubfoldersOnly) { $folder.SubfoldersOnly } else { @() }
-    Sync-Folder -FolderName $folder.Name -Source $folder.Source -Destination $folder.Destination -IsDryRun $DryRun -SubfoldersOnly $subfolders
+    $flatten = if ($folder.FlattenContents) { $folder.FlattenContents } else { $false }
+    Sync-Folder -FolderName $folder.Name -Source $folder.Source -Destination $folder.Destination -IsDryRun $DryRun -SubfoldersOnly $subfolders -FlattenContents $flatten
 }
 
 Write-Host ""

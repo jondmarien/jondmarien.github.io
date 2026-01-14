@@ -35,4 +35,4 @@ Of course, you can exclude charsets, not just single characters.
 ----
 TODO: EDIT THIS
 
- ![](/Resources/ISS/Regex-20241113141119290.webp)
+ ![](Regex-20241113141119290.webp)

@@ -25,12 +25,12 @@ Usually, the reply from a C2 server contains the command, instructing the malici
 4. **Exfiltrating data:** This is one of the most common objectives. The program may be instructed to steal valuable data such as sensitive files, credentials, or personal information.
 
 If we follow the HTTP Stream for the `GET /command` packet (Frame 457), we can see that the message was sent out and acknowledges that the payload is inside the victim.
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231190524.png)
+![](Pasted%20image%2020241231190524.png)
 If we follow the stream to `2`, another layer, we can see the command that was executed!
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231190553.png)
+![](Pasted%20image%2020241231190553.png)
 If we follow the HTTP Stream for the `POST /exfiltrate` packet (Frame 476) sent to the same destination IP, we will see a file exfiltrated to the C2 server.
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231185000.png)
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231185018.png)
+![](Pasted%20image%2020241231185000.png)
+![](Pasted%20image%2020241231185018.png)
 
 ```
 --f5964f77-daf1-4853-aacb-df4754eaacaf
@@ -42,7 +42,7 @@ AES ECB is your chance to decrypt the encrypted beacon with the key: 1234567890a
 ```
 
 Similarly, if we go up a stream level to `4`, we can see another hidden value:
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231190744.png)
+![](Pasted%20image%2020241231190744.png)
 
 ```
 Encrypted: 8724670c271adffd59447552a0ef3249 (The exfiltrated file has a clue)
@@ -55,11 +55,11 @@ Beacon acknowledged
 
 If we then take that encrypted value, and put it into [CyberChef](https://gchq.github.io/CyberChef/), we can find the key! Here are the steps I took.
 
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231190857.png)
+![](Pasted%20image%2020241231190857.png)
 Make sure you use the key from the previous step, and select `ECB` mode on the `AES Decrypt` Function.
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231190904.png)
+![](Pasted%20image%2020241231190904.png)
 I like to bake the actions myself, so I turned off `auto-bake`, and clicked bake!
-![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231191132.png)
+![](Pasted%20image%2020241231191132.png)
 Finally, we get the secret!
 > [!check]- THM Key 
-> ![](/Resources/Learning/TryHackMe/AOC2024/Pasted-image-20241231191057.png)
+> ![](Pasted%20image%2020241231191057.png)

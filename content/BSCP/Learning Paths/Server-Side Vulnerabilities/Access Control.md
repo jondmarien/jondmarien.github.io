@@ -4,14 +4,14 @@ author: Jon Marien
 created: 2025-12-18
 published: 2025-12-18
 tags:
-  - certifications
+  - certs
   - bscp
   - burp
 ---
 
-| Title          | Author     | Created           | Published         | Tags                                                                     |
-| -------------- | ---------- | ----------------- | ----------------- | ------------------------------------------------------------------------ |
-| Access Control | Jon Marien | December 18, 2025 | December 18, 2025 | [[#certifications\|#certifications]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Title          | Author     | Created           | Published         | Tags                                                   |
+| -------------- | ---------- | ----------------- | ----------------- | ------------------------------------------------------ |
+| Access Control | Jon Marien | December 18, 2025 | December 18, 2025 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
 
 # Access Control
 

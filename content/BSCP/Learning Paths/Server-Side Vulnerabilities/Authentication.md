@@ -4,14 +4,14 @@ author: Jon Marien
 created: 2026-01-13
 published: 2026-01-13
 tags:
-  - certifications
+  - certs
   - bscp
   - burp
 ---
 
-| Title          | Author     | Created          | Published        | Tags                                                                     |
-| -------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------------------------ |
-| Authentication | Jon Marien | January 13, 2026 | January 13, 2026 | [[#certifications\|#certifications]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Title          | Author     | Created          | Published        | Tags                                                   |
+| -------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
+| Authentication | Jon Marien | January 13, 2026 | January 13, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
 # Definition
 Authentication is the security process of verifying that a user, device, or system is genuinely who or what they claim to be before granting access to resources.
 

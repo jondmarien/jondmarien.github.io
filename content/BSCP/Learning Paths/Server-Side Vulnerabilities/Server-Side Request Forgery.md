@@ -4,14 +4,14 @@ author: Jon Marien
 created: 2026-01-13
 published: 2026-01-13
 tags:
-  - certifications
+  - certs
   - bscp
   - burp
 ---
 
-| Title                       | Author     | Created          | Published        | Tags                                                                     |
-| --------------------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------------------------ |
-| Server-Side Request Forgery | Jon Marien | January 13, 2026 | January 13, 2026 | [[#certifications\|#certifications]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Title                       | Author     | Created          | Published        | Tags                                                   |
+| --------------------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
+| Server-Side Request Forgery | Jon Marien | January 13, 2026 | January 13, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
 
 # Definition
 Server-side request forgery (SSRF) is a vulnerability where an attacker tricks a vulnerable server-side application into making HTTP or other network requests to targets the attacker chooses, instead of the intended destination.
@@ -101,3 +101,10 @@ In this pattern, the attacker uses SSRF to reach **internal back-end services** 
 - Monitor and log outbound calls from the app to unusual internal destinations.
 
 ---
+# Lab
+![[image-1051.png]]
+![[image-1052.png]]
+![[image-1053.png]]
+
+:)
+

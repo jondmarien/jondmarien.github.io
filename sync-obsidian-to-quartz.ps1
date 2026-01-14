@@ -126,7 +126,7 @@ function Sync-SingleFolder {
     # Robocopy flags explanation:
     # /E      = Copy subdirectories including empty ones
     # /MT:8   = Use 8 parallel threads for faster copying
-    # /XO     = Exclude older files (skip if source is older than dest) - COMMENTED OUT for initial sync
+    # /XD     = Exclude directories by name
     # /R:3    = Retry 3 times on failed files
     # /W:5    = Wait 5 seconds between retries
     
@@ -135,6 +135,7 @@ function Sync-SingleFolder {
         $Destination,
         "/E",
         "/MT:8",
+        "/XD", ".git",
         "/R:3",
         "/W:5"
     )

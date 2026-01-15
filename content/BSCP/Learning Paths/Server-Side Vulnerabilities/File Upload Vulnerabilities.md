@@ -13,6 +13,7 @@ tags:
 | --------------------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
 | File Upload Vulnerabilities | Jon Marien | January 13, 2026 | January 13, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
 
+---
 # Definition
 File upload vulnerabilities occur when an application lets users upload files but does not strictly validate their **name, type, content, or size**, so attackers can upload unexpected and dangerous files (for example, scripts instead of images).  These files can then be stored on the server and sometimes executed, leading to issues like remote code execution if the server runs the uploaded script.
 

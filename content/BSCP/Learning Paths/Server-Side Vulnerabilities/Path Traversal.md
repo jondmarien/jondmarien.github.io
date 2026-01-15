@@ -12,9 +12,9 @@ tags:
 | Title          | Author     | Created           | Published         | Tags                                                   |
 | -------------- | ---------- | ----------------- | ----------------- | ------------------------------------------------------ |
 | Path Traversal | Jon Marien | December 18, 2025 | December 18, 2025 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
-# Path Traversal
 
-## Definition
+---
+# Definition
 **Path Traversal** is also called **Directory Traversal**.
 
 It **enables attackers to read arbitrary files on a server that is running an application**. It could possibly include:
@@ -24,7 +24,7 @@ It **enables attackers to read arbitrary files on a server that is running an ap
 
 In some cases, an attacker can write to these arbitrary files on the server, allowing them to modify the app's data or behaviour, and possibly, ultimately, take full control of the server.
 
-### Reading Arbitrary Files via Path Traversal
+## Reading Arbitrary Files via Path Traversal
 Image a shopping app that displays images of items for sale. They might load it using: `<img src="/loadImage?filename=218.png">`.
 
 the `loadImage` URL takes a `filename` parameter and returns the content of the file specified. They are stored on disk at `/var/www/images/`. To return an image, the app appends the requested filename to the base directory, and uses a filesystem API to read the contents. The proceeding path would become: `/var/www/images/218.png`.

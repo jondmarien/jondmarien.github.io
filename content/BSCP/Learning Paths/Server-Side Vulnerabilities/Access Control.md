@@ -13,6 +13,7 @@ tags:
 | -------------- | ---------- | ----------------- | ----------------- | ------------------------------------------------------ |
 | Access Control | Jon Marien | December 18, 2025 | December 18, 2025 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
 
+---
 # Access Control
 
 ## Definition

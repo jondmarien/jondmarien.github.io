@@ -13,6 +13,7 @@ tags:
 | -------------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
 | SQL Injection (SQLi) | Jon Marien | January 14, 2026 | January 14, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
 
+---
 # Description
 SQL injection (SQLi) is a critical vulnerability that lets an attacker manipulate the SQL queries an application sends to its database. This manipulation can allow unauthorized access to sensitive data, modification or deletion of records, and in some cases, full compromise of the backend server.
 

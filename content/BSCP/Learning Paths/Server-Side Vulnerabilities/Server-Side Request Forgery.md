@@ -13,6 +13,7 @@ tags:
 | --------------------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
 | Server-Side Request Forgery | Jon Marien | January 13, 2026 | January 13, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
 
+---
 # Definition
 Server-side request forgery (SSRF) is a vulnerability where an attacker tricks a vulnerable server-side application into making HTTP or other network requests to targets the attacker chooses, instead of the intended destination.
 

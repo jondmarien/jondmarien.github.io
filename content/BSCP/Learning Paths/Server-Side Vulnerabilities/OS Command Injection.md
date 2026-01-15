@@ -13,6 +13,7 @@ tags:
 | -------------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
 | OS Command Injection | Jon Marien | January 14, 2026 | January 14, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
 
+---
 # Description
 OS command injection (shell injection) is a vulnerability where an application passes user input into an operating system command, allowing the attacker to execute arbitrary OS commands on the server.
 

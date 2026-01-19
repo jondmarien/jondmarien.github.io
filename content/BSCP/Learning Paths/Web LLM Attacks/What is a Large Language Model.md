@@ -21,7 +21,7 @@ A **large language model (LLM)** is a type of artificial intelligence algorithm 
 - They typically consist of billions to trillions of **parameters**, which are variables that define the model's predictive power and its ability to generalize across various natural language processing tasks.
 - Users interact with these models through a chat interface by providing a **prompt**, which the model uses to generate a plausible sequence of words as a response.
 
-## Why It’s Important / Impact
+### Why It’s Important / Impact
 - LLMs represent a significant shift in technology due to their ability to **generalize across tasks** with minimal specific supervision, replacing the need for bespoke systems for every individual application.
 - They enable a wide range of modern website functionalities, including:
     - **Conversational Agents:** Customer service virtual assistants and chatbots.
@@ -29,7 +29,7 @@ A **large language model (LLM)** is a type of artificial intelligence algorithm 
     - **Productivity:** Code generation, SEO improvement, and automated reasoning.
 - However, they also inherit the **inaccuracies and biases** present in their massive training datasets, which can impact the quality and safety of their outputs.
 
-## Protect Against It
+#### Protect Against It
 - Implement robust **input validation** and filtering rules on the prompt interface to prevent malicious instructions or injection attacks.
 - Use **fine-tuning** and specific guardrails to align the model’s behavior with safety policies and to reduce the likelihood of generating biased or incorrect information.
 - Employ **human-in-the-loop** systems to verify critical outputs, especially in high-stakes environments like customer service or data analysis.

@@ -13,11 +13,24 @@ description: Where code meets creativity — and every bug has a story.
 | ------------------------------------- | ---------------------------- | ---------------- | ----------------- | ---------------- |
 | Welcome to Chrono's Cyber Chronicles! | Jon Marien | October 31, 2024 | November 01, 2024 | [[#blog\|#blog]] |
 
-## Recently Updated Notes @ 2025-03-23 04:37
+## Recently Updated Notes: 2026-01-14 | 15:10
 
-| Title                                                                                                                             | Author                       | Created            | Published          | Tags                                                                                        |
-| --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- | ------------------ | ------------------ | ------------------------------------------------------------------------------------------- |
-| [Malicious .lnk Files on Windows](Malicious%20.lnk%20Files%20on%20Windows.md)                                                     | <ul><li>Jon Marien</li></ul> | March 19, 2025     | March 19, 2025     | <ul><li>issessions</li><li>writeups</li></ul>                                               |
+| Title                                   | Author     | Created           | Published         | Tags                                              |
+| --------------------------------------- | ---------- | ----------------- | ----------------- | ------------------------------------------------- |
+| File Upload Vulnerabilities             | Jon Marien | January 13, 2026  | January 13, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
+| Server-Side Request Forgery             | Jon Marien | January 13, 2026  | January 13, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
+| Authentication                          | Jon Marien | January 13, 2026  | January 13, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
+| Access Control                          | Jon Marien | December 18, 2025 | December 18, 2025 | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
+| Path Traversal                          | Jon Marien | December 18, 2025 | December 18, 2025 | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
+| Defending Against LLM Attacks           | Jon Marien | January 19, 2026  | January 19, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
+| Leaking Sensitive Training Data         | Jon Marien | January 19, 2026  | January 19, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
+| Indirect Prompt Injection               | Jon Marien | January 19, 2026  | January 19, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
+| Exploiting LLM APIs                     | Jon Marien | January 15, 2026  | January 15, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
+| What is a Large Language Model -- (LLM) | Jon Marien | January 14, 2026  | January 14, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
+| How to Prevent CORS-based Attacks       | Jon Marien | January 14, 2026  | January 14, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
+| Common Vulnerabilities                  | Jon Marien | January 14, 2026  | January 14, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
+| Same-Origin Policy                      | Jon Marien | January 14, 2026  | January 14, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
+| What IS CORS                            | Jon Marien | January 14, 2026  | January 14, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
 
 # Unlocking the future, one exploit at a time.
 ---------------
@@ -25,10 +38,10 @@ Hey! -- I'm Jon, or `chrono`, and welcome to _Chrono’s Cyber Chronicles_, my d
 
 I will provide some internet links and in-site links for you to browse. Enjoy~! 
 
-![](/Resources/Learning/Welcome-to-Chrono's-Cyber-Chronicles!-20241022224032321.webp)
+![](Welcome%20to%20Chrono's%20Cyber%20Chronicles!-20241022224032321.webp)
 -
 
-![](/Resources/Learning/TryHackMe/AOC2024/hiding.png)
+![](hiding.png)
 
 ## **Here are my socials:**
 [LinkedIn](https://linkedin.com/in/jondmarien)

@@ -116,12 +116,12 @@ function Sync-Folder {
         # Sync specific files from the root of Source
         $welcomeFile = Join-Path $Source "Welcome to Chrono's Cyber Chronicles!.md"
         if (Test-Path -Path $welcomeFile) {
-            $destFile = Join-Path $Destination "Welcome to Chrono's Cyber Chronicles!.md"
+            $destFile = Join-Path $Destination "index.md"
             if (-not $IsDryRun) {
                 Copy-Item -Path $welcomeFile -Destination $destFile -Force
-                Write-Host "  📄 Copied Welcome to Chrono's Cyber Chronicles!.md" -ForegroundColor Gray
+                Write-Host "  📄 Copied Welcome to Chrono's Cyber Chronicles!.md -> index.md" -ForegroundColor Gray
             } else {
-                Write-Host "  📄 Would copy Welcome to Chrono's Cyber Chronicles!.md" -ForegroundColor Gray
+                Write-Host "  📄 Would copy Welcome to Chrono's Cyber Chronicles!.md -> index.md" -ForegroundColor Gray
             }
         }
         return

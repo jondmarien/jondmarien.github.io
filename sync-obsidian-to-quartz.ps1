@@ -124,6 +124,17 @@ function Sync-Folder {
                 Write-Host "  📄 Would copy Welcome to Chrono's Cyber Chronicles!.md -> index.md" -ForegroundColor Gray
             }
         }
+        
+        $recentlyUpdatedFile = Join-Path $Source "Recently Updated Notes.md"
+        if (Test-Path -Path $recentlyUpdatedFile) {
+            $destFile = Join-Path $Destination "Recently Updated Notes.md"
+            if (-not $IsDryRun) {
+                Copy-Item -Path $recentlyUpdatedFile -Destination $destFile -Force
+                Write-Host "  📄 Copied Recently Updated Notes.md" -ForegroundColor Gray
+            } else {
+                Write-Host "  📄 Would copy Recently Updated Notes.md" -ForegroundColor Gray
+            }
+        }
         return
     }
 

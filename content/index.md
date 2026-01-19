@@ -13,25 +13,6 @@ description: Where code meets creativity — and every bug has a story.
 | ------------------------------------- | ---------------------------- | ---------------- | ----------------- | ---------------- |
 | Welcome to Chrono's Cyber Chronicles! | Jon Marien | October 31, 2024 | November 01, 2024 | [[#blog\|#blog]] |
 
-## Recently Updated Notes: 2026-01-14 | 15:10
-
-| Title                                   | Author     | Created           | Published         | Tags                                              |
-| --------------------------------------- | ---------- | ----------------- | ----------------- | ------------------------------------------------- |
-| File Upload Vulnerabilities             | Jon Marien | January 13, 2026  | January 13, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
-| Server-Side Request Forgery             | Jon Marien | January 13, 2026  | January 13, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
-| Authentication                          | Jon Marien | January 13, 2026  | January 13, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
-| Access Control                          | Jon Marien | December 18, 2025 | December 18, 2025 | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
-| Path Traversal                          | Jon Marien | December 18, 2025 | December 18, 2025 | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
-| Defending Against LLM Attacks           | Jon Marien | January 19, 2026  | January 19, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
-| Leaking Sensitive Training Data         | Jon Marien | January 19, 2026  | January 19, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
-| Indirect Prompt Injection               | Jon Marien | January 19, 2026  | January 19, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
-| Exploiting LLM APIs                     | Jon Marien | January 15, 2026  | January 15, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
-| What is a Large Language Model -- (LLM) | Jon Marien | January 14, 2026  | January 14, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
-| How to Prevent CORS-based Attacks       | Jon Marien | January 14, 2026  | January 14, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
-| Common Vulnerabilities                  | Jon Marien | January 14, 2026  | January 14, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
-| Same-Origin Policy                      | Jon Marien | January 14, 2026  | January 14, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
-| What IS CORS                            | Jon Marien | January 14, 2026  | January 14, 2026  | <ul><li>certs</li><li>bscp</li><li>burp</li></ul> |
-
 # Unlocking the future, one exploit at a time.
 ---------------
 Hey! -- I'm Jon, or `chrono`, and welcome to _Chrono’s Cyber Chronicles_, my digital hub where cybersecurity meets creativity. Here, I document my journey as a student, problem-solver, and hacker-at-heart. Whether it’s breaking down cryptographic challenges, capturing CTF flags, or visualizing thought experiments in code and art, this space is all about exploration, clarity, and constant evolution. Stay curious — and maybe a little paranoid. 😉

@@ -1,0 +1,21 @@
+---
+title: WebSocket Security Vulnerabilities
+author: Jon Marien
+created: 2026-01-19
+published: 2026-01-19
+tags:
+  - certs
+  - bscp
+  - burp
+---
+
+| Title                              | Author     | Created          | Published        | Tags                                                   |
+| ---------------------------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
+| WebSocket Security Vulnerabilities | Jon Marien | January 19, 2026 | January 19, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+
+# WebSockets security vulnerabilities
+In principle, practically any web security vulnerability might arise in relation to WebSockets:
+
+- User-supplied input transmitted to the server might be processed in unsafe ways, leading to vulnerabilities such as SQL injection or XML external entity injection.
+- Some blind vulnerabilities reached via WebSockets might only be detectable using out-of-band (OAST) techniques.
+- If attacker-controlled data is transmitted via WebSockets to other application users, then it might lead to XSS or other client-side vulnerabilities.

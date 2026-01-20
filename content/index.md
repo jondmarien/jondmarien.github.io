@@ -25,35 +25,35 @@ I will provide some internet links and in-site links for you to browse. Enjoy~!
 ![](hiding.png)
 
 ## **Here are my socials:**
-[LinkedIn](https://linkedin.com/in/jondmarien)
-[Github](https://github.com/jondmarien)
-[YouTube](https://www.youtube.com/@SirChronoblaze)
-[Twitch](https://www.twitch.tv/sirchronoblaze)
-[Instagram](https://www.instagram.com/jon.marien)
+- [LinkedIn](https://linkedin.com/in/jondmarien)
+- [Github](https://github.com/jondmarien)
+- [YouTube](https://www.youtube.com/@SirChronoblaze)
+- [Twitch](https://www.twitch.tv/sirchronoblaze)
+- [Instagram](https://www.instagram.com/jon.marien)
 
 ## **Here are some in-site links to browse/read:**
-#tryhackme <-- All of my TryHackMe Labs. You can also search or click on [THM Index](THM%20Index.md).
-#portswigger <-- All of my PortSwigger Labs. You can also search or click on [PS Labs Index](PS%20Labs%20Index.md).
-#issessions <-- All of my ISSessions Writeups. You can also search or click on [ISSessions Writeups Index](ISSessions%20Writeups%20Index.md). 
-#hackthebox <-- All of my HackTheBox Writeups. You can also search or click on [HackTheBox Index](HackTheBox%20Index.md).
+- #tryhackme <-- All of my TryHackMe Labs. You can also search or click on [THM Index](THM%20Index.md).
+- #portswigger <-- All of my PortSwigger Labs. You can also search or click on [PS Labs Index](PS%20Labs%20Index.md).
+- #issessions <-- All of my ISSessions Writeups. You can also search or click on [ISSessions Writeups Index](ISSessions%20Writeups%20Index.md). 
+- #hackthebox <-- All of my HackTheBox Writeups. You can also search or click on [HackTheBox Index](HackTheBox%20Index.md).
 
 ## **Direct Links:**
 Here are some of my favourite write-ups I've done so far!
 
-[GameFreak Teraleak](GameFreak%20Teraleak.md)
-[Mr. Robot CTF - Writeup](Mr.%20Robot%20CTF%20-%20Writeup.md)
-[Introduction to NeoVim](Introduction%20to%20NeoVim.md)
-[PaperCut CVE-2023-27350](PaperCut%20CVE-2023-27350.md)
-[The 7-Zip Vulnerability Discovery (CVE-2024-11477)](The%207-Zip%20Vulnerability%20Discovery%20(CVE-2024-11477).md)
+- [GameFreak Teraleak](GameFreak%20Teraleak.md)
+- [Mr. Robot CTF - Writeup](Mr.%20Robot%20CTF%20-%20Writeup.md)
+- [Introduction to NeoVim](Introduction%20to%20NeoVim.md)
+- [PaperCut CVE-2023-27350](PaperCut%20CVE-2023-27350.md)
+- [The 7-Zip Vulnerability Discovery (CVE-2024-11477)](The%207-Zip%20Vulnerability%20Discovery%20(CVE-2024-11477).md)
 
 Here are all of my ISSessions Writeups:
 [ISSessions Articles Directory](ISSessions%20Articles%20Directory.md)
 
 ## **Halloween 2024 Challenges**
-[The Witches Cauldron](The%20Witches%20Cauldron.md)
-[Boogeyman 1](Boogeyman%201.md)
-[Boogeyman 2](Boogeyman%202.md)
-[Boogeyman 3](Boogeyman%203.md)
+- [The Witches Cauldron](The%20Witches%20Cauldron.md)
+- [Boogeyman 1](Boogeyman%201.md)
+- [Boogeyman 2](Boogeyman%202.md)
+- [Boogeyman 3](Boogeyman%203.md)
 
 ## **Classes**
 All of my Class notes. You can also search or click on #classes.

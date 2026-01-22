@@ -53,6 +53,3 @@ Here are all of my ISSessions Writeups:
 - [Boogeyman 1](Boogeyman%201.md)
 - [Boogeyman 2](Boogeyman%202.md)
 - [Boogeyman 3](Boogeyman%203.md)
-
-## **Classes**
-#classes <- All of my Sheridan notes.

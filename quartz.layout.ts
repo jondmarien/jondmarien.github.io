@@ -18,7 +18,6 @@ export const defaultContentPageLayout: PageLayout = {
       links: {
         GitHub: "https://github.com/jondmarien",
         LinkedIn: "https://linkedin.com/in/jondmarien",
-        Instagram: "https://instagram.com/jon.marien",
         Portfolio: "https://chron0.tech",
       },
     }),

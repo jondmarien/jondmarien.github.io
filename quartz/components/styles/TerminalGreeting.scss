@@ -23,6 +23,90 @@
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+#terminal-container {
+  border: 1px solid var(--theme-dim);
+  background-color: var(--theme-bg);
+  overflow: hidden;
+  transition: height 0.3s ease;
+
+  .terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: rgba(128, 128, 128, 0.1);
+    border-bottom: 1px solid var(--theme-dim);
+    user-select: none;
+
+    .terminal-title {
+      font-family: "Fira Code", monospace;
+      font-size: 0.85rem;
+      color: var(--theme-main);
+      font-weight: bold;
+    }
+
+    .terminal-toggle {
+      background: none;
+      border: none;
+      color: var(--theme-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+      padding: 0;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  &.collapsed {
+    .terminal-body {
+      display: none;
+    }
+
+    .terminal-header .terminal-toggle svg {
+      transform: rotate(-90deg);
+    }
+
+    // Remove bottom border of header when collapsed if preferred,
+    // or keep it to show the box structure.
+    border-bottom: 1px solid var(--theme-dim);
+  }
+}
+
+// Override previous greeting styles to fit inside body
+.terminal-greeting {
+  font-family: "Fira Code", monospace;
+  // margin-bottom: 2rem; // Removed margin
+  padding: 1rem;
+  background: transparent !important; // Let container background show
+  border: none !important; // Border moved to container
+  border-radius: 0;
+}
+
+.terminal-greeting .prefix {
+  color: var(--secondary);
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.terminal-greeting .message {
+  color: var(--darkgray);
+}
+
+.terminal-greeting .cursor {
+  color: var(--secondary);
+  animation: blink 1s step-end infinite;
 }

@@ -746,22 +746,27 @@ a {
   .page > #quartz-body {
     display: flex !important;
     flex-direction: column !important;
-    gap: 1.5rem !important;
+    gap: 1rem !important;
     padding: 0 1rem !important; // Reduce padding
   }
 
-  .sidebar {
-     display: block !important;
-     position: static !important;
+  // Allow standard Quartz styling to handle sidebar positioning mostly, 
+  // but ensure it doesn't break flow. 
+  // Removed forced "display: block" which might have killed flex behaviors.
+  .sidebar { 
      width: 100% !important;
      max-width: 100% !important;
-     margin-top: 1rem !important;
+     margin-top: 0 !important;
      height: auto !important;
+     padding: 1rem 0 !important;
   }
   
+  // Let Explorer handle its own mobile styles (collapsible drawer)
+  // We only ensure it fits the container if needed.
   .sidebar.left .explorer {
-      max-height: 300px; // Limit height of file explorer on mobile
-      overflow-y: auto;
+      // Allow it to be its natural size (or collapsed)
+      // Removing the max-height/overflow hack so the drawer works.
+      width: 100%;
   }
 
   .center {
@@ -771,8 +776,15 @@ a {
   }
   
   .center > article {
-     margin-top: 2rem !important; // Reduce top margin
-     padding: 1rem !important;    // Reduce internal padding
+     margin-top: 1rem !important; 
+     padding: 1rem !important;   
+     border: none !important; // Remove heavy border on mobile to save space
+     background: transparent !important; // Cleaner look on mobile
+  }
+
+  // Adjust label for mobile
+  .center > article::before {
+      display: none; // Hide the "MAIN_PROCESS" label on mobile to save space
   }
 
   // Header tweaks

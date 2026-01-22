@@ -126,8 +126,31 @@ async function mountTerminal() {
   // Responsive Resizing
   const fitAddon = new FitAddon()
   term.loadAddon(fitAddon)
-  term.open(container)
+  term.open((container.querySelector(".terminal-body") as HTMLElement) || container)
   fitAddon.fit()
+
+  // =======================================================================
+  //  TOGGLE FUNCTIONALITY
+  // =======================================================================
+  const toggleBtn = container.querySelector(".terminal-toggle")
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      container.classList.toggle("collapsed")
+      const isCollapsed = container.classList.contains("collapsed")
+      localStorage.setItem("terminal-collapsed", isCollapsed.toString())
+      if (!isCollapsed) {
+        // give it a moment to render
+        setTimeout(() => fitAddon.fit(), 50)
+        term.focus()
+      }
+    })
+
+    // Restore state
+    const savedCollapsed = localStorage.getItem("terminal-collapsed") === "true"
+    if (savedCollapsed) {
+      container.classList.add("collapsed")
+    }
+  }
 
   // =======================================================================
   //  VIRTUAL FILE SYSTEM

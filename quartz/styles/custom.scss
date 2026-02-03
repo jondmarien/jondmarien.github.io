@@ -18,15 +18,20 @@
 //  1. ROOT VARIABLES & DEFAULTS
 // =========================================================================
 :root {
-  // FALLBACK THEME (Matrix Green)
+  // FALLBACK THEME (Purple - matches quartz.config.ts darkMode)
   // These values are used if no theme is selected or JS fails.
-  --theme-main: #00ff41;   // Primary accent color (text, borders, highlights)
-  --theme-dim: #008f11;    // Dimmed accent (subtitles, dividers)
+  --theme-main: #d580ff;   // Primary accent color (text, borders, highlights)
+  --theme-dim: #8a00e0;    // Dimmed accent (subtitles, dividers)
   --theme-bg: #050505;     // Main background (deep black)
-  --theme-border: #00ff41; // Border color
-  --panel-bg: rgba(0, 20, 0, 0.85); // Background for content panels
+  --theme-border: #d580ff; // Border color
+  --panel-bg: rgba(20, 0, 40, 0.85); // Background for content panels
   --text-main: #e0e0e0;    // Primary text color
   --text-dim: #a0a0a0;     // Secondary text color
+  
+  // QUARTZ GRAPH COLOR SYNC
+  // Override Quartz's default colors so the graph uses our theme
+  --secondary: var(--theme-main);  // Current/active node color
+  --tertiary: var(--theme-dim);    // Visited node color
   
   // CRT EFFECT CONTROL
   --crt-opacity: 1; 
@@ -107,12 +112,16 @@ body::after {
 //  3. THEME DEFINITIONS
 // =========================================================================
 //  Styles applied when data-theme-id is set on <html> by InteractiveTerminal.ts
+//  NOTE: --secondary and --tertiary are used by the Quartz graph component.
+//  We override them here so the graph colors match each theme.
 
 [data-theme-id="matrix"] {
   --theme-main: #00ff41;
   --theme-dim: #008f11;
   --theme-border: #00ff41;
   --term-green: #00ff41;
+  --secondary: #00ff41 !important;
+  --tertiary: #008f11 !important;
 }
 
 [data-theme-id="amber"] {
@@ -121,6 +130,8 @@ body::after {
   --theme-border: #ffb000;
   --term-green: #ffb000;
   --panel-bg: rgba(40, 20, 0, 0.85);
+  --secondary: #ffb000 !important;
+  --tertiary: #8f6200 !important;
 }
 
 [data-theme-id="cyan"] {
@@ -129,6 +140,8 @@ body::after {
   --theme-border: #00ffff;
   --term-green: #00ffff;
   --panel-bg: rgba(0, 20, 40, 0.85);
+  --secondary: #00ffff !important;
+  --tertiary: #008f8f !important;
 }
 
 [data-theme-id="red"] {
@@ -137,6 +150,8 @@ body::after {
   --theme-border: #ff4d4d;
   --term-green: #ff4d4d;
   --panel-bg: rgba(40, 0, 0, 0.85);
+  --secondary: #ff4d4d !important;
+  --tertiary: #b30000 !important;
 }
 
 [data-theme-id="purple"] {
@@ -145,6 +160,8 @@ body::after {
   --theme-border: #d580ff;
   --term-green: #d580ff;
   --panel-bg: rgba(20, 0, 40, 0.85);
+  --secondary: #d580ff !important;
+  --tertiary: #8a00e0 !important;
 }
 
 [data-theme-id="ocean"] {
@@ -153,6 +170,8 @@ body::after {
   --theme-border: #00bfff;
   --term-green: #00bfff;
   --panel-bg: rgba(0, 10, 30, 0.85);
+  --secondary: #00bfff !important;
+  --tertiary: #006080 !important;
 }
 
 [data-theme-id="cherry"] {
@@ -161,6 +180,8 @@ body::after {
   --theme-border: #ff0055;
   --term-green: #ff0055;
   --panel-bg: rgba(30, 0, 10, 0.85);
+  --secondary: #ff0055 !important;
+  --tertiary: #990033 !important;
 }
 
 [data-theme-id="rainy"] {
@@ -169,6 +190,8 @@ body::after {
   --theme-border: #a3c2c2;
   --term-green: #a3c2c2;
   --panel-bg: rgba(10, 15, 20, 0.85);
+  --secondary: #a3c2c2 !important;
+  --tertiary: #5c7a7a !important;
 }
 
 [data-theme-id="white"] {
@@ -177,6 +200,8 @@ body::after {
     --theme-border: #ffffff;
     --term-green: #ffffff;
     --panel-bg: rgba(20, 20, 20, 0.85);
+    --secondary: #ffffff !important;
+    --tertiary: #808080 !important;
 }
 
 

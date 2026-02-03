@@ -596,19 +596,69 @@ document.addEventListener("nav", async (e: CustomEventMap["nav"]) => {
   })
 
   const containers = [...document.getElementsByClassName("global-graph-outer")] as HTMLElement[]
+
+  // Portal element for global graph - moves modal to body to bypass stacking context issues
+  let portalContainer: HTMLElement | null = null
+  let originalParents: Map<HTMLElement, HTMLElement> = new Map()
+
   async function renderGlobalGraph() {
     const slug = getFullSlug(window)
+
+    // Create portal container if it doesn't exist
+    if (!portalContainer) {
+      portalContainer = document.createElement("div")
+      portalContainer.id = "global-graph-portal"
+      portalContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(4px);
+        background: rgba(0, 0, 0, 0.5);
+      `
+      document.body.appendChild(portalContainer)
+
+      // Click on backdrop to close
+      portalContainer.addEventListener("click", (e) => {
+        if (e.target === portalContainer) {
+          hideGlobalGraph()
+        }
+      })
+    }
+
     for (const container of containers) {
+      // Store original parent for restoration later
+      const originalParent = container.parentElement
+      if (originalParent) {
+        originalParents.set(container, originalParent)
+      }
+
       container.classList.add("active")
-      const sidebar = container.closest(".sidebar") as HTMLElement
-      if (sidebar) {
-        sidebar.style.zIndex = "1"
+
+      // Move container to portal (direct child of body)
+      if (portalContainer) {
+        portalContainer.appendChild(container)
       }
 
       const graphContainer = container.querySelector(".global-graph-container") as HTMLElement
-      registerEscapeHandler(container, hideGlobalGraph)
+      registerEscapeHandler(portalContainer!, hideGlobalGraph)
+
       if (graphContainer) {
-        globalGraphCleanups.push(await renderGraph(graphContainer, slug))
+        // Wait for next frame to ensure layout is calculated and container has dimensions
+        // This prevents WebGPU texture creation with 0 width
+        await new Promise<void>((resolve) => {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(async () => {
+              globalGraphCleanups.push(await renderGraph(graphContainer, slug))
+              resolve()
+            })
+          })
+        })
       }
     }
   }
@@ -617,11 +667,20 @@ document.addEventListener("nav", async (e: CustomEventMap["nav"]) => {
     cleanupGlobalGraphs()
     for (const container of containers) {
       container.classList.remove("active")
-      const sidebar = container.closest(".sidebar") as HTMLElement
-      if (sidebar) {
-        sidebar.style.zIndex = ""
+
+      // Restore container to original parent
+      const originalParent = originalParents.get(container)
+      if (originalParent) {
+        originalParent.appendChild(container)
       }
     }
+
+    // Remove portal from DOM
+    if (portalContainer) {
+      portalContainer.remove()
+      portalContainer = null
+    }
+    originalParents.clear()
   }
 
   async function shortcutHandler(e: HTMLElementEventMap["keydown"]) {

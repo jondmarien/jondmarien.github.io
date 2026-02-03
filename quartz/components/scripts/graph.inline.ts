@@ -586,14 +586,6 @@ document.addEventListener("nav", async (e: CustomEventMap["nav"]) => {
   }
 
   await renderLocalGraph()
-  const handleThemeChange = () => {
-    void renderLocalGraph()
-  }
-
-  document.addEventListener("themechange", handleThemeChange)
-  window.addCleanup(() => {
-    document.removeEventListener("themechange", handleThemeChange)
-  })
 
   const containers = [...document.getElementsByClassName("global-graph-outer")] as HTMLElement[]
 
@@ -683,6 +675,29 @@ document.addEventListener("nav", async (e: CustomEventMap["nav"]) => {
     originalParents.clear()
   }
 
+  // Re-render global graph if it's open (for theme changes)
+  async function rerenderGlobalGraphIfOpen() {
+    const isGlobalGraphOpen = containers.some((container) => container.classList.contains("active"))
+    if (isGlobalGraphOpen) {
+      // Clean up existing graph and re-render with new theme colors
+      cleanupGlobalGraphs()
+      const slug = getFullSlug(window)
+      for (const container of containers) {
+        const graphContainer = container.querySelector(".global-graph-container") as HTMLElement
+        if (graphContainer) {
+          await new Promise<void>((resolve) => {
+            requestAnimationFrame(() => {
+              requestAnimationFrame(async () => {
+                globalGraphCleanups.push(await renderGraph(graphContainer, slug))
+                resolve()
+              })
+            })
+          })
+        }
+      }
+    }
+  }
+
   async function shortcutHandler(e: HTMLElementEventMap["keydown"]) {
     if (e.key === "g" && (e.ctrlKey || e.metaKey) && !e.shiftKey) {
       e.preventDefault()
@@ -698,6 +713,22 @@ document.addEventListener("nav", async (e: CustomEventMap["nav"]) => {
     icon.addEventListener("click", renderGlobalGraph)
     window.addCleanup(() => icon.removeEventListener("click", renderGlobalGraph))
   })
+
+  // Handle theme changes from all sources:
+  // - 'themechange' event: dispatched by darkmode.inline.ts for light/dark mode changes
+  // - 'themeChanged' event: dispatched by InteractiveTerminal and ThemeSelector for color theme changes (matrix, purple, cyan, etc.)
+  const handleThemeChange = () => {
+    void renderLocalGraph()
+    void rerenderGlobalGraphIfOpen()
+  }
+
+  // Light/dark mode theme changes
+  document.addEventListener("themechange", handleThemeChange)
+  window.addCleanup(() => document.removeEventListener("themechange", handleThemeChange))
+
+  // Color theme changes (matrix, purple, cyan, etc.)
+  window.addEventListener("themeChanged", handleThemeChange)
+  window.addCleanup(() => window.removeEventListener("themeChanged", handleThemeChange))
 
   document.addEventListener("keydown", shortcutHandler)
   window.addCleanup(() => {

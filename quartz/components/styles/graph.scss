@@ -51,8 +51,9 @@
     display: block;
     
     .global-graph-container {
-      border: 1px solid var(--lightgray);
-      background-color: var(--light);
+      border: 1px solid var(--theme-border, var(--lightgray));
+      background-color: rgba(5, 5, 5, 0.85); // Dark semi-transparent background
+      backdrop-filter: blur(8px);
       border-radius: 5px;
       box-sizing: border-box;
       height: 80vh;

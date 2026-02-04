@@ -205,6 +205,7 @@ class FaultyTerminalRenderer {
   private animationId: number = 0
   private startTime: number = 0
   private loadAnimationStart: number = 0
+  private boundResize: () => void
 
   constructor(container: HTMLElement, tintColor: string) {
     this.container = container
@@ -240,10 +241,11 @@ class FaultyTerminalRenderer {
 
     this.mesh = new Mesh(gl, { geometry, program: this.program })
 
+    this.boundResize = this.resize.bind(this)
     this.resize()
     container.appendChild(gl.canvas)
 
-    window.addEventListener("resize", this.resize.bind(this))
+    window.addEventListener("resize", this.boundResize)
   }
 
   private hexToRgb(hex: string): [number, number, number] {
@@ -295,7 +297,7 @@ class FaultyTerminalRenderer {
     if (this.animationId) {
       cancelAnimationFrame(this.animationId)
     }
-    window.removeEventListener("resize", this.resize.bind(this))
+    window.removeEventListener("resize", this.boundResize)
     const canvas = this.renderer.gl.canvas
     if (canvas.parentElement) {
       canvas.parentElement.removeChild(canvas)

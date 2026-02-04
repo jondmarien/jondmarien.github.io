@@ -27,6 +27,7 @@ import TerminalGreeting from "./TerminalGreeting"
 import InteractiveTerminal from "./InteractiveTerminal"
 import HeaderBar from "./HeaderBar"
 import ThemeSelector from "./ThemeSelector"
+import BootScreen from "./BootScreen"
 
 export {
   ArticleTitle,
@@ -58,4 +59,5 @@ export {
   InteractiveTerminal,
   HeaderBar,
   ThemeSelector,
+  BootScreen,
 }

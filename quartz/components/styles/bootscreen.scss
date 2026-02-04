@@ -1,0 +1,233 @@
+@use "../../styles/variables.scss" as *;
+
+// Boot screen overlay - full page takeover
+// Uses !important to break out of any parent containers
+.boot-screen {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: 99999 !important;
+  background: #000 !important;
+  opacity: 1;
+  transition: opacity 0.6s ease-out;
+  overflow: hidden !important;
+  
+  &.hidden {
+    display: none !important;
+  }
+  
+  &.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+// WebGL shader background - fills entire screen absolutely
+#boot-terminal-bg {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: 1;
+  overflow: hidden;
+  
+  canvas {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    display: block;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+// Vignette overlay for text readability - stronger effect
+#boot-vignette {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    rgba(0, 0, 0, 0.15) 25%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.7) 75%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+}
+
+// Boot text content - positioned top-left over the shader
+#boot-content {
+  position: fixed !important;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 10;
+  font-family: 'Fira Code', 'Courier New', Consolas, monospace;
+  color: #e0e0e0;
+  max-width: 650px;
+  pointer-events: none;
+  
+  // Tablet
+  @media screen and (max-width: 1024px) {
+    top: 1rem;
+    left: 1rem;
+    max-width: 80vw;
+  }
+  
+  // Mobile
+  @media screen and (max-width: 600px) {
+    top: 0.75rem;
+    left: 0.75rem;
+    max-width: 92vw;
+    right: 0.75rem;
+  }
+}
+
+// Lines container
+#boot-lines {
+  max-height: 70vh;
+  overflow-y: auto;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  // Mobile: smaller max height
+  @media screen and (max-width: 600px) {
+    max-height: 60vh;
+  }
+}
+
+// Individual boot lines - larger text
+.boot-line {
+  margin: 0;
+  padding: 0.15rem 0;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  opacity: 0;
+  animation: boot-line-appear 0.2s ease forwards;
+  word-wrap: break-word;
+  
+  // Tablet
+  @media screen and (max-width: 1024px) {
+    font-size: 1rem;
+  }
+  
+  // Mobile
+  @media screen and (max-width: 600px) {
+    font-size: 0.85rem;
+    line-height: 1.35;
+    padding: 0.1rem 0;
+  }
+  
+  // Very small screens
+  @media screen and (max-width: 380px) {
+    font-size: 0.75rem;
+  }
+  
+  &.header {
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #fff;
+    
+    @media screen and (max-width: 1024px) {
+      font-size: 1.15rem;
+    }
+    
+    @media screen and (max-width: 600px) {
+      font-size: 1rem;
+    }
+  }
+  
+  &.info {
+    color: #aaa;
+  }
+  
+  &.status {
+    color: #e0e0e0;
+  }
+  
+  &.hardware {
+    padding-left: 1rem;
+    color: #ccc;
+    
+    @media screen and (max-width: 600px) {
+      padding-left: 0.5rem;
+    }
+    
+    .ok {
+      color: #00ff00;
+      font-weight: bold;
+    }
+  }
+  
+  &.prompt {
+    margin-top: 0.3rem;
+    animation: boot-line-appear 0.2s ease forwards, boot-blink 1s ease-in-out infinite 0.2s;
+  }
+  
+  &.empty {
+    height: 0.6rem;
+    
+    @media screen and (max-width: 600px) {
+      height: 0.4rem;
+    }
+  }
+}
+
+@keyframes boot-line-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Blinking cursor
+#boot-cursor {
+  display: inline-block;
+  color: #fff;
+  animation: boot-blink 0.5s step-end infinite;
+}
+
+@keyframes boot-blink {
+  50% { opacity: 0; }
+}
+
+// Skip hint at bottom
+.boot-skip-hint {
+  position: fixed !important;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.65rem;
+  color: #555;
+  z-index: 10;
+  pointer-events: none;
+  
+  @media screen and (max-width: 600px) {
+    font-size: 0.55rem;
+    bottom: 0.5rem;
+  }
+}

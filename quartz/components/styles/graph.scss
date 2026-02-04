@@ -52,19 +52,28 @@
     
     .global-graph-container {
       border: 1px solid var(--theme-border, var(--lightgray));
-      background-color: rgba(5, 5, 5, 0.85); // Dark semi-transparent background
-      backdrop-filter: blur(8px);
       border-radius: 5px;
       box-sizing: border-box;
       height: 80vh;
       width: 80vw;
       max-width: 1200px;
       max-height: 800px;
+      backdrop-filter: blur(8px);
+      
+      // Light mode: use papyrus/paper background
+      background-color: rgba(250, 243, 230, 0.92);
 
       @media all and not ($desktop) {
         width: 90vw;
         height: 70vh;
       }
     }
+  }
+}
+
+// Dark mode override for graph modal
+:root[saved-theme="dark"] #global-graph-portal {
+  .global-graph-outer .global-graph-container {
+    background-color: rgba(5, 5, 5, 0.85);
   }
 }

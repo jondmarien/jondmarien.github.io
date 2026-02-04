@@ -18,13 +18,13 @@
 //  1. ROOT VARIABLES & DEFAULTS
 // =========================================================================
 :root {
-  // FALLBACK THEME (Purple - matches quartz.config.ts darkMode)
+  // FALLBACK THEME (Matrix Green - matches quartz.config.ts darkMode)
   // These values are used if no theme is selected or JS fails.
-  --theme-main: #d580ff;   // Primary accent color (text, borders, highlights)
-  --theme-dim: #8a00e0;    // Dimmed accent (subtitles, dividers)
+  --theme-main: #00ff41;   // Primary accent color (text, borders, highlights)
+  --theme-dim: #008f11;    // Dimmed accent (subtitles, dividers)
   --theme-bg: #050505;     // Main background (deep black)
-  --theme-border: #d580ff; // Border color
-  --panel-bg: rgba(20, 0, 40, 0.85); // Background for content panels
+  --theme-border: #00ff41; // Border color
+  --panel-bg: rgba(0, 20, 0, 0.85); // Background for content panels
   --text-main: #e0e0e0;    // Primary text color
   --text-dim: #a0a0a0;     // Secondary text color
   
@@ -115,7 +115,7 @@ body::after {
 //  NOTE: --secondary and --tertiary are used by the Quartz graph component.
 //  We override them here so the graph colors match each theme.
 
-[data-theme-id="matrix"] {
+:root[data-theme-id="matrix"] {
   --theme-main: #00ff41;
   --theme-dim: #008f11;
   --theme-border: #00ff41;
@@ -124,7 +124,7 @@ body::after {
   --tertiary: #008f11 !important;
 }
 
-[data-theme-id="amber"] {
+:root[data-theme-id="amber"] {
   --theme-main: #ffb000;
   --theme-dim: #8f6200;
   --theme-border: #ffb000;
@@ -134,7 +134,7 @@ body::after {
   --tertiary: #8f6200 !important;
 }
 
-[data-theme-id="cyan"] {
+:root[data-theme-id="cyan"] {
   --theme-main: #00ffff;
   --theme-dim: #008f8f;
   --theme-border: #00ffff;
@@ -144,7 +144,7 @@ body::after {
   --tertiary: #008f8f !important;
 }
 
-[data-theme-id="red"] {
+:root[data-theme-id="red"] {
   --theme-main: #ff4d4d;
   --theme-dim: #b30000;
   --theme-border: #ff4d4d;
@@ -154,7 +154,7 @@ body::after {
   --tertiary: #b30000 !important;
 }
 
-[data-theme-id="purple"] {
+:root[data-theme-id="purple"] {
   --theme-main: #d580ff;
   --theme-dim: #8a00e0;
   --theme-border: #d580ff;
@@ -164,7 +164,7 @@ body::after {
   --tertiary: #8a00e0 !important;
 }
 
-[data-theme-id="ocean"] {
+:root[data-theme-id="ocean"] {
   --theme-main: #00bfff; // Deep Sky Blue
   --theme-dim: #006080;
   --theme-border: #00bfff;
@@ -174,7 +174,7 @@ body::after {
   --tertiary: #006080 !important;
 }
 
-[data-theme-id="cherry"] {
+:root[data-theme-id="cherry"] {
   --theme-main: #ff0055; // Retro Pink/Red
   --theme-dim: #990033;
   --theme-border: #ff0055;
@@ -184,7 +184,7 @@ body::after {
   --tertiary: #990033 !important;
 }
 
-[data-theme-id="rainy"] {
+:root[data-theme-id="rainy"] {
   --theme-main: #a3c2c2; // Blue Grey
   --theme-dim: #5c7a7a;
   --theme-border: #a3c2c2;
@@ -194,7 +194,7 @@ body::after {
   --tertiary: #5c7a7a !important;
 }
 
-[data-theme-id="white"] {
+:root[data-theme-id="white"] {
     --theme-main: #ffffff;
     --theme-dim: #808080;
     --theme-border: #ffffff;

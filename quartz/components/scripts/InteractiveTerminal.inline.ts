@@ -110,6 +110,18 @@ async function mountTerminal() {
     smoothSync()
   }) as EventListener)
 
+  // Listen for terminal reset (after reboot)
+  window.addEventListener("resetTerminal", (() => {
+    term.clear()
+    commandHistory = []
+    historyIndex = -1
+    currentLine = ""
+    term.writeln("\x1b[1;32mCONNECTED TO CHRON0.TECH [TERMINAL v1.0.5]\x1b[0m")
+    term.writeln("--------------------------------------------")
+    term.writeln("Type 'help' to see available commands.")
+    prompt()
+  }) as EventListener)
+
   // Listen for Quartz Light/Dark mode toggle (attribute change on html)
   const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
@@ -239,6 +251,7 @@ async function mountTerminal() {
           term.writeln("  flicker set <val> Set flicker strength (0.02 - 0.1)")
           term.writeln("  whoami            Display current user")
           term.writeln("  date              Display system date")
+          term.writeln("  reboot            Reboot the system (shows boot screen)")
           break
 
         case "crt":
@@ -298,6 +311,28 @@ async function mountTerminal() {
 
         case "clear":
           term.clear()
+          break
+        case "reboot":
+          term.writeln("\x1b[1;33m[SYSTEM]\x1b[0m Initiating system reboot...")
+          term.writeln("")
+          
+          // Countdown sequence
+          let countdown = 3
+          const countdownInterval = setInterval(() => {
+            term.writeln(`\x1b[1;31mRebooting in ${countdown}...\x1b[0m`)
+            countdown--
+            
+            if (countdown < 0) {
+              clearInterval(countdownInterval)
+              term.writeln("")
+              term.writeln("\x1b[1;32m[REBOOT]\x1b[0m System restart initiated...")
+              
+              // Trigger the boot screen
+              setTimeout(() => {
+                window.dispatchEvent(new CustomEvent("triggerBootScreen"))
+              }, 500)
+            }
+          }, 1000)
           break
         case "whoami":
           term.writeln("sysadmin@chron0.tech")

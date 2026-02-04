@@ -1,33 +1,23 @@
 import { Renderer, Program, Mesh, Triangle, Color } from "ogl"
+import { BOOT_SEQUENCE, STORAGE_KEY, MAX_VISIBLE_LINES, type BootLine } from "./bootsequence.data"
 
-// ============================================================================
-// BOOT SEQUENCE CONFIGURATION
-// ============================================================================
-
-interface BootLine {
-  text: string
-  delay: number
-  type: "header" | "info" | "hardware" | "status" | "prompt" | "empty"
-}
-
-const BOOT_SEQUENCE: BootLine[] = [
+// Final BIOS summary screen (shown after boot sequence completes)
+const FINAL_SCREEN: BootLine[] = [
   { text: "CHRONO.TECH BIOS v4.2.0", delay: 0, type: "header" },
-  { text: "Copyright (C) 2024-2026 Jon Marien", delay: 200, type: "info" },
-  { text: "", delay: 300, type: "empty" },
-  { text: "Initializing quantum core...", delay: 500, type: "status" },
-  { text: "Detecting neural interface...", delay: 800, type: "status" },
-  { text: "CPU: Quantum Core @ 4.2 GHz ... OK", delay: 1000, type: "hardware" },
-  { text: "RAM: 32768 MB Neural Buffer ... OK", delay: 1200, type: "hardware" },
-  { text: "DISK: 2 TB Holographic Array ... OK", delay: 1400, type: "hardware" },
-  { text: "GPU: CyberGraphics 9000 ... OK", delay: 1600, type: "hardware" },
-  { text: "", delay: 1800, type: "empty" },
-  { text: "Loading CHRONO.OS...", delay: 2000, type: "status" },
-  { text: "Establishing secure uplink...", delay: 2300, type: "status" },
-  { text: "", delay: 2600, type: "empty" },
-  { text: "Press any key to continue...", delay: 2800, type: "prompt" },
+  { text: "Copyright (C) 2024-2026 Jon Marien", delay: 60, type: "info" },
+  { text: "", delay: 100, type: "empty" },
+  { text: "Initializing quantum core...", delay: 140, type: "status" },
+  { text: "Detecting neural interface...", delay: 180, type: "status" },
+  { text: "CPU: Quantum Core @ 4.2 GHz ... OK", delay: 220, type: "hardware" },
+  { text: "RAM: 32768 MB Neural Buffer ... OK", delay: 260, type: "hardware" },
+  { text: "DISK: 2 TB Holographic Array ... OK", delay: 300, type: "hardware" },
+  { text: "GPU: CyberGraphics 9000 ... OK", delay: 340, type: "hardware" },
+  { text: "", delay: 380, type: "empty" },
+  { text: "Loading CHRONO.OS ...", delay: 420, type: "status" },
+  { text: "Establishing secure uplink...", delay: 460, type: "status" },
+  { text: "", delay: 500, type: "empty" },
+  { text: "Press any key to continue...", delay: 540, type: "prompt" },
 ]
-
-const STORAGE_KEY = "chrono-boot-seen"
 
 // ============================================================================
 // FAULTY TERMINAL SHADER
@@ -319,23 +309,41 @@ class FaultyTerminalRenderer {
 // BOOT SCREEN CONTROLLER
 // ============================================================================
 
-document.addEventListener("nav", () => {
-  // Only run on initial page load, not SPA navigation
-  if (window.location.pathname !== "/" && !document.referrer.includes(window.location.origin)) {
-    return
+// Helper to create a boot line element
+function createLineElement(line: BootLine): HTMLDivElement {
+  const lineEl = document.createElement("div")
+  lineEl.className = `boot-line ${line.type}`
+
+  if (line.type === "empty") {
+    lineEl.innerHTML = "&nbsp;"
+  } else if (line.type === "hardware") {
+    // Highlight "[  OK  ]" or "OK" in hardware lines
+    let html = line.text
+    if (html.includes("[  OK  ]")) {
+      html = html.replace("[  OK  ]", '<span class="ok">[  OK  ]</span>')
+    } else if (html.includes("OK")) {
+      html = html.replace("OK", '<span class="ok">OK</span>')
+    }
+    lineEl.innerHTML = html
+  } else {
+    lineEl.textContent = line.text
   }
 
+  return lineEl
+}
+
+// Main boot screen runner - can be called on page load or via reboot command
+function runBootScreen(skipStorageCheck = false) {
   const bootScreen = document.getElementById("boot-screen")
   if (!bootScreen) return
 
   // Move boot screen to be direct child of body to fix position:fixed offset
-  // caused by parent containers with transform properties
   if (bootScreen.parentElement !== document.body) {
     document.body.appendChild(bootScreen)
   }
 
-  // Check if already seen
-  if (localStorage.getItem(STORAGE_KEY)) {
+  // Check if already seen (unless bypassed by reboot command)
+  if (!skipStorageCheck && localStorage.getItem(STORAGE_KEY)) {
     bootScreen.classList.add("hidden")
     return
   }
@@ -349,9 +357,13 @@ document.addEventListener("nav", () => {
     return
   }
 
-  // Get theme color for tint
+  // Reset state for reboot
+  bootScreen.classList.remove("hidden", "fade-out")
+  linesContainer.innerHTML = ""
+
+  // Get theme color for tint (uses user's current theme)
   const themeMain =
-    getComputedStyle(document.documentElement).getPropertyValue("--theme-main").trim() || "#d580ff"
+    getComputedStyle(document.documentElement).getPropertyValue("--theme-main").trim() || "#00ff00"
 
   // Initialize WebGL background
   let terminal: FaultyTerminalRenderer | null = null
@@ -365,35 +377,46 @@ document.addEventListener("nav", () => {
   // Track cleanup
   const timers: number[] = []
   let waitingForInput = false
+  let lineCount = 0
 
-  // Display boot lines progressively
+  // Display boot lines progressively with screen clearing
   BOOT_SEQUENCE.forEach((line) => {
     const timer = window.setTimeout(() => {
-      const lineEl = document.createElement("div")
-      lineEl.className = `boot-line ${line.type}`
-
-      if (line.type === "empty") {
-        lineEl.innerHTML = "&nbsp;"
-      } else if (line.type === "hardware") {
-        // Highlight "OK" in hardware lines
-        lineEl.innerHTML = line.text.replace("OK", '<span class="ok">OK</span>')
-      } else {
-        lineEl.textContent = line.text
+      // Clear screen when we exceed max visible lines (like a real terminal)
+      if (lineCount >= MAX_VISIBLE_LINES) {
+        linesContainer.innerHTML = ""
+        lineCount = 0
       }
 
+      const lineEl = createLineElement(line)
       linesContainer.appendChild(lineEl)
-
-      // Scroll to bottom if needed
-      linesContainer.scrollTop = linesContainer.scrollHeight
+      lineCount++
     }, line.delay)
     timers.push(timer)
   })
 
-  // Enable input after last line
-  const lastDelay = BOOT_SEQUENCE[BOOT_SEQUENCE.length - 1].delay
+  // After boot sequence, clear and show final BIOS summary screen
+  const lastBootDelay = BOOT_SEQUENCE[BOOT_SEQUENCE.length - 1].delay
+  const clearScreenTimer = window.setTimeout(() => {
+    linesContainer.innerHTML = ""
+    lineCount = 0
+  }, lastBootDelay + 300)
+  timers.push(clearScreenTimer)
+
+  // Display final BIOS screen
+  FINAL_SCREEN.forEach((line) => {
+    const timer = window.setTimeout(() => {
+      const lineEl = createLineElement(line)
+      linesContainer.appendChild(lineEl)
+    }, lastBootDelay + 400 + line.delay)
+    timers.push(timer)
+  })
+
+  // Enable input after final screen is displayed
+  const finalScreenLastDelay = FINAL_SCREEN[FINAL_SCREEN.length - 1].delay
   const enableInputTimer = window.setTimeout(() => {
     waitingForInput = true
-  }, lastDelay + 200)
+  }, lastBootDelay + 400 + finalScreenLastDelay + 200)
   timers.push(enableInputTimer)
 
   // Complete boot and hide screen
@@ -410,6 +433,12 @@ document.addEventListener("nav", () => {
     setTimeout(() => {
       bootScreen.classList.add("hidden")
       terminal?.stop()
+      
+      // Reset the interactive terminal (clear screen and history)
+      if (skipStorageCheck) {
+        // Only reset terminal on manual reboot, not initial page load
+        window.dispatchEvent(new CustomEvent("resetTerminal"))
+      }
     }, 600)
 
     // Remove listeners
@@ -436,4 +465,17 @@ document.addEventListener("nav", () => {
     document.removeEventListener("click", handleInput)
     document.removeEventListener("touchstart", handleInput)
   })
+}
+
+// Run on initial page load (only on homepage)
+document.addEventListener("nav", () => {
+  if (window.location.pathname !== "/" && !document.referrer.includes(window.location.origin)) {
+    return
+  }
+  runBootScreen(false)
+})
+
+// Listen for reboot command from terminal
+window.addEventListener("triggerBootScreen", () => {
+  runBootScreen(true) // Skip storage check for manual reboot
 })

@@ -17,11 +17,11 @@
   opacity: 1;
   transition: opacity 0.6s ease-out;
   overflow: hidden !important;
-  
+
   &.hidden {
     display: none !important;
   }
-  
+
   &.fade-out {
     opacity: 0;
     pointer-events: none;
@@ -41,7 +41,7 @@
   padding: 0 !important;
   z-index: 1;
   overflow: hidden;
-  
+
   canvas {
     position: fixed !important;
     top: 0 !important;
@@ -75,119 +75,138 @@
   );
 }
 
-// Boot text content - positioned top-left over the shader
+// Boot text content - positioned top-left over the shader, full width
 #boot-content {
   position: fixed !important;
   top: 1.5rem;
   left: 1.5rem;
+  right: 1.5rem;
   z-index: 10;
   font-family: 'Fira Code', 'Courier New', Consolas, monospace;
-  color: #e0e0e0;
-  max-width: 650px;
+  color: var(--theme-main, #00ff00);
   pointer-events: none;
-  
+  text-shadow:
+    0 0 8px rgba(0, 0, 0, 0.9),
+    0 0 16px rgba(0, 0, 0, 0.8),
+    1px 1px 2px rgba(0, 0, 0, 1),
+    -1px -1px 2px rgba(0, 0, 0, 1),
+    2px 2px 4px rgba(0, 0, 0, 0.9);
+
   // Tablet
   @media screen and (max-width: 1024px) {
     top: 1rem;
     left: 1rem;
-    max-width: 80vw;
+    right: 1rem;
   }
-  
+
   // Mobile
   @media screen and (max-width: 600px) {
     top: 0.75rem;
     left: 0.75rem;
-    max-width: 92vw;
     right: 0.75rem;
   }
 }
 
-// Lines container
+// Lines container - no scrolling, content clears when full
 #boot-lines {
-  max-height: 70vh;
-  overflow-y: auto;
-  
+  max-height: 85vh;
+  overflow: hidden;
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE/Edge
+
   &::-webkit-scrollbar {
     display: none;
+    width: 0;
+    height: 0;
   }
-  
+
   // Mobile: smaller max height
   @media screen and (max-width: 600px) {
-    max-height: 60vh;
+    max-height: 80vh;
   }
 }
 
-// Individual boot lines - larger text
+// Individual boot lines - larger text with strong shadow for readability
 .boot-line {
   margin: 0;
-  padding: 0.15rem 0;
-  font-size: 1.1rem;
-  line-height: 1.4;
+  padding: 0.1rem 0;
+  font-size: 1rem;
+  line-height: 1.35;
   opacity: 0;
   animation: boot-line-appear 0.2s ease forwards;
   word-wrap: break-word;
-  
+  white-space: pre-wrap;
+  // Strong text shadow for readability against busy background
+  text-shadow:
+    0 0 8px rgba(0, 0, 0, 0.9),
+    0 0 16px rgba(0, 0, 0, 0.8),
+    1px 1px 2px rgba(0, 0, 0, 1),
+    -1px -1px 2px rgba(0, 0, 0, 1),
+    2px 2px 4px rgba(0, 0, 0, 0.9);
+
   // Tablet
   @media screen and (max-width: 1024px) {
     font-size: 1rem;
   }
-  
+
   // Mobile
   @media screen and (max-width: 600px) {
     font-size: 0.85rem;
     line-height: 1.35;
     padding: 0.1rem 0;
   }
-  
+
   // Very small screens
   @media screen and (max-width: 380px) {
     font-size: 0.75rem;
   }
-  
+
   &.header {
     font-weight: bold;
     font-size: 1.3rem;
     color: #fff;
-    
+
     @media screen and (max-width: 1024px) {
       font-size: 1.15rem;
     }
-    
+
     @media screen and (max-width: 600px) {
       font-size: 1rem;
     }
   }
-  
+
   &.info {
     color: #aaa;
   }
-  
+
   &.status {
     color: #e0e0e0;
   }
-  
+
   &.hardware {
     padding-left: 1rem;
     color: #ccc;
-    
+
     @media screen and (max-width: 600px) {
       padding-left: 0.5rem;
     }
-    
+
     .ok {
       color: #00ff00;
       font-weight: bold;
     }
   }
-  
+
   &.prompt {
     margin-top: 0.3rem;
-    animation: boot-line-appear 0.2s ease forwards, boot-blink 1s ease-in-out infinite 0.2s;
+    animation:
+      boot-line-appear 0.2s ease forwards,
+      boot-blink 1s ease-in-out infinite 0.2s;
   }
-  
+
   &.empty {
     height: 0.6rem;
-    
+
     @media screen and (max-width: 600px) {
       height: 0.4rem;
     }
@@ -211,7 +230,9 @@
 }
 
 @keyframes boot-blink {
-  50% { opacity: 0; }
+  50% {
+    opacity: 0;
+  }
 }
 
 // Skip hint at bottom
@@ -220,12 +241,12 @@
   bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  font-family: 'Fira Code', monospace;
+  font-family: "Fira Code", monospace;
   font-size: 0.65rem;
   color: #555;
   z-index: 10;
   pointer-events: none;
-  
+
   @media screen and (max-width: 600px) {
     font-size: 0.55rem;
     bottom: 0.5rem;

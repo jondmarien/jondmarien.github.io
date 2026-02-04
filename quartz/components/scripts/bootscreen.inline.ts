@@ -376,7 +376,6 @@ function runBootScreen(skipStorageCheck = false) {
 
   // Track cleanup
   const timers: number[] = []
-  let waitingForInput = false
   let lineCount = 0
 
   // Display boot lines progressively with screen clearing
@@ -412,21 +411,21 @@ function runBootScreen(skipStorageCheck = false) {
     timers.push(timer)
   })
 
-  // Enable input after final screen is displayed
-  const finalScreenLastDelay = FINAL_SCREEN[FINAL_SCREEN.length - 1].delay
-  const enableInputTimer = window.setTimeout(() => {
-    waitingForInput = true
-  }, lastBootDelay + 400 + finalScreenLastDelay + 200)
-  timers.push(enableInputTimer)
+  // Track if boot has already been skipped/completed
+  let bootCompleted = false
 
-  // Complete boot and hide screen
+  // Complete boot and hide screen (can be called at any time to skip)
   const completeBoot = () => {
-    if (!waitingForInput) return
+    if (bootCompleted) return
+    bootCompleted = true
+
+    // Clear all pending timers (stops the animation)
+    timers.forEach((t) => clearTimeout(t))
 
     // Mark as seen
     localStorage.setItem(STORAGE_KEY, "true")
 
-    // Fade out
+    // Fade out (same animation whether skipping early or at end)
     bootScreen.classList.add("fade-out")
 
     // Cleanup after animation

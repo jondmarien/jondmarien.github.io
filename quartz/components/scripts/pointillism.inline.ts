@@ -8,12 +8,12 @@
 const IMAGE_PATH = "/static/infinity.webp"
 
 // Configuration
-const DOT_RADIUS_MIN = 1.5
-const DOT_RADIUS_MAX = 4
-const DOTS_PER_FRAME = 80 // How many dots to place each animation frame
-const TOTAL_DOTS = 25000 // Total dots before the image is "complete"
-const FADE_IN_AFTER_COMPLETE = true // Subtle glow after completion
-const RESTART_DELAY_MS = 3000 // Pause before restarting the animation
+const DOT_RADIUS_MIN = 0.5
+const DOT_RADIUS_MAX = 1.8
+const DOTS_PER_FRAME = 150 // How many dots to place each animation frame
+const TOTAL_DOTS = 80000 // Total dots before the image is "complete"
+const DOT_OPACITY = 0.12 // Low opacity per dot — layers build up clarity
+const RESTART_DELAY_MS = 4000 // Pause before restarting the animation
 
 interface DotData {
   x: number
@@ -135,7 +135,7 @@ function initPointillism() {
 
     ctx.beginPath()
     ctx.arc(dx, dy, dr, 0, Math.PI * 2)
-    ctx.fillStyle = `rgba(${dot.r}, ${dot.g}, ${dot.b}, ${dot.a / 255})`
+    ctx.fillStyle = `rgba(${dot.r}, ${dot.g}, ${dot.b}, ${DOT_OPACITY})`
     ctx.fill()
   }
 

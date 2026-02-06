@@ -28,6 +28,7 @@ import InteractiveTerminal from "./InteractiveTerminal"
 import HeaderBar from "./HeaderBar"
 import ThemeSelector from "./ThemeSelector"
 import BootScreen from "./BootScreen"
+import PointillismCanvas from "./PointillismCanvas"
 
 export {
   ArticleTitle,
@@ -60,4 +61,5 @@ export {
   HeaderBar,
   ThemeSelector,
   BootScreen,
+  PointillismCanvas,
 }

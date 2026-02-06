@@ -27,6 +27,10 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.InteractiveTerminal(),
     Component.ArticleTitle(),
+    Component.ConditionalRender({
+      component: Component.PointillismCanvas(),
+      condition: (page) => page.fileData.slug === "index",
+    }),
     Component.ContentMeta(),
     Component.TagList(),
   ],

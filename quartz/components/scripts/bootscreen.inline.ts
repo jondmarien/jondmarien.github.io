@@ -468,9 +468,14 @@ function runBootScreen(skipStorageCheck = false) {
   })
 }
 
-// Run on initial page load (only on homepage)
+// Run on initial page load (only on homepage root path)
 document.addEventListener("nav", () => {
-  if (window.location.pathname !== "/" && !document.referrer.includes(window.location.origin)) {
+  const bootScreen = document.getElementById("boot-screen")
+  const path = window.location.pathname
+  // Only show boot screen on exact root path
+  if (path !== "/" && path !== "/index.html") {
+    // Hide boot screen on all non-root pages
+    if (bootScreen) bootScreen.classList.add("hidden")
     return
   }
   runBootScreen(false)

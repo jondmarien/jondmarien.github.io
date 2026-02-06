@@ -20,21 +20,21 @@
 :root {
   // FALLBACK THEME (Matrix Green - matches quartz.config.ts darkMode)
   // These values are used if no theme is selected or JS fails.
-  --theme-main: #00ff41;   // Primary accent color (text, borders, highlights)
-  --theme-dim: #008f11;    // Dimmed accent (subtitles, dividers)
-  --theme-bg: #050505;     // Main background (deep black)
+  --theme-main: #00ff41; // Primary accent color (text, borders, highlights)
+  --theme-dim: #008f11; // Dimmed accent (subtitles, dividers)
+  --theme-bg: #050505; // Main background (deep black)
   --theme-border: #00ff41; // Border color
   --panel-bg: rgba(0, 20, 0, 0.85); // Background for content panels
-  --text-main: #e0e0e0;    // Primary text color
-  --text-dim: #a0a0a0;     // Secondary text color
-  
+  --text-main: #e0e0e0; // Primary text color
+  --text-dim: #a0a0a0; // Secondary text color
+
   // QUARTZ GRAPH COLOR SYNC
   // Override Quartz's default colors so the graph uses our theme
-  --secondary: var(--theme-main);  // Current/active node color
-  --tertiary: var(--theme-dim);    // Visited node color
-  
+  --secondary: var(--theme-main); // Current/active node color
+  --tertiary: var(--theme-dim); // Visited node color
+
   // CRT EFFECT CONTROL
-  --crt-opacity: 1; 
+  --crt-opacity: 1;
   --vignette-opacity: 0.4; // 0.4 = ON, 0 = OFF
   --flicker-strength: 0.04; // Opacity variance (recommended 0.02 - 0.1)
 
@@ -61,23 +61,28 @@ body::before {
   content: " ";
   display: block;
   position: fixed;
-  top: 0; left: 0; bottom: 0; right: 0;
-  
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
   // Opacity controlled dynamically via --crt-opacity variable
   opacity: var(--crt-opacity, 1);
-  
-  // Dual gradients: 
+
+  // Dual gradients:
   // 1. Horizontal lines (Scanlines)
   // 2. Vertical RGB sub-pixel emulation
-  background: 
-    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.12) 50%), 
+  background:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.12) 50%),
     linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-    
-  z-index: 9999;           // Always on top
-  background-size: 100% 2px, 3px 100%; // Size of scanlines and sub-pixels
-  pointer-events: none;    // Allow clicking through the overlay
+
+  z-index: 9999; // Always on top
+  background-size:
+    100% 2px,
+    3px 100%; // Size of scanlines and sub-pixels
+  pointer-events: none; // Allow clicking through the overlay
   transition: opacity 0.2s ease;
-  
+
   // Gentle flicker animation to simulate old hardware monitor variations
   // Moved here from ::after so it works even if vignette is off
   animation: flicker 0.15s infinite;
@@ -88,25 +93,32 @@ body::after {
   content: " ";
   display: block;
   position: fixed;
-  top: 0; left: 0; bottom: 0; right: 0;
-  
-  opacity: var(--crt-opacity, 1);
-  
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  opacity: var(--vignette-opacity, 0.4);
+
   // Radial gradient creates the darkened corners (Vignette)
-  // Alpha is controlled strictly by --vignette-opacity
-  background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0, var(--vignette-opacity, 0.4)) 100%);
-  
+  background: radial-gradient(circle, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%);
+
   z-index: 9998;
   pointer-events: none;
   transition: opacity 0.2s ease;
 }
 
 @keyframes flicker {
-  0% { opacity: calc(var(--crt-opacity, 1) * (1 - var(--flicker-strength, 0.04))); }
-  50% { opacity: var(--crt-opacity, 1); }
-  100% { opacity: calc(var(--crt-opacity, 1) * (1 - var(--flicker-strength, 0.04))); }
+  0% {
+    opacity: calc(var(--crt-opacity, 1) * (1 - var(--flicker-strength, 0.04)));
+  }
+  50% {
+    opacity: var(--crt-opacity, 1);
+  }
+  100% {
+    opacity: calc(var(--crt-opacity, 1) * (1 - var(--flicker-strength, 0.04)));
+  }
 }
-
 
 // =========================================================================
 //  3. THEME DEFINITIONS
@@ -195,25 +207,24 @@ body::after {
 }
 
 :root[data-theme-id="white"] {
-    --theme-main: #ffffff;
-    --theme-dim: #808080;
-    --theme-border: #ffffff;
-    --term-green: #ffffff;
-    --panel-bg: rgba(20, 20, 20, 0.85);
-    --secondary: #ffffff !important;
-    --tertiary: #808080 !important;
+  --theme-main: #ffffff;
+  --theme-dim: #808080;
+  --theme-border: #ffffff;
+  --term-green: #ffffff;
+  --panel-bg: rgba(20, 20, 20, 0.85);
+  --secondary: #ffffff !important;
+  --tertiary: #808080 !important;
 }
-
 
 // LIGHT MODE OVERRIDES
 // Quartz typically uses [saved-theme="light"]
 :root[saved-theme="light"] {
-    --theme-bg: #fdf6e3 !important; // Solarized Light "Beige" / Paper
-    --panel-bg: rgba(253, 246, 227, 0.95) !important;
-    --text-main: #333333 !important;
-    --text-dim: #666666 !important;
-    
-    // Theme Overrides for Light Mode (High Contrast / Darker for Readability)
+  --theme-bg: #fdf6e3 !important; // Solarized Light "Beige" / Paper
+  --panel-bg: rgba(253, 246, 227, 0.95) !important;
+  --text-main: #333333 !important;
+  --text-dim: #666666 !important;
+
+  // Theme Overrides for Light Mode (High Contrast / Darker for Readability)
   &[data-theme-id="matrix"] {
     --theme-main: #003300 !important; // Deep Forest Green
     --theme-dim: #002200 !important;
@@ -253,68 +264,67 @@ body::after {
 }
 
 :root[saved-theme="light"][data-theme-id="matrix"] {
-    --theme-main: #004d00 !important;
-    --theme-dim: #006600 !important;
-    --theme-border: #004d00 !important;
-    --term-green: #004d00 !important;
+  --theme-main: #004d00 !important;
+  --theme-dim: #006600 !important;
+  --theme-border: #004d00 !important;
+  --term-green: #004d00 !important;
 }
 
 :root[saved-theme="light"][data-theme-id="amber"] {
-    --theme-main: #b35900 !important;
-    --theme-dim: #804000 !important;
-    --theme-border: #b35900 !important;
-     --term-green: #b35900 !important;
+  --theme-main: #b35900 !important;
+  --theme-dim: #804000 !important;
+  --theme-border: #b35900 !important;
+  --term-green: #b35900 !important;
 }
 
 :root[saved-theme="light"][data-theme-id="cyan"] {
-    --theme-main: #004d4d !important;
-    --theme-dim: #003333 !important;
-    --theme-border: #004d4d !important;
-    --term-green: #004d4d !important;
+  --theme-main: #004d4d !important;
+  --theme-dim: #003333 !important;
+  --theme-border: #004d4d !important;
+  --term-green: #004d4d !important;
 }
 
 :root[saved-theme="light"][data-theme-id="red"] {
-    --theme-main: #b30000 !important;
-    --theme-dim: #800000 !important;
-    --theme-border: #b30000 !important;
-    --term-green: #b30000 !important;
+  --theme-main: #b30000 !important;
+  --theme-dim: #800000 !important;
+  --theme-border: #b30000 !important;
+  --term-green: #b30000 !important;
 }
 
 :root[saved-theme="light"][data-theme-id="purple"] {
-    --theme-main: #4d0099 !important;
-    --theme-dim: #330066 !important;
-    --theme-border: #4d0099 !important;
-    --term-green: #4d0099 !important;
+  --theme-main: #4d0099 !important;
+  --theme-dim: #330066 !important;
+  --theme-border: #4d0099 !important;
+  --term-green: #4d0099 !important;
 }
 
 :root[saved-theme="light"][data-theme-id="ocean"] {
-    --theme-main: #004080 !important;
-    --theme-dim: #002040 !important;
-    --theme-border: #004080 !important;
-    --term-green: #004080 !important;
+  --theme-main: #004080 !important;
+  --theme-dim: #002040 !important;
+  --theme-border: #004080 !important;
+  --term-green: #004080 !important;
 }
 
 :root[saved-theme="light"][data-theme-id="cherry"] {
-    --theme-main: #990033 !important;
-    --theme-dim: #660022 !important;
-    --theme-border: #990033 !important;
-    --term-green: #990033 !important;
+  --theme-main: #990033 !important;
+  --theme-dim: #660022 !important;
+  --theme-border: #990033 !important;
+  --term-green: #990033 !important;
 }
 
 :root[saved-theme="light"][data-theme-id="rainy"] {
-    --theme-main: #2f4f4f !important; // Dark Slate Gray
-    --theme-dim: #1a2e2e !important;
-    --theme-border: #2f4f4f !important;
-    --term-green: #2f4f4f !important;
+  --theme-main: #2f4f4f !important; // Dark Slate Gray
+  --theme-dim: #1a2e2e !important;
+  --theme-border: #2f4f4f !important;
+  --term-green: #2f4f4f !important;
 }
 
 :root[saved-theme="light"][data-theme-id="white"] {
-    --theme-main: #000000 !important;
-    --theme-dim: #444444 !important;
-    --theme-border: #000000 !important;
-    --term-green: #000000 !important;
+  --theme-main: #000000 !important;
+  --theme-dim: #444444 !important;
+  --theme-border: #000000 !important;
+  --term-green: #000000 !important;
 }
-
 
 body {
   font-family: "Fira Code", monospace;
@@ -325,12 +335,19 @@ body {
 }
 
 // Ensure box-sizing is inherited for layout safety
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
 // Global Text Styles
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Fira Code", monospace;
   text-transform: uppercase;
   color: var(--theme-main) !important;
@@ -358,10 +375,17 @@ body::after {
   content: " ";
   display: block;
   position: fixed;
-  top: 0; left: 0; bottom: 0; right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
   z-index: 999;
-  background-size: 100% 2px, 3px 100%;
+  background-size:
+    100% 2px,
+    3px 100%;
   pointer-events: none;
 }
 
@@ -376,11 +400,11 @@ body::after {
       "grid-sidebar-left grid-header grid-sidebar-right"
       "grid-sidebar-left grid-center grid-sidebar-right"
       "grid-sidebar-left grid-footer grid-sidebar-right" !important;
-      
-      // Adjust spacing for the tighter breakpoint
-      column-gap: 2rem !important;
+
+    // Adjust spacing for the tighter breakpoint
+    column-gap: 2rem !important;
   }
-  
+
   .sidebar.left {
     grid-area: grid-sidebar-left !important;
     display: flex !important;
@@ -389,7 +413,7 @@ body::after {
     top: 2rem;
     height: calc(100vh - 4rem) !important;
   }
-  
+
   .sidebar.right {
     grid-area: grid-sidebar-right !important;
     display: flex !important;
@@ -397,13 +421,13 @@ body::after {
     position: sticky !important;
     top: 2rem;
   }
-  
+
   .center {
     grid-area: grid-center !important;
     max-width: 100% !important;
     margin: 0 !important;
   }
-  
+
   .page-header {
     grid-area: grid-header !important;
     margin-top: 2rem !important;
@@ -419,7 +443,7 @@ body::after {
   background-color: var(--panel-bg);
   padding: 2rem;
   margin-top: 3.5rem; // Increased from 1rem to clear the label
-  
+
   &::before {
     content: " [ MAIN_PROCESS :: DISPLAY ] ";
     display: inline-block;
@@ -439,23 +463,23 @@ body::after {
 
 // Terminal Loading Placeholder
 #terminal-container {
-   width: 100%;
-   background-color: var(--theme-bg);
-   border: 1px solid var(--theme-border);
-   padding: 1rem;
-   overflow: hidden;
+  width: 100%;
+  background-color: var(--theme-bg);
+  border: 1px solid var(--theme-border);
+  padding: 1rem;
+  overflow: hidden;
 
-   .terminal-placeholder {
-       font-size: 0.9rem;
-       opacity: 0.8;
-       animation: blink 2s infinite;
-       color: var(--theme-main);
-   }
-   
-   // Xterm overrides to match theme
-   .xterm-viewport {
-       background-color: transparent !important;
-   }
+  .terminal-placeholder {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    animation: blink 2s infinite;
+    color: var(--theme-main);
+  }
+
+  // Xterm overrides to match theme
+  .xterm-viewport {
+    background-color: transparent !important;
+  }
 }
 
 // 2. Left Sidebar (Explorer)
@@ -464,7 +488,7 @@ body::after {
   padding: 1rem;
   height: 100%;
   overflow-y: auto;
-  
+
   &::before {
     content: "FILE_SYS";
     display: block;
@@ -473,11 +497,11 @@ body::after {
     margin-bottom: 0.5rem;
     font-weight: bold;
   }
-  
+
   // Make folder items clickable
   .folder-container {
     cursor: pointer;
-    
+
     // Improve hover state for folders
     &:hover {
       .folder-title {
@@ -496,7 +520,7 @@ footer {
   text-align: center;
   font-family: "Fira Code", monospace;
   opacity: 0.8;
-  
+
   ul {
     display: flex;
     justify-content: center;
@@ -505,11 +529,11 @@ footer {
     padding: 0;
     margin-top: 0.5rem;
   }
-  
+
   a {
     color: var(--text-dim) !important;
     font-size: 0.9rem;
-    
+
     &:hover {
       color: var(--theme-main) !important;
       background: transparent;
@@ -523,15 +547,15 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  
+
   .toc {
     border-left: 2px solid var(--theme-dim);
     padding-left: 1rem;
     margin-top: 0; // Reset margin since it's now first (or second)
     position: relative;
-    
+
     margin-bottom: 2rem; // Space between TOC and Graph
-    
+
     &::before {
       content: "JUMP_TARGETS";
       color: var(--theme-dim);
@@ -547,13 +571,13 @@ footer {
     filter: sepia(100%) hue-rotate(100deg) saturate(300%) contrast(1.2);
     // Note: The hue-rotate filter might mess up non-green themes. We should reset it or enable it only for matrix.
     // For simplicity, we'll keep the filter for that "CRT" look, but maybe adjust it per theme later if needed.
-    // Actually, generic contrast/sepia is okay, but hue-rotate shifts the color. 
+    // Actually, generic contrast/sepia is okay, but hue-rotate shifts the color.
     // We should probably rely on the theme colors instead of filters.
     filter: none; // Resetting filter to rely on theme colors
-    
+
     position: relative;
     padding-top: 1.5rem; // Space for the label
-    
+
     &::before {
       content: "NET_TOPOLOGY";
       background: var(--theme-dim);
@@ -568,13 +592,12 @@ footer {
   }
 }
 
-
 // Code Blocks
 pre {
   border: 1px solid var(--theme-main) !important;
-  background-color: rgba(5,5,5,0.9) !important;
+  background-color: rgba(5, 5, 5, 0.9) !important;
   border-radius: 0 !important;
-  
+
   code {
     background: transparent !important;
     font-family: "Fira Code", monospace !important;
@@ -602,17 +625,17 @@ pre {
     filter: grayscale(1) brightness(0.7); // Make it look "hollow"/dim
     margin-right: 5px;
   }
-  
+
   // Colorize the chevron arrow for folders
   .folder-icon {
     color: var(--theme-main) !important;
     stroke: var(--theme-main) !important;
-    
+
     polyline {
       stroke: var(--theme-main) !important;
     }
   }
-  
+
   // Open Folder
   li[data-collapsed="false"] > button span.folder-container::before {
     content: "📂 ";
@@ -631,7 +654,9 @@ pre {
 }
 
 // --- Graph View Theming ---
-.graph-container, .global-graph-container, .global-graph-icon {
+.graph-container,
+.global-graph-container,
+.global-graph-icon {
   // Target D3 nodes and links
   // Note: These might be SVG 'circle' and 'line' elements
   svg {
@@ -640,65 +665,71 @@ pre {
       opacity: 0.8;
       transition: fill 0.3s ease;
     }
-    
+
     line {
       stroke: var(--theme-dim) !important;
       transition: stroke 0.3s ease;
     }
-    
+
     // Global Graph Icon (Top Right)
     path {
-        fill: var(--theme-main) !important; // Force fill for the icon
-        transition: fill 0.3s ease;
+      fill: var(--theme-main) !important; // Force fill for the icon
+      transition: fill 0.3s ease;
     }
-    
+
     // Active/Highlight states
     .node-active {
-        fill: var(--theme-main) !important;
-        stroke: var(--theme-border) !important;
-        stroke-width: 2px;
+      fill: var(--theme-main) !important;
+      stroke: var(--theme-border) !important;
+      stroke-width: 2px;
     }
-    
+
     .link-active {
-        stroke: var(--theme-main) !important;
+      stroke: var(--theme-main) !important;
     }
   }
 }
 
 // --- Table of Contents Theming ---
 .toc {
-    button.toc-header {
-        color: var(--theme-main) !important;
-        
-        svg.fold {
-            stroke: var(--theme-main) !important;
-            polyline {
-                 stroke: var(--theme-main) !important;
-            }
-        }
+  button.toc-header {
+    color: var(--theme-main) !important;
+
+    svg.fold {
+      stroke: var(--theme-main) !important;
+      polyline {
+        stroke: var(--theme-main) !important;
+      }
     }
+  }
 }
 
 // --- Page Animation ---
 @keyframes contentFadeIn {
-    0% { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 #quartz-body {
-    animation: contentFadeIn 0.8s ease-out forwards;
+  animation: contentFadeIn 0.8s ease-out forwards;
 }
 
 // --- ASCII Header ---
 .header-bar .ascii-header {
-    font-family: "Fira Code", monospace;
-    font-size: 0.5rem; // ASCII art needs to be small to fit
-    line-height: 0.5rem;
-    white-space: pre;
-    color: var(--theme-main);
-    text-shadow: 0 0 5px var(--theme-dim);
-    margin: 1rem 0;
-    overflow-x: hidden; // Prevent accidental scrollbar from art
+  font-family: "Fira Code", monospace;
+  font-size: 0.5rem; // ASCII art needs to be small to fit
+  line-height: 0.5rem;
+  white-space: pre;
+  color: var(--theme-main);
+  text-shadow: 0 0 5px var(--theme-dim);
+  margin: 1rem 0;
+  overflow-x: hidden; // Prevent accidental scrollbar from art
 }
 
 // --- Table Formatting ---
@@ -708,11 +739,11 @@ table {
   margin: 2rem 0;
   border: 1px solid var(--theme-dim);
   font-family: "Fira Code", monospace;
-  
+
   thead {
     background-color: rgba(128, 128, 128, 0.1);
     border-bottom: 2px solid var(--theme-main);
-    
+
     th {
       text-align: left;
       padding: 1rem;
@@ -722,16 +753,16 @@ table {
       letter-spacing: 0.1em;
     }
   }
-  
+
   tbody {
     tr {
       border-bottom: 1px solid var(--theme-dim);
       transition: background 0.2s;
-      
+
       &:hover {
         background-color: rgba(128, 128, 128, 0.1);
       }
-      
+
       td {
         padding: 0.8rem 1rem;
         color: var(--text-main);
@@ -775,41 +806,41 @@ a {
     padding: 0 1rem !important; // Reduce padding
   }
 
-  // Allow standard Quartz styling to handle sidebar positioning mostly, 
-  // but ensure it doesn't break flow. 
+  // Allow standard Quartz styling to handle sidebar positioning mostly,
+  // but ensure it doesn't break flow.
   // Removed forced "display: block" which might have killed flex behaviors.
-  .sidebar { 
-     width: 100% !important;
-     max-width: 100% !important;
-     margin-top: 0 !important;
-     height: auto !important;
-     padding: 1rem 0 !important;
+  .sidebar {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 0 !important;
+    height: auto !important;
+    padding: 1rem 0 !important;
   }
-  
+
   // Let Explorer handle its own mobile styles (collapsible drawer)
   // We only ensure it fits the container if needed.
   .sidebar.left .explorer {
-      // Allow it to be its natural size (or collapsed)
-      // Removing the max-height/overflow hack so the drawer works.
-      width: 100%;
+    // Allow it to be its natural size (or collapsed)
+    // Removing the max-height/overflow hack so the drawer works.
+    width: 100%;
   }
 
   .center {
-     margin: 0 !important;
-     width: 100% !important;
-     max-width: 100% !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
-  
+
   .center > article {
-     margin-top: 1rem !important; 
-     padding: 1rem !important;   
-     border: none !important; // Remove heavy border on mobile to save space
-     background: transparent !important; // Cleaner look on mobile
+    margin-top: 1rem !important;
+    padding: 1rem !important;
+    border: none !important; // Remove heavy border on mobile to save space
+    background: transparent !important; // Cleaner look on mobile
   }
 
   // Adjust label for mobile
   .center > article::before {
-      display: none; // Hide the "MAIN_PROCESS" label on mobile to save space
+    display: none; // Hide the "MAIN_PROCESS" label on mobile to save space
   }
 
   // Header tweaks
@@ -817,37 +848,39 @@ a {
     flex-direction: column;
     gap: 1rem;
     align-items: center;
-    
+
     .logo a {
-        font-size: 1.2rem !important;
+      font-size: 1.2rem !important;
     }
-    
+
     nav ul {
-        gap: 1rem !important;
-        font-size: 0.8rem !important;
+      gap: 1rem !important;
+      font-size: 0.8rem !important;
     }
   }
 
   // Terminal resizing
   #terminal-container {
-     padding: 0.5rem !important;
-     min-height: 250px; // Ensure min height
+    padding: 0.5rem !important;
+    min-height: 250px; // Ensure min height
   }
-  
+
   // ASCII / Code Overflow
-  pre, code, .ascii-art, .header-bar .ascii-header {
-      overflow-x: auto !important;
-      white-space: pre !important; 
-      max-width: 100vw !important;
+  pre,
+  code,
+  .ascii-art,
+  .header-bar .ascii-header {
+    overflow-x: auto !important;
+    white-space: pre !important;
+    max-width: 100vw !important;
   }
-  
+
   // Adjust Graph and TOC in the bottom/right sidebar
   .right {
-      order: 3; // Ensure it comes after content
-      
-      .graph {
-          display: none; // Often best to hide graph on mobile to save scroll
-      }
+    order: 3; // Ensure it comes after content
+
+    .graph {
+      display: none; // Often best to hide graph on mobile to save scroll
+    }
   }
 }
-

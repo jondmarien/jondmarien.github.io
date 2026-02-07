@@ -19,6 +19,8 @@ Hey! -- I'm Jon, or `chrono`, and welcome to _Chrono’s Cyber Chronicles_, my d
 
 I will provide some internet links and in-site links for you to browse. Enjoy~! 
 
+![](Welcome%20to%20Chrono's%20Cyber%20Chronicles!-20241022224032321.webp)
+
 ![](hiding.png)
 
 ## **Here are my socials:**

@@ -9,9 +9,9 @@ published: 2024-11-01
 description: Where code meets creativity — and every bug has a story.
 ---
 
-| Title                                 | Author     | Created          | Published         |
-| ------------------------------------- | ---------- | ---------------- | ----------------- |
-| Welcome to Chrono's Cyber Chronicles! | Jon Marien | October 31, 2024 | November 01, 2024 |
+| Author     | Created          | Published         |
+| ---------- | ---------------- | ----------------- |
+| Jon Marien | October 31, 2024 | November 01, 2024 |
 
 # Unlocking the future, one exploit at a time.
 ---------------

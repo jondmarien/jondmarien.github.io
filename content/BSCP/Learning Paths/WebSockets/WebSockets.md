@@ -4,9 +4,7 @@ author: Jon Marien
 created: 2026-01-19
 published: 2026-01-19
 tags:
-  - certs
   - bscp
-  - burp
 ---
 
 | Author     | Created          | Published        |

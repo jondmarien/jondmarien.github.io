@@ -4,14 +4,12 @@ author: Jon Marien
 created: 2026-01-19
 published: 2026-01-19
 tags:
-  - certs
   - bscp
-  - burp
 ---
 
-| Title                            | Author     | Created          | Published        | Tags                                                   |
-| -------------------------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
-| Manipulating WebSocket Handshake | Jon Marien | January 19, 2026 | January 19, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Author     | Created          | Published        |
+| ---------- | ---------------- | ---------------- |
+| Jon Marien | January 19, 2026 | January 19, 2026 |
 
 # Manipulating WebSocket Handshake
 Some WebSockets vulnerabilities can only be found and exploited by manipulating the WebSocket handshake. These vulnerabilities tend to involve design flaws, such as:

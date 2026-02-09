@@ -4,18 +4,16 @@ author: Jon Marien
 created: 2026-02-07
 published: 2026-02-07
 tags:
-  - certs
   - bscp
-  - burp
 ---
 
-| Title                  | Author     | Created           | Published         | Tags                                                   |
-| ---------------------- | ---------- | ----------------- | ----------------- | ------------------------------------------------------ |
-| Framebusting (Scripts) | Jon Marien | February 07, 2026 | February 07, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Author     | Created           | Published         |
+| ---------- | ----------------- | ----------------- |
+| Jon Marien | February 07, 2026 | February 07, 2026 |
 
 # Definition
 
-> **Clickjacking attacks are possible whenever websites can be framed.*
+> **Clickjacking attacks are possible whenever websites can be framed.**
 
 Therefore, preventative techniques are based upon restricting the framing capability for websites. A common client-side protection enacted through the web browser is to use frame busting or frame breaking scripts. 
 

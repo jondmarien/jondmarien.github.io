@@ -4,14 +4,12 @@ author: Jon Marien
 created: 2026-01-13
 published: 2026-01-13
 tags:
-  - certs
   - bscp
-  - burp
 ---
 
-| Title                       | Author     | Created          | Published        | Tags                                                   |
-| --------------------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
-| Server-Side Request Forgery | Jon Marien | January 13, 2026 | January 13, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Author     | Created          | Published        |
+| ---------- | ---------------- | ---------------- |
+| Jon Marien | January 13, 2026 | January 13, 2026 |
 
 ---
 # Definition

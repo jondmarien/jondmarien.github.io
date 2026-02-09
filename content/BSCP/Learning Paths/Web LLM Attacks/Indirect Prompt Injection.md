@@ -4,14 +4,12 @@ author: Jon Marien
 created: 2026-01-19
 published: 2026-01-19
 tags:
-  - certs
   - bscp
-  - burp
 ---
 
-| Title                     | Author     | Created          | Published        | Tags                                                   |
-| ------------------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
-| Indirect Prompt Injection | Jon Marien | January 19, 2026 | January 19, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Author     | Created          | Published        |
+| ---------- | ---------------- | ---------------- |
+| Jon Marien | January 19, 2026 | January 19, 2026 |
 
 # Definition
 Indirect prompt injection is when an attacker hides instructions in *external content* that the LLM later consumes (like a web page, email, training data snippet, or API output), causing the model to follow the attacker’s instructions instead of the user’s intent.  Unlike direct prompt injection (typed straight into the chatbot), the “prompt” arrives through data the LLM is asked to read or summarize.

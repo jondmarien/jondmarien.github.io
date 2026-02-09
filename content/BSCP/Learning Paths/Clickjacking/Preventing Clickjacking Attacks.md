@@ -4,14 +4,12 @@ author: Jon Marien
 created: 2026-02-07
 published: 2026-02-07
 tags:
-  - certs
   - bscp
-  - burp
 ---
 
-| Title                           | Author     | Created           | Published         | Tags                                                   |
-| ------------------------------- | ---------- | ----------------- | ----------------- | ------------------------------------------------------ |
-| Preventing Clickjacking Attacks | Jon Marien | February 07, 2026 | February 07, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Author     | Created           | Published         |
+| ---------- | ----------------- | ----------------- |
+| Jon Marien | February 07, 2026 | February 07, 2026 |
 
 ---
 # Preventing Against Clickjacking Attacks

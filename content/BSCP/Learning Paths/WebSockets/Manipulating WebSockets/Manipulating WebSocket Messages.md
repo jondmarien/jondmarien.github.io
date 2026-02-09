@@ -4,14 +4,12 @@ author: Jon Marien
 created: 2026-01-19
 published: 2026-01-19
 tags:
-  - certs
   - bscp
-  - burp
 ---
 
-| Title                           | Author     | Created          | Published        | Tags                                                   |
-| ------------------------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
-| Manipulating WebSocket Messages | Jon Marien | January 19, 2026 | January 19, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Author     | Created          | Published        |
+| ---------- | ---------------- | ---------------- |
+| Jon Marien | January 19, 2026 | January 19, 2026 |
 
 ## Manipulation of Messages
 The majority of input-based vulnerabilities affecting WebSockets can be found and exploited by tampering with the contents of WebSocket messages.

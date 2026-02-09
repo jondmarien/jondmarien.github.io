@@ -4,14 +4,12 @@ author: Jon Marien
 created: 2026-02-07
 published: 2026-02-07
 tags:
-  - certs
   - bscp
-  - burp
 ---
 
-| Title                                    | Author     | Created           | Published         | Tags                                                   |
-| ---------------------------------------- | ---------- | ----------------- | ----------------- | ------------------------------------------------------ |
-| Constructing a Basic Clickjacking Attack | Jon Marien | February 07, 2026 | February 07, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Author     | Created           | Published         |
+| ---------- | ----------------- | ----------------- |
+| Jon Marien | February 07, 2026 | February 07, 2026 |
 
 # Example
 Clickjacking attacks use CSS to create and manipulate layers. The attacker incorporates the target website as an `iframe` layer overlaid on the decoy website. An example using the style tag and parameters is as follows: 

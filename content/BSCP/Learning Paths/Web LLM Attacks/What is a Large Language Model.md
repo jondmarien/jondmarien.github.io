@@ -4,14 +4,12 @@ author: Jon Marien
 created: 2026-01-14
 published: 2026-01-14
 tags:
-  - certs
   - bscp
-  - burp
 ---
 
-| Title                                   | Author     | Created          | Published        | Tags                                                   |
-| --------------------------------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
-| What is a Large Language Model -- (LLM) | Jon Marien | January 14, 2026 | January 14, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Author     | Created          | Published        |
+| ---------- | ---------------- | ---------------- |
+| Jon Marien | January 14, 2026 | January 14, 2026 |
 
 # Definition
 A **large language model (LLM)** is a type of artificial intelligence algorithm that uses deep learning and massive data sets to understand, summarize, generate, and predict content. These models are trained on vast amounts of semi-public data, enabling them to recognize intricate patterns and relationships within human language.

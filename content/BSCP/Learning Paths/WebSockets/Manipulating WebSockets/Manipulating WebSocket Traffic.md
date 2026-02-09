@@ -4,14 +4,12 @@ author: Jon Marien
 created: 2026-01-19
 published: 2026-01-19
 tags:
-  - certs
   - bscp
-  - burp
 ---
 
-| Title                          | Author     | Created          | Published        | Tags                                                   |
-| ------------------------------ | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
-| Manipulating WebSocket Traffic | Jon Marien | January 19, 2026 | January 19, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Author     | Created          | Published        |
+| ---------- | ---------------- | ---------------- |
+| Jon Marien | January 19, 2026 | January 19, 2026 |
 
 # Manipulating WebSocket traffic
 Finding WebSockets security vulnerabilities generally involves manipulating them in ways that the application doesn't expect. You can do this using Burp Suite.

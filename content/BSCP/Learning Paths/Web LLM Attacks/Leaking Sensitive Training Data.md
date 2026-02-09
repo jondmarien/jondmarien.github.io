@@ -4,14 +4,12 @@ author: Jon Marien
 created: 2026-01-19
 published: 2026-01-19
 tags:
-  - certs
   - bscp
-  - burp
 ---
 
-| Title                           | Author     | Created          | Published        | Tags                                                   |
-| ------------------------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
-| Leaking Sensitive Training Data | Jon Marien | January 19, 2026 | January 19, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Author     | Created          | Published        |
+| ---------- | ---------------- | ---------------- |
+| Jon Marien | January 19, 2026 | January 19, 2026 |
 
 # Definition
 Leaking sensitive training data is when an attacker uses prompt injection (or carefully crafted prompts) to get an LLM to reveal confidential information that was present in its training set or internal data sources.  This can happen if sensitive data was accidentally included in training data, or if user data was not properly scrubbed before being used for training or retrieval.

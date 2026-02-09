@@ -4,14 +4,12 @@ author: Jon Marien
 created: 2026-01-19
 published: 2026-01-19
 tags:
-  - certs
   - bscp
-  - burp
 ---
 
-| Title                    | Author     | Created          | Published        | Tags                                                   |
-| ------------------------ | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
-| WebSocket Security Vulns | Jon Marien | January 19, 2026 | January 19, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Author     | Created          | Published        |
+| ---------- | ---------------- | ---------------- |
+| Jon Marien | January 19, 2026 | January 19, 2026 |
 
 # WebSockets Security Vulns
 In principle, practically any web security vulnerability might arise in relation to WebSockets:

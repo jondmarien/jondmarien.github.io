@@ -4,14 +4,12 @@ author: Jon Marien
 created: 2026-01-19
 published: 2026-01-19
 tags:
-  - certs
   - bscp
-  - burp
 ---
 
-| Title                                           | Author     | Created          | Published        | Tags                                                   |
-| ----------------------------------------------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
-| Using Cross-Site WebSockets (CSRF on Handshake) | Jon Marien | January 19, 2026 | January 19, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Author     | Created          | Published        |
+| ---------- | ---------------- | ---------------- |
+| Jon Marien | January 19, 2026 | January 19, 2026 |
 
 # Definition
 Cross-site WebSocket hijacking (CSWSH) is when an attacker-controlled website causes a victim’s browser to open a WebSocket connection to a vulnerable application, and the application ties that connection to the victim’s authenticated session (often via cookies in the handshake).  It’s essentially a CSRF-style issue on the WebSocket handshake, but with a key difference: once the connection is established, the attacker can get **two-way** interaction over the hijacked WebSocket.

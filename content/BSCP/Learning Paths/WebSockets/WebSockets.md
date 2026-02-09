@@ -9,9 +9,9 @@ tags:
   - burp
 ---
 
-| Title      | Author     | Created          | Published        | Tags                                                   |
-| ---------- | ---------- | ---------------- | ---------------- | ------------------------------------------------------ |
-| WebSockets | Jon Marien | January 19, 2026 | January 19, 2026 | [[#certs\|#certs]], [[#bscp\|#bscp]], [[#burp\|#burp]] |
+| Author     | Created          | Published        |
+| ---------- | ---------------- | ---------------- |
+| Jon Marien | January 19, 2026 | January 19, 2026 |
 
 # Definition
 WebSockets are an HTTP-initiated upgrade that creates a long-lived, bidirectional connection, which means many classic web vulnerabilities can still apply—just over a different channel.  Because they often carry user actions and sensitive data, weaknesses in session handling, origin checks, and message validation can become high impact.

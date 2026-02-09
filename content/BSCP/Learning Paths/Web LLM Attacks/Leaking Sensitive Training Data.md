@@ -7,9 +7,9 @@ tags:
   - bscp
 ---
 
-| Author     | Created          | Published        |
-| ---------- | ---------------- | ---------------- |
-| Jon Marien | January 19, 2026 | January 19, 2026 |
+| Author     | Published        |
+| ---------- | ---------------- |
+| Jon Marien | January 19, 2026 |
 
 # Definition
 Leaking sensitive training data is when an attacker uses prompt injection (or carefully crafted prompts) to get an LLM to reveal confidential information that was present in its training set or internal data sources.  This can happen if sensitive data was accidentally included in training data, or if user data was not properly scrubbed before being used for training or retrieval.

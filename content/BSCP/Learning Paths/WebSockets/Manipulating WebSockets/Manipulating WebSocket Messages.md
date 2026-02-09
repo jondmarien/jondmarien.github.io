@@ -7,11 +7,11 @@ tags:
   - bscp
 ---
 
-| Author     | Created          | Published        |
-| ---------- | ---------------- | ---------------- |
-| Jon Marien | January 19, 2026 | January 19, 2026 |
+| Author     | Published        |
+| ---------- | ---------------- |
+| Jon Marien | January 19, 2026 |
 
-## Manipulation of Messages
+# Definition
 The majority of input-based vulnerabilities affecting WebSockets can be found and exploited by tampering with the contents of WebSocket messages.
 
 For example, suppose a chat application uses WebSockets to send chat messages between the browser and the server. When a user types a chat message, a WebSocket message like the following is sent to the server:

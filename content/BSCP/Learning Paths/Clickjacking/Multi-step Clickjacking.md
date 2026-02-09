@@ -7,13 +7,13 @@ tags:
   - bscp
 ---
 
-| Author     | Created           | Published         |
-| ---------- | ----------------- | ----------------- |
-| Jon Marien | February 07, 2026 | February 07, 2026 |
+| Author     | Published         |
+| ---------- | ----------------- |
+| Jon Marien | February 07, 2026 |
 
 ---
 
-# Multistep clickjacking
+# Definition
 
 Attacker manipulation of inputs to a target website may necessitate multiple actions. For example, an attacker might want to trick a user into buying something from a retail website so items need to be added to a shopping basket before the order is placed. 
 

@@ -7,11 +7,11 @@ tags:
   - bscp
 ---
 
-| Author     | Created          | Published        |
-| ---------- | ---------------- | ---------------- |
-| Jon Marien | January 19, 2026 | January 19, 2026 |
+| Author     | Published        |
+| ---------- | ---------------- |
+| Jon Marien | January 19, 2026 |
 
-# Manipulating WebSocket traffic
+# Definition
 Finding WebSockets security vulnerabilities generally involves manipulating them in ways that the application doesn't expect. You can do this using Burp Suite.
 
 Burp Suite can:

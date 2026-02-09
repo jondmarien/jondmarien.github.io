@@ -7,12 +7,12 @@ tags:
   - bscp
 ---
 
-| Author     | Created           | Published         |
-| ---------- | ----------------- | ----------------- |
-| Jon Marien | February 07, 2026 | February 07, 2026 |
+| Author     | Published         |
+| ---------- | ----------------- |
+| Jon Marien | February 07, 2026 |
 
 ---
-# Preventing Against Clickjacking Attacks
+# Definition
 The most commonly encountered browser-side prevention mechanism is namely frame busting scripts. However, it is often straightforward for an attacker to circumvent these protections. Consequently, server driven protocols have been devised that constrain browser `iframe` usage and mitigate against clickjacking.
 
 Clickjacking is a browser-side behavior and its success or otherwise depends upon browser functionality and conformity to prevailing web standards and best practice. 

@@ -7,11 +7,11 @@ tags:
   - bscp
 ---
 
-| Author     | Created           | Published         |
-| ---------- | ----------------- | ----------------- |
-| Jon Marien | February 07, 2026 | February 07, 2026 |
+| Author     | Published         |
+| ---------- | ----------------- |
+| Jon Marien | February 07, 2026 |
 
-# Example
+# Definition/Example
 Clickjacking attacks use CSS to create and manipulate layers. The attacker incorporates the target website as an `iframe` layer overlaid on the decoy website. An example using the style tag and parameters is as follows: 
 ```html
 <head>

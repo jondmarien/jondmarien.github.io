@@ -7,12 +7,12 @@ tags:
   - bscp
 ---
 
-| Author     | Created          | Published        |
-| ---------- | ---------------- | ---------------- |
-| Jon Marien | January 14, 2026 | January 14, 2026 |
+| Author     | Published        |
+| ---------- | ---------------- |
+| Jon Marien | January 14, 2026 |
 
 ---
-# How to Prevent CORS-based Attacks?
+# Discussion
 CORS vulnerabilities arise primarily as misconfigurations. Prevention is therefore a configuration problem. The next sections describe effective defenses against these strains of attacks.
 
 ## Proper configuration of cross-origin requests

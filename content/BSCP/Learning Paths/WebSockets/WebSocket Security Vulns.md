@@ -7,11 +7,11 @@ tags:
   - bscp
 ---
 
-| Author     | Created          | Published        |
-| ---------- | ---------------- | ---------------- |
-| Jon Marien | January 19, 2026 | January 19, 2026 |
+| Author     | Published        |
+| ---------- | ---------------- |
+| Jon Marien | January 19, 2026 |
 
-# WebSockets Security Vulns
+# Definition
 In principle, practically any web security vulnerability might arise in relation to WebSockets:
 
 - User-supplied input transmitted to the server might be processed in unsafe ways, leading to vulnerabilities such as SQL injection or XML external entity injection.

@@ -7,9 +7,9 @@ tags:
   - bscp
 ---
 
-| Author     | Created          | Published        |
-| ---------- | ---------------- | ---------------- |
-| Jon Marien | January 19, 2026 | January 19, 2026 |
+| Author     | Published        |
+| ---------- | ---------------- |
+| Jon Marien | January 19, 2026 |
 
 # Definition
 Any API an LLM can call should be treated as effectively **publicly accessible**, because users (and attackers) can reach those capabilities indirectly through prompts and tool/function calls.

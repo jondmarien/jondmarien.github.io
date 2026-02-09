@@ -7,13 +7,13 @@ tags:
   - bscp
 ---
 
-| Author     | Created           | Published         |
-| ---------- | ----------------- | ----------------- |
-| Jon Marien | February 07, 2026 | February 07, 2026 |
+| Author     | Published         |
+| ---------- | ----------------- |
+| Jon Marien | February 07, 2026 |
 
 ---
 
-# Combining Clickjacking with a DOM XSS Attack
+# Definition
 Historically, clickjacking has been used to perform behaviors such as boosting "likes" on a Facebook page. However, the true potency of clickjacking is revealed when it is used as a carrier for another attack such as a DOM XSS attack. 
 
 Implementation of this combined attack is relatively straightforward assuming that the attacker has first identified the XSS exploit. The XSS exploit is then combined with the `iframe` target URL so that the user clicks on the button or link and consequently executes the DOM XSS attack.

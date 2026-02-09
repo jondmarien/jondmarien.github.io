@@ -7,9 +7,9 @@ tags:
   - bscp
 ---
 
-| Author     | Created          | Published        |
-| ---------- | ---------------- | ---------------- |
-| Jon Marien | January 14, 2026 | January 14, 2026 |
+| Author     | Published        |
+| ---------- | ---------------- |
+| Jon Marien | January 14, 2026 |
 
 # Definition
 A **large language model (LLM)** is a type of artificial intelligence algorithm that uses deep learning and massive data sets to understand, summarize, generate, and predict content. These models are trained on vast amounts of semi-public data, enabling them to recognize intricate patterns and relationships within human language.

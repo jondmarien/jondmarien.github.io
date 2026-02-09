@@ -7,12 +7,12 @@ tags:
   - bscp
 ---
 
-| Author     | Created          | Published        |
-| ---------- | ---------------- | ---------------- |
-| Jon Marien | January 14, 2026 | January 14, 2026 |
+| Author     | Published        |
+| ---------- | ---------------- |
+| Jon Marien | January 14, 2026 |
 
 ---
-# Same Origin Policy
+# Definition
 The same-origin policy (SOP) is a browser security rule that restricts how pages from different origins can interact so one site cannot freely read another site’s data in the user’s browser.
 
 It defines `origin` as `scheme + host + port`, and generally allows a page to *send* requests cross-origin (for example, via forms, images, or scripts) but blocks JavaScript from *reading* most cross-origin responses. This helps prevent a malicious site from silently reading private data loaded from another site where the user is logged in.

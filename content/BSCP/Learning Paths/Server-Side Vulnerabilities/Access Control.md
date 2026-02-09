@@ -7,14 +7,12 @@ tags:
   - bscp
 ---
 
-| Author     | Created           | Published         |
-| ---------- | ----------------- | ----------------- |
-| Jon Marien | December 18, 2025 | December 18, 2025 |
+| Author     | Published         |
+| ---------- | ----------------- |
+| Jon Marien | December 18, 2025 |
 
 ---
-# Access Control
-
-## Definition
+# Definition
 Access control is the constraints on an application on who or what is authorized to perform actions or access resources. In the context of web apps, access control is dependent on the authentication and session management:
 - **Authentication** confirms who they are.
 - **Session management** identifies which subsequent HTTP requests are being made by that same user.

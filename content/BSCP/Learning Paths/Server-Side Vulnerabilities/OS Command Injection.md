@@ -7,9 +7,9 @@ tags:
   - bscp
 ---
 
-| Author     | Created          | Published        |
-| ---------- | ---------------- | ---------------- |
-| Jon Marien | January 14, 2026 | January 14, 2026 |
+| Author     | Published        |
+| ---------- | ---------------- |
+| Jon Marien | January 14, 2026 |
 
 ---
 # Description

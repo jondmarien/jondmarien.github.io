@@ -733,6 +733,14 @@ pre {
 }
 
 // --- Table Formatting ---
+.table-container {
+  overflow-x: hidden;
+
+  & > table {
+    margin: 0;
+  }
+}
+
 table {
   border-collapse: collapse;
   width: 100%;

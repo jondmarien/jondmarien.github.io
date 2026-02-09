@@ -9,13 +9,17 @@ A highly customized digital garden built on **Quartz v4**, engineered with a dis
 This project pushes the boundaries of the default Quartz setup with extensive visual and interactive customizations:
 
 ### 🖥️ Interactive Terminal
+
 Integrated **xterm.js** terminal emulator embedded directly into the landing page.
+
 - **Commands**: Typing `help` reveals available system commands.
 - **Theme Control**: Use `theme set <name>` to dynamically switch the site's entire color palette.
 - **History**: Full command history support (Up/Down arrows).
 
 ### 🎨 Dynamic Theme System
+
 A robust custom theming engine built on SCSS variables, supporting instant switching between:
+
 - **Matrix** (Default Neon Green)
 - **Amber** (Retro Monochrome)
 - **Cyan** (Tron-like)
@@ -28,13 +32,16 @@ A robust custom theming engine built on SCSS variables, supporting instant switc
 *All themes support both Dark (CRT) and Light (High Contrast) modes.*
 
 ### 📺 CRT & Visual Effects
+
 Pure CSS implementation of retro hardware artifacts:
+
 - **Scanlines**: Subtle overlay for that authentic monitor feel.
 - **Vignette**: Radial dimming at the screen edges.
 - **Screen Flicker**: Gentle, non-intrusive animation (can be disabled).
 - **ASCII Art**: Custom pre-rendered text headers.
 
 ### 🛠️ Custom Components
+
 - **Styled Graph View**: Node/link colors sync dynamically with the active theme.
 - **Hacker Sidebar**: "Explorer" and "Table of Contents" restyled to look like system directories.
 - **System Status Bar**: Custom header bar with mock system indicators.
@@ -42,9 +49,22 @@ Pure CSS implementation of retro hardware artifacts:
 ## 🧰 Tech Stack
 
 - **Core**: [Quartz v4](https://quartz.jzhao.xyz/) (Preact, SSG)
+- **Runtime**: [Bun](https://bun.sh/) >=1.3.9 (Node.js 22+ fallback)
 - **Styling**: Sass (SCSS) with extensive custom modules.
 - **Scripting**: TypeScript for terminal logic and component behavior.
 - **Terminal**: xterm.js integration.
+
+## ⚡ Bun Runtime Optimizations
+
+The build pipeline leverages Bun-specific APIs for improved performance, with automatic Node.js fallbacks:
+
+| Optimization | File | Benefit |
+|---|---|---|
+| `Bun.escapeHTML()` | `quartz/util/escape.ts` | SIMD-accelerated HTML escaping replaces the manual `replaceAll` chain |
+| `Bun.write()` | `quartz/plugins/emitters/helpers.ts` | Fewer syscalls during the emit phase (~2,600+ files per build) |
+| `Bun.markdown` | `quartz/util/markdown.ts` | Built-in Zig-based Markdown parser for simple md→HTML rendering |
+
+All optimizations use runtime detection (`typeof Bun !== "undefined"`) so the project remains fully functional under Node.js.
 
 ## 💻 Usage
 
@@ -52,10 +72,13 @@ To run the system locally:
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Initialize the development server
-npx quartz build --serve
+bun run serve
+
+# Build for production
+bun run build
 ```
 
 ## 📝 Customization

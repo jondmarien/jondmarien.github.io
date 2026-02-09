@@ -8,19 +8,21 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 
 ## Build System & Commands
 
-This project uses **npm** with Node.js 22+. The custom CLI is accessed via `npx quartz`.
+This project uses **Bun >=1.3.9** as the primary runtime (with Node.js 22+ fallback). The custom CLI is accessed via `npx quartz` or `bun run quartz`.
 
 ### Development Workflow
 
 **Start development server (with hot reload):**
 ```powershell
-npx quartz build --serve
+bun run serve
+# or: npx quartz build --serve
 ```
 This builds the site and serves it at `http://localhost:8080/` with live reload on file changes.
 
 **Build for production:**
 ```powershell
-npx quartz build
+bun run build
+# or: npx quartz build
 ```
 Output is generated in the `public/` directory.
 
@@ -191,6 +193,17 @@ Terminal logic is in `InteractiveTerminal.inline.ts`. Key sections:
 - `strict: true` - Full strict mode enabled
 - `noUnusedLocals` and `noUnusedParameters` enforced
 - Build output excluded via `exclude: ["build/**/*.d.ts"]`
+
+## Bun Runtime Optimizations
+
+The project leverages Bun-specific APIs with Node.js fallbacks:
+
+- **`Bun.escapeHTML()`** (`quartz/util/escape.ts`): SIMD-accelerated HTML escaping replaces the manual `replaceAll` chain. Falls back to the manual implementation under Node.js.
+- **`Bun.write()`** (`quartz/plugins/emitters/helpers.ts`): Optimized file writes with fewer syscalls during the emit phase. Falls back to `fs.promises.writeFile` under Node.js.
+- **`Bun.markdown`** (`quartz/util/markdown.ts`): Utility module exposing Bun's built-in Zig-based Markdown parser for simple md→HTML rendering that doesn't need the full remark/rehype pipeline. Returns `null` under Node.js.
+- **Version pinning**: Bun >=1.3.9 is pinned in CI (`deploy-quartz.yaml`), Docker (`Dockerfile`), and used via `bun run` scripts in `package.json`.
+
+All Bun-specific code paths use runtime detection (`typeof Bun !== "undefined"`) so the project remains fully functional under Node.js.
 
 ## Content Structure
 
